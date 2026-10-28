@@ -51,7 +51,7 @@ const quick = [
   { label: "Pricing", hash: "pricing" },
   { label: "FAQ", hash: "faq" },
 ];
-const programs = ["1:1 w/ Head Coach Izzy", "1:1 Strength & HIT Mat Pilates", "Small Group Personal Training", "Plant-Based & Custom Nutrition", "The Workout Plant App"];
+const programs = ["1:1 w/ Head Coach Izzy", "Virtual Session w/ Coach Izzy", "1:1 Strength & HIT Mat Pilates", "Group Personal Training (4 Max)", "Plant-Based & Custom Nutrition", "The Workout Plant App"];
 
 export function Footer() {
   const head = "mb-4 font-display text-sm font-extrabold uppercase tracking-widest";
@@ -80,6 +80,9 @@ export function Footer() {
             <li><Link to="/" className={link}>Home</Link></li>
             {quick.map((q) => <li key={q.hash}><Link to="/" hash={q.hash} className={link}>{q.label}</Link></li>)}
             <li><Link to="/contact" className={link}>Contact Us</Link></li>
+            <li><Link to="/high-protein-vegan-recipes" className={link}>Vegan Recipes</Link></li>
+            <li><Link to="/fitness-articles" className={link}>Articles</Link></li>
+            <li><Link to="/client-login" className={link}>Client Login</Link></li>
           </ul>
         </div>
         <div>

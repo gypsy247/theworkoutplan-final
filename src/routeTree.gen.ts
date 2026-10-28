@@ -10,14 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ClientLoginRouteImport } from './routes/client-login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as FitnessArticlesRouteImport } from './routes/fitness-articles'
+import { Route as HighProteinVeganRecipesRouteImport } from './routes/high-protein-vegan-recipes'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientLoginRoute = ClientLoginRouteImport.update({
+  id: '/client-login',
+  path: '/client-login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -28,6 +36,16 @@ const ContactRoute = ContactRouteImport.update({
 const DisclaimerRoute = DisclaimerRouteImport.update({
   id: '/disclaimer',
   path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FitnessArticlesRoute = FitnessArticlesRouteImport.update({
+  id: '/fitness-articles',
+  path: '/fitness-articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HighProteinVeganRecipesRoute = HighProteinVeganRecipesRouteImport.update({
+  id: '/high-protein-vegan-recipes',
+  path: '/high-protein-vegan-recipes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -43,45 +61,75 @@ const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/fitness-articles': typeof FitnessArticlesRoute
+  '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/fitness-articles': typeof FitnessArticlesRoute
+  '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/fitness-articles': typeof FitnessArticlesRoute
+  '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/contact' | '/disclaimer' | '/privacy-policy' | '/terms-of-service'
+    | '/'
+    | '/client-login'
+    | '/contact'
+    | '/disclaimer'
+    | '/fitness-articles'
+    | '/high-protein-vegan-recipes'
+    | '/privacy-policy'
+    | '/terms-of-service'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/disclaimer' | '/privacy-policy' | '/terms-of-service'
+  to:
+    | '/'
+    | '/client-login'
+    | '/contact'
+    | '/disclaimer'
+    | '/fitness-articles'
+    | '/high-protein-vegan-recipes'
+    | '/privacy-policy'
+    | '/terms-of-service'
   id:
     | '__root__'
     | '/'
+    | '/client-login'
     | '/contact'
     | '/disclaimer'
+    | '/fitness-articles'
+    | '/high-protein-vegan-recipes'
     | '/privacy-policy'
     | '/terms-of-service'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ClientLoginRoute: typeof ClientLoginRoute
   ContactRoute: typeof ContactRoute
   DisclaimerRoute: typeof DisclaimerRoute
+  FitnessArticlesRoute: typeof FitnessArticlesRoute
+  HighProteinVeganRecipesRoute: typeof HighProteinVeganRecipesRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
 }
@@ -93,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/client-login': {
+      id: '/client-login'
+      path: '/client-login'
+      fullPath: '/client-login'
+      preLoaderRoute: typeof ClientLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -107,6 +162,20 @@ declare module '@tanstack/react-router' {
       path: '/disclaimer'
       fullPath: '/disclaimer'
       preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fitness-articles': {
+      id: '/fitness-articles'
+      path: '/fitness-articles'
+      fullPath: '/fitness-articles'
+      preLoaderRoute: typeof FitnessArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/high-protein-vegan-recipes': {
+      id: '/high-protein-vegan-recipes'
+      path: '/high-protein-vegan-recipes'
+      fullPath: '/high-protein-vegan-recipes'
+      preLoaderRoute: typeof HighProteinVeganRecipesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -128,8 +197,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ClientLoginRoute: ClientLoginRoute,
   ContactRoute: ContactRoute,
   DisclaimerRoute: DisclaimerRoute,
+  FitnessArticlesRoute: FitnessArticlesRoute,
+  HighProteinVeganRecipesRoute: HighProteinVeganRecipesRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
 }

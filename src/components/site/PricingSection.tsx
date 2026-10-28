@@ -14,19 +14,23 @@ export function PricingSection() {
             🔥 NEW CLIENT BOGO SALE: Buy 1 Get 1 Free on your intro session! Use code: BOGO
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {TIERS.map((t) => (
-            <article key={t.id} className={`card-surface relative flex flex-col p-8 ${t.featured ? "border-primary ring-1 ring-primary/50" : ""}`}>
+            <article key={t.id} className={`card-surface relative flex flex-col p-6 ${t.featured ? "border-primary ring-1 ring-primary/50" : ""}`}>
               {t.badge && (
-                <span className={`absolute -top-3 left-8 rounded-full px-3 py-1 text-xs font-bold ${t.featured ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"}`}>
+                <span className={`absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-bold ${t.featured ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"}`}>
                   {t.badge}
                 </span>
               )}
               <h3 className="text-lg font-extrabold tracking-tight">{t.name}</h3>
               <p className="mt-4">
-                <span className="font-display text-5xl font-extrabold">${t.price}</span>
-                <span className="text-muted-foreground"> / session</span>
+                <span className="font-display text-4xl font-extrabold">${t.price}</span>
+                <span className="text-muted-foreground"> / 1 hour</span>
               </p>
+              <p className="mt-4 text-sm text-muted-foreground">{t.description}</p>
+              {t.schedule && (
+                <p className="mt-4 rounded-lg border border-accent/40 bg-accent/10 px-3 py-2 text-xs font-bold text-accent">Current Schedule: {t.schedule}</p>
+              )}
               <ul className="mt-6 flex-1 space-y-3 text-sm text-muted-foreground">
                 {t.features.map((f) => (
                   <li key={f} className="flex gap-2"><Check className="h-4 w-4 shrink-0 text-primary" /> {f}</li>

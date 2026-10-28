@@ -22,6 +22,7 @@ export function Navbar() {
         <Link key={l.hash} to="/" hash={l.hash} className={linkCls} onClick={() => setMobile(false)}>{l.label}</Link>
       ))}
       <Link to="/contact" className={linkCls} onClick={() => setMobile(false)}>Contact Us</Link>
+      <Link to="/client-login" className={`${linkCls} text-xs opacity-80`} onClick={() => setMobile(false)}>Client Login</Link>
     </>
   );
   return (

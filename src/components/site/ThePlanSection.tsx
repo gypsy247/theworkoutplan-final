@@ -1,4 +1,5 @@
 import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
+import { POLICIES, TIERS } from "./data";
 
 const pillars = [
   { n: "01", icon: Dumbbell, title: "Strength + Kickboxing or HIT Mat Pilates", text: "Each 60-minute session integrates progressive strength training with elements of kickboxing or HIT mat Pilates (depending on your trainer)." },
@@ -23,6 +24,8 @@ export function ThePlanSection() {
           <p className="mt-4 text-lg text-muted-foreground">
             Led by Head Coach Izzy Jacobus, whether you train with Izzy or one of our trainers, you follow the same structured, evolving program.
           </p>
+          <p className="mt-4 text-sm font-semibold text-foreground">{POLICIES.philosophy}</p>
+          <p className="mt-2 text-sm text-muted-foreground">Group Personal Training (4 person max): {TIERS.find((t) => t.id === "group")?.schedule}.</p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {pillars.map((p, i) => (
