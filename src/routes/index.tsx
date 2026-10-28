@@ -4,6 +4,7 @@ import { ReviewsSection } from "@/components/site/ReviewsSection";
 import { ThePlanSection } from "@/components/site/ThePlanSection";
 import { TrainersSection } from "@/components/site/TrainersSection";
 import { PricingSection } from "@/components/site/PricingSection";
+import { ResourcesSection } from "@/components/site/ResourcesSection";
 import { FaqSection } from "@/components/site/FaqSection";
 import { ContactSection } from "@/components/site/ContactFooter";
 
@@ -29,6 +30,7 @@ function Index() {
       <ThePlanSection />
       <TrainersSection />
       <PricingSection />
+      <ResourcesSection />
       <FaqSection />
       <ContactSection />
     </>
