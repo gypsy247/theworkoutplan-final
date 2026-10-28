@@ -4,7 +4,7 @@ import { TIERS } from "./data";
 
 const field = "w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-hidden transition focus:border-primary";
 
-export function ConsultationForm({ defaultTier, onDone }: { defaultTier?: string; onDone?: () => void }) {
+export function ConsultationForm({ defaultTier, onDone }: { defaultTier?: string | undefined; onDone?: () => void }) {
   const [sent, setSent] = useState(false);
 
   function submit(e: FormEvent<HTMLFormElement>) {
