@@ -10,6 +10,10 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
+import { BookingProvider } from "../components/site/BookingModal";
+import { Navbar } from "../components/site/Navbar";
+import { Footer } from "../components/site/ContactFooter";
+import { Toaster } from "../components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -116,7 +120,14 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <BookingProvider>
+        <Navbar />
+        <main>
+          <Outlet />
+        </main>
+        <Footer />
+        <Toaster position="top-center" />
+      </BookingProvider>
     </QueryClientProvider>
   );
 }
