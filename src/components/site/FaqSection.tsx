@@ -1,12 +1,16 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { POLICIES } from "./data";
 
 const faqs = [
   ["Do I need to be vegan or plant-based to train here?", "No! While we specialize in plant-based nutrition, all dietary approaches are supported and tailored to your goals."],
-  ["How often do I need to train to see results?", "Just 1 hour, 2 to 3 days a week in studio, supported by custom home/travel workouts and tracking in The Workout Plant App."],
+  ["How often do I need to train to see results?", POLICIES.philosophy],
   ["How does the New Client BOGO Sale work?", "Use code BOGO when booking your first session to get your second session free."],
-  ["Do I need to bring my own mat or equipment?", "Everything is provided at our private studio, including mats, weights, and cool towels at the end of your session."],
+  ["What should I wear and bring?", POLICIES.attire],
+  ["What is your cancellation and rescheduling policy?", POLICIES.cancellation],
+  ["What happens if I arrive late?", POLICIES.late],
+  ["When are group sessions?", "Group Personal Training (4 person max) runs Mondays at 7:00 PM & Wednesdays at 7:00 PM."],
   ["Where is the studio located?", "139 Frost St, Brooklyn, NY 11211 in Williamsburg."],
-  ["How do I know which trainer to choose?", "Choose Izzy ($170) for advanced strength/kickboxing & clinical nutrition, Analine ($115) or Dev ($95) for strength + HIT Mat Pilates, or Small Group ($75) for group energy."],
+  ["How do I know which trainer to choose?", "Head Coach Izzy ($170, or $150 virtual) for 1-on-1 with our founder, Analine ($115) for strength + HIT Mat Pilates, Dev ($95) for strength + Mat/Inferno Pilates, or Group ($75) for training side-by-side with up to 3 others."],
 ];
 
 export function FaqSection() {
