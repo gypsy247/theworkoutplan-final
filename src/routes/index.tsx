@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Navbar } from "@/components/site/Navbar";
 import { HeroSection } from "@/components/site/HeroSection";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
 import { ThePlanSection } from "@/components/site/ThePlanSection";
+import { TrainersSection } from "@/components/site/TrainersSection";
+import { PricingSection } from "@/components/site/PricingSection";
+import { FaqSection } from "@/components/site/FaqSection";
+import { ContactSection } from "@/components/site/ContactFooter";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,13 +23,14 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <ReviewsSection />
-        <ThePlanSection />
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <ReviewsSection />
+      <ThePlanSection />
+      <TrainersSection />
+      <PricingSection />
+      <FaqSection />
+      <ContactSection />
+    </>
   );
 }

@@ -1,7 +1,9 @@
 import { MapPin, Navigation, Star } from "lucide-react";
 import { GoogleG, MAPS_URL, Stars } from "./brand";
+import { useBooking } from "./BookingModal";
 
 export function HeroSection() {
+  const { open } = useBooking();
   return (
     <section className="relative overflow-hidden px-6 py-24 text-center">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
@@ -18,9 +20,9 @@ export function HeroSection() {
           The Workout Plant is Williamsburg's highest-rated private training studio and coaching system (139 Frost St). Improve strength, body composition, and overall fitness in just 1 hour, 2–3 days a week.
         </p>
         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="#book" className="rounded-xl bg-primary px-8 py-4 font-bold text-primary-foreground transition hover:opacity-90">
+          <button onClick={() => open()} className="rounded-xl bg-primary px-8 py-4 font-bold text-primary-foreground transition hover:opacity-90">
             Claim New Client BOGO Offer
-          </a>
+          </button>
           <a href="#reviews" className="rounded-xl border border-border bg-card px-8 py-4 font-bold transition hover:border-primary/50">
             See Our 70+ Google Reviews
           </a>
