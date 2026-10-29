@@ -1,5 +1,21 @@
 import { BookOpen, Dumbbell, Image, LineChart, MessageCircle, Plane, Salad, Smartphone, UtensilsCrossed } from "lucide-react";
+import studioLifting from "@/assets/studio-lifting.jpg.asset.json";
+import appTracking from "@/assets/app-workout-tracking.png.asset.json";
+import appAnalytics from "@/assets/app-progress-analytics.png.asset.json";
+import appRecipes from "@/assets/app-recipe-guide.png.asset.json";
 import { POLICIES } from "./data";
+
+const studioShots = [
+  { img: studioLifting.url, label: "1:1 Strength Training" },
+  { img: null, label: "Private Boxing Coaching" },
+  { img: null, label: "Strength & Conditioning" },
+];
+
+const appShots = [
+  { img: appTracking.url, label: "Workout Tracking" },
+  { img: appAnalytics.url, label: "Progress Analytics" },
+  { img: appRecipes.url, label: "Custom Recipe Guide" },
+];
 
 const pillars = [
   { n: "01", icon: Dumbbell, title: "Individual 1:1 Strength Training", text: "Each 60-minute private session combines progressive strength training with functional movement, mobility, conditioning, or kickboxing, tailored to your goals." },
