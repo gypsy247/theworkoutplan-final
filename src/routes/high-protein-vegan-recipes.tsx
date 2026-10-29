@@ -1,17 +1,9 @@
+import { pageHead } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { RECIPE_CATEGORIES } from "@/components/site/content";
 
 export const Route = createFileRoute("/high-protein-vegan-recipes")({
-  head: () => ({
-    meta: [
-      { title: "THE PLANTS: High-Protein Vegan Recipe Guide | The Workout Plant" },
-      { name: "description", content: "High-protein plant-based breakfast, lunch, dinner and extras from The Workout Plant coaching system in Williamsburg, Brooklyn." },
-      { property: "og:title", content: "THE PLANTS: High-Protein Vegan Recipes" },
-      { property: "og:description", content: "Tofu scrambles, green smoothies, Buddha bowls, TVP shepherd's pie and more, built for strength training." },
-      { property: "og:type", content: "article" },
-      { name: "twitter:card", content: "summary" },
-    ],
-  }),
+  head: () => pageHead("/high-protein-vegan-recipes", "THE PLANTS: Recipe Guide | The Workout Plant", "High-protein and low calorie, fitness-focused, plant-based recipes and nutrition guides by The Workout Plant in Williamsburg, Brooklyn.", "article"),
   component: RecipesPage,
 });
 

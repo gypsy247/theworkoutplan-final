@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
 
@@ -9,8 +10,10 @@ export const Route = createFileRoute("/privacy-policy")({
       { property: "og:title", content: "Privacy Policy | The Workout Plant" },
       { property: "og:description", content: "How The Workout Plant handles your personal, booking and SMS data." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_ORIGIN}/privacy-policy` },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/privacy-policy` }],
   }),
   component: () => (
     <LegalPage

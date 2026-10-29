@@ -10,12 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as BookASessionRouteImport } from './routes/book-a-session'
 import { Route as ClientLoginRouteImport } from './routes/client-login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as FitnessArticlesRouteImport } from './routes/fitness-articles'
+import { Route as GroupPersonalTrainingRouteImport } from './routes/group-personal-training'
 import { Route as HighProteinVeganRecipesRouteImport } from './routes/high-protein-vegan-recipes'
+import { Route as MembershipRouteImport } from './routes/membership'
+import { Route as OnbeatPilatesRouteImport } from './routes/onbeat-pilates'
+import { Route as PhotosRouteImport } from './routes/photos'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
@@ -23,6 +28,11 @@ import { Route as PostSlugRouteImport } from './routes/post.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesRoute = ArticlesRouteImport.update({
+  id: '/articles',
+  path: '/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BookASessionRoute = BookASessionRouteImport.update({
@@ -50,9 +60,29 @@ const FitnessArticlesRoute = FitnessArticlesRouteImport.update({
   path: '/fitness-articles',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GroupPersonalTrainingRoute = GroupPersonalTrainingRouteImport.update({
+  id: '/group-personal-training',
+  path: '/group-personal-training',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HighProteinVeganRecipesRoute = HighProteinVeganRecipesRouteImport.update({
   id: '/high-protein-vegan-recipes',
   path: '/high-protein-vegan-recipes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembershipRoute = MembershipRouteImport.update({
+  id: '/membership',
+  path: '/membership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnbeatPilatesRoute = OnbeatPilatesRouteImport.update({
+  id: '/onbeat-pilates',
+  path: '/onbeat-pilates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PhotosRoute = PhotosRouteImport.update({
+  id: '/photos',
+  path: '/photos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
@@ -73,24 +103,34 @@ const PostSlugRoute = PostSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRoute
   '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
+  '/membership': typeof MembershipRoute
+  '/onbeat-pilates': typeof OnbeatPilatesRoute
+  '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRoute
   '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
+  '/membership': typeof MembershipRoute
+  '/onbeat-pilates': typeof OnbeatPilatesRoute
+  '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
@@ -98,12 +138,17 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRoute
   '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
+  '/membership': typeof MembershipRoute
+  '/onbeat-pilates': typeof OnbeatPilatesRoute
+  '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
@@ -112,36 +157,51 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/articles'
     | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
     | '/fitness-articles'
+    | '/group-personal-training'
     | '/high-protein-vegan-recipes'
+    | '/membership'
+    | '/onbeat-pilates'
+    | '/photos'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/post/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/articles'
     | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
     | '/fitness-articles'
+    | '/group-personal-training'
     | '/high-protein-vegan-recipes'
+    | '/membership'
+    | '/onbeat-pilates'
+    | '/photos'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/post/$slug'
   id:
     | '__root__'
     | '/'
+    | '/articles'
     | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
     | '/fitness-articles'
+    | '/group-personal-training'
     | '/high-protein-vegan-recipes'
+    | '/membership'
+    | '/onbeat-pilates'
+    | '/photos'
     | '/privacy-policy'
     | '/terms-of-service'
     | '/post/$slug'
@@ -149,12 +209,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArticlesRoute: typeof ArticlesRoute
   BookASessionRoute: typeof BookASessionRoute
   ClientLoginRoute: typeof ClientLoginRoute
   ContactRoute: typeof ContactRoute
   DisclaimerRoute: typeof DisclaimerRoute
   FitnessArticlesRoute: typeof FitnessArticlesRoute
+  GroupPersonalTrainingRoute: typeof GroupPersonalTrainingRoute
   HighProteinVeganRecipesRoute: typeof HighProteinVeganRecipesRoute
+  MembershipRoute: typeof MembershipRoute
+  OnbeatPilatesRoute: typeof OnbeatPilatesRoute
+  PhotosRoute: typeof PhotosRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   PostSlugRoute: typeof PostSlugRoute
@@ -167,6 +232,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles': {
+      id: '/articles'
+      path: '/articles'
+      fullPath: '/articles'
+      preLoaderRoute: typeof ArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/book-a-session': {
@@ -204,11 +276,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FitnessArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/group-personal-training': {
+      id: '/group-personal-training'
+      path: '/group-personal-training'
+      fullPath: '/group-personal-training'
+      preLoaderRoute: typeof GroupPersonalTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/high-protein-vegan-recipes': {
       id: '/high-protein-vegan-recipes'
       path: '/high-protein-vegan-recipes'
       fullPath: '/high-protein-vegan-recipes'
       preLoaderRoute: typeof HighProteinVeganRecipesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/membership': {
+      id: '/membership'
+      path: '/membership'
+      fullPath: '/membership'
+      preLoaderRoute: typeof MembershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onbeat-pilates': {
+      id: '/onbeat-pilates'
+      path: '/onbeat-pilates'
+      fullPath: '/onbeat-pilates'
+      preLoaderRoute: typeof OnbeatPilatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/photos': {
+      id: '/photos'
+      path: '/photos'
+      fullPath: '/photos'
+      preLoaderRoute: typeof PhotosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy-policy': {
@@ -237,12 +337,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArticlesRoute: ArticlesRoute,
   BookASessionRoute: BookASessionRoute,
   ClientLoginRoute: ClientLoginRoute,
   ContactRoute: ContactRoute,
   DisclaimerRoute: DisclaimerRoute,
   FitnessArticlesRoute: FitnessArticlesRoute,
+  GroupPersonalTrainingRoute: GroupPersonalTrainingRoute,
   HighProteinVeganRecipesRoute: HighProteinVeganRecipesRoute,
+  MembershipRoute: MembershipRoute,
+  OnbeatPilatesRoute: OnbeatPilatesRoute,
+  PhotosRoute: PhotosRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
   PostSlugRoute: PostSlugRoute,

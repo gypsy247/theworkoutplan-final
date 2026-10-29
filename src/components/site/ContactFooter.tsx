@@ -82,6 +82,8 @@ export function Footer() {
             {quick.map((q) => <li key={q.hash}><Link to="/" hash={q.hash} className={link}>{q.label}</Link></li>)}
             <li><Link to="/contact" className={link}>Contact Us</Link></li>
             <li><Link to="/book-a-session" className={link}>Book A Session</Link></li>
+            <li><Link to="/membership" className={link}>Membership</Link></li>
+            <li><Link to="/photos" className={link}>Studio Photos</Link></li>
             <li><Link to="/high-protein-vegan-recipes" className={link}>Vegan Recipes</Link></li>
             <li><Link to="/fitness-articles" className={link}>Articles</Link></li>
             <li><Link to="/client-login" className={link}>Client Login</Link></li>

@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Navigation, Phone } from "lucide-react";
 import { ConsultationForm } from "@/components/site/ConsultationForm";
@@ -13,8 +14,10 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact The Workout Plant" },
       { property: "og:description", content: "Request a consultation and claim your BOGO intro session in Williamsburg, Brooklyn." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_ORIGIN}/contact` },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/contact` }],
   }),
   component: ContactPage,
 });

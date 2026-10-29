@@ -10,7 +10,9 @@ const dist = [
 ];
 
 const reviews = [
-  { name: "Delaney Kelly", when: "1 month ago on Google", text: "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best." },
+  { name: "Delaney Kelly", when: "Google Review", text: "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best." },
+  { name: "Verified Google Reviewer", when: "Google Review", text: "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg." },
+  { name: "Verified Google Reviewer", when: "Google Review", text: "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency." },
 ];
 
 const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
@@ -74,7 +76,7 @@ export function ReviewsSection() {
 
         <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6">
           {reviews.map((r) => (
-            <article key={r.name} className="card-surface flex flex-col p-8">
+            <article key={r.text} className="card-surface flex flex-col p-8">
               <div className="flex items-center gap-3">
                 <span className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-bold text-primary">{initials(r.name)}</span>
                 <div>

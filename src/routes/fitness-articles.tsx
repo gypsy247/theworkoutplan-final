@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ARTICLES } from "@/data/articles";
 
@@ -13,10 +14,10 @@ export const Route = createFileRoute("/fitness-articles")({
       { property: "og:title", content: "Fitness Articles by Izzy Jacobus" },
       { property: "og:description", content: "Evidence-based articles on recovery, nutrition and sustainable habits." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/fitness-articles" },
+      { property: "og:url", content: `${SITE_ORIGIN}/fitness-articles` },
       { name: "twitter:card", content: "summary" },
     ],
-    links: [{ rel: "canonical", href: "/fitness-articles" }],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/fitness-articles` }],
   }),
   component: ArticlesHub,
 });

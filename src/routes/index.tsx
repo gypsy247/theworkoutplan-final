@@ -7,17 +7,12 @@ import { PricingSection } from "@/components/site/PricingSection";
 import { ResourcesSection } from "@/components/site/ResourcesSection";
 import { FaqSection } from "@/components/site/FaqSection";
 import { ContactSection } from "@/components/site/ContactFooter";
+import { GYM_SCHEMA, pageHead } from "@/lib/site-seo";
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "The Workout Plant | Private Gym & Personal Training in Williamsburg" },
-      { name: "description", content: "Rated 4.9★ on Google. Evidence-based private training at 139 Frost St, Brooklyn. Strength, nutrition and app coaching, 2–3 days a week." },
-      { property: "og:title", content: "The Workout Plant | Williamsburg Personal Training" },
-      { property: "og:description", content: "Rated 4.9★ with 70+ Google reviews. Evidence-based private training in Williamsburg, Brooklyn." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    ...pageHead("/", "The Workout Plant: Williamsburg Brooklyn Private Gym & Plant-Based Personal Trainer", "Located in Williamsburg, Brooklyn, The Workout Plant offers 1-on-1 strength training, kickboxing and plant-based nutrition coaching with Trainer Izzy Jacobus at 139 Frost St."),
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(GYM_SCHEMA) }],
   }),
   component: Index,
 });
