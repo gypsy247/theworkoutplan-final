@@ -255,6 +255,26 @@ One of my main goals as a trainer and coach is to teach all of my clients how to
 
 **You’ll never regret learnin’ to throw them hands!**`,
   },
+  {
+    slug: "how-to-get-yourself-to-drink-more-water",
+    title: "How to get yourself to DRINK MORE WATER!",
+    author: "Izzy Jacobus",
+    date: "May 15, 2023",
+    readTime: "1 min read",
+    category: "Nutrition & Habits",
+    excerpt: "Simple habits for drinking more water: track your daily intake with a large bottle and use reminders to stay consistent.",
+    content: `Drink water and almost only water – lots and lots of water.
+
+In addition to the general health aspects, proper hydration can help improve physical performance, speed up recovery, aid in weight loss, and improve mental clarity. You need it to burn fat and you need it to exercise.
+
+1. Drink 2 to 3 liters per day, depending on body size.
+2. Get a large water bottle so that it is easy to track your progress throughout the day. You also might find one of these foldable water bottles useful for “emergencies.”
+3. Use a reminder app to drink water more regularly, especially if you’re having problems getting going. Here's the one that I use from time to time to renew my habit.
+
+Drinking water can also help with weight loss. It can help reduce appetite, boost metabolism, and aid in burning calories. Drinking water before meals can help you feel more full, causing you to eat less, while staying hydrated can help regulate your metabolism, making it easier to burn calories.
+
+My in-person clients live in NYC, where we have excellent quality tap water. If you live in an area with clean rated water supply, don’t bother with filtered water. Save your money and the environment. And certainly, don’t fall for pseudoscience or gimmicks like alkaline water.`,
+  },
 ];
 
 export function getArticle(slug: string): Article | undefined {

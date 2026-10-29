@@ -1,11 +1,14 @@
 import { SITE_ORIGIN } from "@/lib/site-seo";
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import ReactMarkdown from "react-markdown";
 import { ARTICLES, getArticle } from "@/data/articles";
 import izzy from "@/assets/trainer-izzy-boxing.jpg.asset.json";
 
 export const Route = createFileRoute("/post/$slug")({
   loader: ({ params }) => {
+    if (params.slug === "tips-for-drinking-more-water") {
+      throw redirect({ to: "/post/$slug", params: { slug: "how-to-get-yourself-to-drink-more-water" }, statusCode: 301, replace: true });
+    }
     const article = getArticle(params.slug);
     if (!article) throw notFound();
     return { article };
