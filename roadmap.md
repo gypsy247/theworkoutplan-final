@@ -3,6 +3,13 @@
 - [x] Add live Acuity booking to the popup and a dedicated booking page with policies and fallback link.
 - [x] Add studio and app galleries ready for real photos/screenshots.
 - [x] Place real logo, trainer portraits, studio photos and app screenshots across the site.
-- [ ] Replace removed Pilates review with a verified strength-training review (waiting on exact sourced review; unavailable in research).
+- [ ] Add the supplied Google review quotes.
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 - [x] Test prices, policies, booking flow and page layout.
+
+# Indexed Google URLs
+- [ ] Add membership and studio photos pages, and update client login instructions.
+- [ ] Preserve retired service and articles URLs with permanent redirects.
+- [ ] Match requested metadata, canonical URLs, gym schema and sitemap.
+- [ ] Restore the sixth indexed hydration article using original content.
+- [ ] Verify indexed links, page metadata, gallery and onboarding navigation.
