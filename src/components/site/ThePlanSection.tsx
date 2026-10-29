@@ -1,5 +1,10 @@
-import { BookOpen, Dumbbell, Image, LineChart, MessageCircle, Plane, Salad, Smartphone, UtensilsCrossed } from "lucide-react";
+import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
 import studioLifting from "@/assets/studio-lifting.jpg.asset.json";
+import studioActionIzzy from "@/assets/studio-action-izzy.jpg.asset.json";
+import studioLiftingAnaline from "@/assets/studio-lifting-analine.jpg.asset.json";
+import studioLiftingDev from "@/assets/studio-lifting-dev.jpg.asset.json";
+import studioMobilityAnaline from "@/assets/studio-mobility-analine.jpg.asset.json";
+import studioMobilityDev from "@/assets/studio-mobility-dev.jpg.asset.json";
 import appTracking from "@/assets/app-workout-tracking.png.asset.json";
 import appAnalytics from "@/assets/app-progress-analytics.png.asset.json";
 import appRecipes from "@/assets/app-recipe-guide.png.asset.json";
@@ -7,8 +12,11 @@ import { POLICIES } from "./data";
 
 const studioShots = [
   { img: studioLifting.url, label: "1:1 Strength Training" },
-  { img: null, label: "Private Boxing Coaching" },
-  { img: null, label: "Strength & Conditioning" },
+  { img: studioActionIzzy.url, label: "Strength & Conditioning" },
+  { img: studioLiftingAnaline.url, label: "Dumbbell Strength Work" },
+  { img: studioLiftingDev.url, label: "Barbell Training" },
+  { img: studioMobilityAnaline.url, label: "Mobility & Movement" },
+  { img: studioMobilityDev.url, label: "Core & Pilates" },
 ];
 
 const appShots = [
@@ -68,13 +76,7 @@ export function ThePlanSection() {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {studioShots.map(({ img, label }) => (
               <figure key={label}>
-                {img ? (
-                  <img src={img} alt={label} loading="lazy" className="aspect-[4/3] w-full rounded-2xl border border-border object-cover transition-colors hover:border-primary/60" />
-                ) : (
-                  <div role="img" aria-label={`${label} — studio photo pending`} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-secondary transition-colors hover:border-primary/60">
-                    <div className="text-center"><Image className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Studio photo pending</p></div>
-                  </div>
-                )}
+                <img src={img} alt={label} loading="lazy" className="aspect-[4/3] w-full rounded-2xl border border-border object-cover transition-colors hover:border-primary/60" />
                 <figcaption className="mt-3 text-sm font-semibold">{label}</figcaption>
               </figure>
             ))}
