@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ARTICLES, RECIPE_CATEGORIES } from "./content";
+import { RECIPE_CATEGORIES } from "./content";
+import { ARTICLES } from "@/data/articles";
 
 export function ResourcesSection() {
   return (
@@ -21,8 +22,14 @@ export function ResourcesSection() {
           </div>
           <div className="card-surface p-8">
             <h3 className="text-2xl font-extrabold tracking-tight">Articles by Izzy Jacobus</h3>
-            <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-              {ARTICLES.map((a) => <li key={a.slug} className="ml-5 list-disc">{a.title}</li>)}
+            <ul className="mt-4 space-y-2 text-sm">
+              {ARTICLES.map((a) => (
+                <li key={a.slug}>
+                  <Link to="/post/$slug" params={{ slug: a.slug }} className="text-muted-foreground hover:text-primary hover:underline">
+                    {a.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <Link to="/fitness-articles" className="mt-6 inline-block font-bold text-primary hover:underline">Read the articles →</Link>
           </div>
