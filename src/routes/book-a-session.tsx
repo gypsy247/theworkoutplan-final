@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { AcuityScheduler } from "@/components/site/AcuityScheduler";
 
@@ -8,8 +9,9 @@ export const Route = createFileRoute("/book-a-session")({
     { property: "og:title", content: "Book a 1:1 Session | The Workout Plant" },
     { property: "og:description", content: "Choose a private training appointment with Izzy, Analine or Dev, or book virtual coaching. New clients use BOGO at checkout." },
     { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_ORIGIN}/book-a-session` },
     { name: "twitter:card", content: "summary_large_image" },
-  ] }),
+  ], links: [{ rel: "canonical", href: `${SITE_ORIGIN}/book-a-session` }] }),
   component: () => (
     <section className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-5xl">

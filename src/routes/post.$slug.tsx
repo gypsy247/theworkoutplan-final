@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import ReactMarkdown from "react-markdown";
 import { ARTICLES, getArticle } from "@/data/articles";
@@ -16,10 +17,11 @@ export const Route = createFileRoute("/post/$slug")({
       { property: "og:title", content: loaderData?.article.title ?? "Article" },
       { property: "og:description", content: loaderData?.article.excerpt ?? "" },
       { property: "og:type", content: "article" },
-      { property: "og:url", content: `/post/${params.slug}` },
+      { property: "og:url", content: `${SITE_ORIGIN}/post/${params.slug}` },
       { name: "twitter:card", content: "summary" },
+      ...(!loaderData ? [{ name: "robots", content: "noindex" }] : []),
     ],
-    links: [{ rel: "canonical", href: `/post/${params.slug}` }],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/post/${params.slug}` }],
     scripts: loaderData
       ? [
           {
@@ -28,6 +30,8 @@ export const Route = createFileRoute("/post/$slug")({
               "@context": "https://schema.org",
               "@type": "Article",
               headline: loaderData.article.title,
+              url: `${SITE_ORIGIN}/post/${params.slug}`,
+              mainEntityOfPage: `${SITE_ORIGIN}/post/${params.slug}`,
               description: loaderData.article.excerpt,
               author: { "@type": "Person", name: loaderData.article.author },
               publisher: { "@type": "Organization", name: "The Workout Plant" },

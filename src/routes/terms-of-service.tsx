@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
 import { POLICIES } from "@/components/site/data";
@@ -10,8 +11,10 @@ export const Route = createFileRoute("/terms-of-service")({
       { property: "og:title", content: "Terms & Conditions | The Workout Plant" },
       { property: "og:description", content: "Private 1:1 session booking, 48-hour rescheduling, no-refund and billing terms." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_ORIGIN}/terms-of-service` },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/terms-of-service` }],
   }),
   component: () => (
     <LegalPage

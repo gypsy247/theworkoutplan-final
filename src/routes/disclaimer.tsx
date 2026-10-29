@@ -1,3 +1,4 @@
+import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
 
@@ -9,8 +10,10 @@ export const Route = createFileRoute("/disclaimer")({
       { property: "og:title", content: "Health, Fitness & SMS Disclaimer | The Workout Plant" },
       { property: "og:description", content: "Consult a physician before training. SMS terms: reply STOP to opt out, HELP for help." },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE_ORIGIN}/disclaimer` },
       { name: "twitter:card", content: "summary" },
     ],
+    links: [{ rel: "canonical", href: `${SITE_ORIGIN}/disclaimer` }],
   }),
   component: () => (
     <LegalPage
