@@ -6,7 +6,7 @@ import { PHONE_HREF } from "./brand";
 export const ACUITY_URL = "https://app.acuityscheduling.com/schedule.php?owner=33537878&ref=embedded_csp";
 export const ACUITY_FALLBACK = "https://TheWorkoutPlant.as.me/";
 
-export function AcuityScheduler({ tierId }: { tierId?: string }) {
+export function AcuityScheduler({ tierId }: { tierId?: string | undefined }) {
   const tier = TIERS.find((item) => item.id === tierId);
   return (
     <div className="min-w-0 space-y-6">
