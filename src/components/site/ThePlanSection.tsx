@@ -1,5 +1,29 @@
-import { BookOpen, Dumbbell, Image, LineChart, MessageCircle, Plane, Salad, Smartphone, UtensilsCrossed } from "lucide-react";
+import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
+import studioLifting from "@/assets/studio-lifting.jpg.asset.json";
+import studioActionIzzy from "@/assets/studio-action-izzy.jpg.asset.json";
+import studioLiftingAnaline from "@/assets/studio-lifting-analine.jpg.asset.json";
+import studioLiftingDev from "@/assets/studio-lifting-dev.jpg.asset.json";
+import studioMobilityAnaline from "@/assets/studio-mobility-analine.jpg.asset.json";
+import studioMobilityDev from "@/assets/studio-mobility-dev.jpg.asset.json";
+import appTracking from "@/assets/app-workout-tracking.png.asset.json";
+import appAnalytics from "@/assets/app-progress-analytics.png.asset.json";
+import appRecipes from "@/assets/app-recipe-guide.png.asset.json";
 import { POLICIES } from "./data";
+
+const studioShots = [
+  { img: studioLifting.url, label: "1:1 Strength Training" },
+  { img: studioActionIzzy.url, label: "Strength & Conditioning" },
+  { img: studioLiftingAnaline.url, label: "Dumbbell Strength Work" },
+  { img: studioLiftingDev.url, label: "Barbell Training" },
+  { img: studioMobilityAnaline.url, label: "Mobility & Movement" },
+  { img: studioMobilityDev.url, label: "Core & Pilates" },
+];
+
+const appShots = [
+  { img: appTracking.url, label: "Workout Tracking" },
+  { img: appAnalytics.url, label: "Progress Analytics" },
+  { img: appRecipes.url, label: "Custom Recipe Guide" },
+];
 
 const pillars = [
   { n: "01", icon: Dumbbell, title: "Individual 1:1 Strength Training", text: "Each 60-minute private session combines progressive strength training with functional movement, mobility, conditioning, or kickboxing, tailored to your goals." },
@@ -50,11 +74,9 @@ export function ThePlanSection() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside 139 Frost St</h3>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {["1:1 Strength Training", "Private Boxing Coaching", "Strength & Conditioning"].map((label) => (
+            {studioShots.map(({ img, label }) => (
               <figure key={label}>
-                <div role="img" aria-label={`${label} — studio photo pending`} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-secondary transition-colors hover:border-primary/60">
-                  <div className="text-center"><Image className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Studio photo pending</p></div>
-                </div>
+                <img src={img} alt={label} loading="lazy" className="aspect-[4/3] w-full rounded-2xl border border-border object-cover transition-colors hover:border-primary/60" />
                 <figcaption className="mt-3 text-sm font-semibold">{label}</figcaption>
               </figure>
             ))}
@@ -63,11 +85,9 @@ export function ThePlanSection() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside The Workout Plant App</h3>
           <div className="mt-8 grid gap-10 md:grid-cols-3">
-            {["Workout Tracking", "Progress Analytics", "Custom Recipe Guide"].map((label) => (
+            {appShots.map(({ img, label }) => (
               <figure key={label}>
-                <div role="img" aria-label={`${label} — app screenshot pending`} className="phone-shadow mx-auto flex aspect-[9/19] w-full max-w-[280px] items-center justify-center overflow-hidden rounded-3xl border-2 border-border bg-secondary transition-colors hover:border-primary/60">
-                  <div className="px-4 text-center"><Smartphone className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">App screenshot pending</p></div>
-                </div>
+                <img src={img} alt={`${label} — The Workout Plant App`} loading="lazy" className="phone-shadow mx-auto aspect-[9/19] w-full max-w-[280px] rounded-3xl border-2 border-border bg-secondary object-cover transition-colors hover:border-primary/60" />
                 <figcaption className="mt-4 text-center text-sm font-semibold">{label}</figcaption>
               </figure>
             ))}
