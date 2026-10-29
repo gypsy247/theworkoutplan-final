@@ -76,7 +76,7 @@ const mdComponents = {
   ol: ({ children }: { children?: React.ReactNode }) => (
     <ol className="mt-5 list-decimal space-y-2 pl-6 text-muted-foreground">{children}</ol>
   ),
-  a: ({ children, href }: { children?: React.ReactNode; href?: string }) => (
+  a: ({ children, href }: { children?: React.ReactNode; href?: string | undefined }) => (
     <a href={href} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">
       {children}
     </a>
