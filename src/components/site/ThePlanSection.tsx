@@ -66,11 +66,15 @@ export function ThePlanSection() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside 139 Frost St</h3>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {["1:1 Strength Training", "Private Boxing Coaching", "Strength & Conditioning"].map((label) => (
+            {studioShots.map(({ img, label }) => (
               <figure key={label}>
-                <div role="img" aria-label={`${label} — studio photo pending`} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-secondary transition-colors hover:border-primary/60">
-                  <div className="text-center"><Image className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Studio photo pending</p></div>
-                </div>
+                {img ? (
+                  <img src={img} alt={label} loading="lazy" className="aspect-[4/3] w-full rounded-2xl border border-border object-cover transition-colors hover:border-primary/60" />
+                ) : (
+                  <div role="img" aria-label={`${label} — studio photo pending`} className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-border bg-secondary transition-colors hover:border-primary/60">
+                    <div className="text-center"><Image className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">Studio photo pending</p></div>
+                  </div>
+                )}
                 <figcaption className="mt-3 text-sm font-semibold">{label}</figcaption>
               </figure>
             ))}
@@ -79,11 +83,9 @@ export function ThePlanSection() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside The Workout Plant App</h3>
           <div className="mt-8 grid gap-10 md:grid-cols-3">
-            {["Workout Tracking", "Progress Analytics", "Custom Recipe Guide"].map((label) => (
+            {appShots.map(({ img, label }) => (
               <figure key={label}>
-                <div role="img" aria-label={`${label} — app screenshot pending`} className="phone-shadow mx-auto flex aspect-[9/19] w-full max-w-[280px] items-center justify-center overflow-hidden rounded-3xl border-2 border-border bg-secondary transition-colors hover:border-primary/60">
-                  <div className="px-4 text-center"><Smartphone className="mx-auto h-10 w-10 text-primary/60" /><p className="mt-3 text-xs uppercase tracking-widest text-muted-foreground">App screenshot pending</p></div>
-                </div>
+                <img src={img} alt={`${label} — The Workout Plant App`} loading="lazy" className="phone-shadow mx-auto aspect-[9/19] w-full max-w-[280px] rounded-3xl border-2 border-border bg-secondary object-cover transition-colors hover:border-primary/60" />
                 <figcaption className="mt-4 text-center text-sm font-semibold">{label}</figcaption>
               </figure>
             ))}
