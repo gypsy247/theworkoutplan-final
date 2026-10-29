@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookASessionRouteImport } from './routes/book-a-session'
 import { Route as ClientLoginRouteImport } from './routes/client-login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
@@ -21,6 +22,11 @@ import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookASessionRoute = BookASessionRouteImport.update({
+  id: '/book-a-session',
+  path: '/book-a-session',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClientLoginRoute = ClientLoginRouteImport.update({
@@ -61,6 +67,7 @@ const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book-a-session': typeof BookASessionRoute
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/book-a-session'
     | '/client-login'
     | '/contact'
     | '/disclaimer'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookASessionRoute: typeof BookASessionRoute
   ClientLoginRoute: typeof ClientLoginRoute
   ContactRoute: typeof ContactRoute
   DisclaimerRoute: typeof DisclaimerRoute
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-a-session': {
+      id: '/book-a-session'
+      path: '/book-a-session'
+      fullPath: '/book-a-session'
+      preLoaderRoute: typeof BookASessionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/client-login': {
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookASessionRoute: BookASessionRoute,
   ClientLoginRoute: ClientLoginRoute,
   ContactRoute: ContactRoute,
   DisclaimerRoute: DisclaimerRoute,

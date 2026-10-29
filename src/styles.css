@@ -34,19 +34,22 @@
   --color-g-red: var(--g-red);
   --color-g-yellow: var(--g-yellow);
   --color-g-green: var(--g-green);
+  --color-scheduler: var(--scheduler);
 }
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.141 0.005 285.8);
+  --background: oklch(0.13552 0.00417 285.830);
   --foreground: oklch(0.985 0 0);
-  --card: oklch(0.183 0.006 285.8);
+  --card: oklch(0.17629 0.00584 285.786);
   --card-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.235 0.006 285.8);
-  --border: oklch(0.274 0.006 286);
-  --primary: oklch(0.727 0.18 152);
-  --primary-foreground: oklch(0.141 0.005 285.8);
-  --accent: oklch(0.769 0.165 70.1);
+  --border: oklch(0.26203 0.00849 285.799);
+  --primary: oklch(0.63683 0.23347 356.348);
+  --primary-foreground: oklch(1 0 0);
+  --accent: oklch(0.76973 0.16452 70.606);
+  --scheduler: oklch(1 0 0);
+  --shadow-phone: 0 20px 45px -12px color-mix(in oklab, var(--background) 90%, transparent);
   --muted-foreground: oklch(0.705 0.01 286);
   --destructive: oklch(0.6 0.22 27);
   --g-blue: oklch(0.62 0.19 259);
@@ -61,6 +64,8 @@
   body { background-color: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); }
   h1, h2, h3, h4 { font-family: var(--font-display); }
   section[id] { scroll-margin-top: 6rem; }
+  * { letter-spacing: 0; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 }
 
 @utility card-surface {
@@ -69,7 +74,9 @@
   border-radius: var(--radius-2xl);
   transition: border-color 300ms, box-shadow 300ms;
   &:hover {
-    border-color: color-mix(in oklab, var(--color-primary) 50%, transparent);
+    border-color: color-mix(in oklab, var(--color-primary) 60%, transparent);
     box-shadow: 0 0 40px -12px color-mix(in oklab, var(--color-primary) 35%, transparent);
   }
 }
+
+@utility phone-shadow { box-shadow: var(--shadow-phone); }

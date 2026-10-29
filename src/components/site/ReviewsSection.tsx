@@ -11,8 +11,6 @@ const dist = [
 
 const reviews = [
   { name: "Delaney Kelly", when: "1 month ago on Google", text: "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best." },
-  { name: "Kayla Hodge", when: "3 months ago on Google", text: "I love the workout plant! I go to the on beat Pilates class and it's one of my favorites in the city. All the materials and mats are provided (I love the cool towel at the end). Analine makes the class comfortable for all levels. Will continue to be coming back!" },
-  { name: "Williamsburg Local Client", when: "Verified Google Reviewer", text: "Hands down the best private training studio in Brooklyn. Zero ego, 100% evidence-based coaching. Having the custom app for my home and travel workouts plus nutrition guidance made consistency effortless. Worth every penny!" },
 ];
 
 const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
@@ -23,7 +21,7 @@ export function ReviewsSection() {
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">
-            The Proof Is In The Pudding… Rated <span className="text-accent">4.9★</span> on Google Maps
+            The Proof Is In The Pudding… Rated <span className="text-primary">4.9<span className="text-accent">★</span></span> on Google Maps
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">Real Williamsburg clients. Real transformations. Verified on Google Business Profile.</p>
         </div>
@@ -50,7 +48,7 @@ export function ReviewsSection() {
                 <div key={d.s} className="flex items-center gap-3 text-sm">
                   <span className="w-6 text-muted-foreground">{d.s}★</span>
                   <div className="h-2 flex-1 overflow-hidden rounded-full bg-secondary">
-                    <div className="h-full rounded-full bg-accent" style={{ width: `${d.p}%` }} />
+                    <div className="h-full rounded-full bg-primary" style={{ width: `${d.p}%` }} />
                   </div>
                   <span className="w-10 text-right text-muted-foreground">{d.p}%</span>
                 </div>
@@ -60,7 +58,7 @@ export function ReviewsSection() {
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">
                 Open in Google Maps <ExternalLink className="h-4 w-4" />
               </a>
-              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold hover:border-accent">
+              <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold hover:border-primary/60">
                 Leave Us a Google Review <ExternalLink className="h-4 w-4" />
               </a>
             </div>
@@ -74,7 +72,7 @@ export function ReviewsSection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6">
           {reviews.map((r) => (
             <article key={r.name} className="card-surface flex flex-col p-8">
               <div className="flex items-center gap-3">
