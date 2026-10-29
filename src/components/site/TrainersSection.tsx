@@ -24,6 +24,8 @@ const trainers = [
     name: "Dev Buchanan",
     role: "Junior Trainer & HIT Pilates Instructor",
     bio: "Dev combines her passion for strength training with her experience teaching mat and Inferno Pilates at YO-BK. Her coaching blends strength, conditioning, and Pilates-inspired movement to help clients build confidence, improve their fitness, and feel stronger in everyday life.",
+    quote:
+      "I've always been passionate about fitness, cycling through phases of spin, CrossFit, jiu-jitsu, and strength training. But for a long time, partying and unhealthy habits took priority over consistency. In 2023, I made the decision to commit to sobriety for good. Strength training became my anchor, giving me structure, transforming my body composition, and helping me rebuild my confidence. What began as a personal transformation grew into a passion that ultimately inspired me to pursue fitness professionally.",
   },
 ];
 
