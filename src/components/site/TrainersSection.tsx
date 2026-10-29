@@ -1,6 +1,6 @@
-import izzy from "@/assets/trainer-izzy.jpg";
-import analine from "@/assets/trainer-analine.jpg";
-import dev from "@/assets/trainer-dev.jpg";
+import izzy from "@/assets/trainer-izzy-boxing.jpg.asset.json";
+import analine from "@/assets/trainer-analine-real.jpg.asset.json";
+import dev from "@/assets/trainer-dev-real.jpg.asset.json";
 
 const trainers = [
   { img: izzy, name: "Izzy Jacobus", role: "Head Coach / Trainer & Founder", bio: "Creator of THE PLAN. Former nutritional counselor at Brooklyn Nurse Practitioners Clinic and experienced kickboxing & strength coach specializing in advanced 1:1 strength training, athletic goals, and individualized nutrition coaching.", quote: "A little over a decade ago, I was obese, sedentary, and struggling with chronic pain that made even everyday activities difficult. I started rebuilding my health with small steps. Walking led to bodyweight exercises, and eventually yoga, kickboxing, and strength training. What began as an effort to reclaim my own health became a passion for helping others do the same." },
@@ -20,7 +20,7 @@ export function TrainersSection() {
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {trainers.map((t) => (
             <article key={t.name} className="card-surface p-8">
-              <img src={t.img} alt={`${t.name}, ${t.role}`} width={800} height={1008} loading="lazy" className="mb-6 aspect-[4/5] w-full rounded-xl object-cover object-top" />
+              <img src={t.img.url} alt={`${t.name}, ${t.role}`} width={800} height={1008} loading="lazy" className="mb-6 aspect-[4/5] w-full rounded-xl object-cover object-top" />
               <span className="inline-block rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">{t.role}</span>
               <h3 className="mt-4 text-2xl font-extrabold tracking-tight">{t.name}</h3>
               <p className="mt-3 text-muted-foreground">{t.bio}</p>
