@@ -8,9 +8,8 @@ const faqs = [
   ["What should I wear and bring?", POLICIES.attire],
   ["What is your cancellation and rescheduling policy?", POLICIES.cancellation],
   ["What happens if I arrive late?", POLICIES.late],
-  ["When are group sessions?", "Group Personal Training (4 person max) runs Mondays at 7:00 PM & Wednesdays at 7:00 PM."],
   ["Where is the studio located?", "139 Frost St, Brooklyn, NY 11211 in Williamsburg."],
-  ["How do I know which trainer to choose?", "Head Coach Izzy ($170, or $150 virtual) for 1-on-1 with our founder, Analine ($115) for strength + HIT Mat Pilates, Dev ($95) for strength + Mat/Inferno Pilates, or Group ($75) for training side-by-side with up to 3 others."],
+  ["How do I know which trainer to choose?", "Choose Head Coach Izzy ($170, or $150 virtual) for advanced 1:1 strength training and individualized nutrition coaching, Analine ($115) for progressive strength and mobility, or Dev ($95) for strength and conditioning. All sessions are private, one-on-one, and one hour."],
 ];
 
 export function FaqSection() {
