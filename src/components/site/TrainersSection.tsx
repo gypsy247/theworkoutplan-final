@@ -1,33 +1,6 @@
-import izzy from "@/assets/trainer-izzy-boxing.jpg.asset.json";
-import analine from "@/assets/trainer-analine-real.jpg.asset.json";
-import dev from "@/assets/trainer-dev-real.jpg.asset.json";
+import siteContent from "@/data/siteContent.json";
 
-const trainers = [
-  {
-    img: izzy,
-    name: "Izzy Jacobus",
-    role: "Head Coach / Trainer & Founder",
-    bio: "Creator of THE PLAN. Former nutritional counselor at Brooklyn Nurse Practitioners Clinic and experienced kickboxing & strength coach specializing in advanced 1:1 strength training, athletic goals, and individualized nutrition coaching.",
-    quote:
-      "A little over a decade ago, I was obese, sedentary, and struggling with chronic pain that made even everyday activities difficult. I started rebuilding my health with small steps. Walking led to bodyweight exercises, and eventually yoga, kickboxing, and strength training. What began as an effort to reclaim my own health became a passion for helping others do the same.",
-  },
-  {
-    img: analine,
-    name: "Analine Ignacio",
-    role: "Personal Trainer & HIT Pilates Instructor",
-    bio: "Analine combines strength training with a passion for movement, mobility, and mat Pilates. Also an instructor at YO-BK, she brings a thoughtful, encouraging approach to helping clients build strength, improve movement, and develop lasting fitness habits.",
-    quote:
-      "I'd always been active and never worried much about nutrition, but during the pandemic, I gained weight and struggled to lose it. I started making small, sustainable changes—improving my eating habits, gradually increasing my daily steps, and discovering Pilates along the way. Losing 40 pounds taught me that consistency matters more than perfection and inspired me to help others make lasting changes.",
-  },
-  {
-    img: dev,
-    name: "Dev Buchanan",
-    role: "Junior Trainer & HIT Pilates Instructor",
-    bio: "Dev combines her passion for strength training with her experience teaching mat and Inferno Pilates at YO-BK. Her coaching blends strength, conditioning, and Pilates-inspired movement to help clients build confidence, improve their fitness, and feel stronger in everyday life.",
-    quote:
-      "I've always been passionate about fitness, cycling through phases of spin, CrossFit, jiu-jitsu, and strength training. But for a long time, partying and unhealthy habits took priority over consistency. In 2023, I made the decision to commit to sobriety for good. Strength training became my anchor, giving me structure, transforming my body composition, and helping me rebuild my confidence. What began as a personal transformation grew into a passion that ultimately inspired me to pursue fitness professionally.",
-  },
-];
+const trainers = siteContent.trainers;
 
 export function TrainersSection() {
   return (
@@ -44,7 +17,7 @@ export function TrainersSection() {
           {trainers.map((t) => (
             <article key={t.name} className="card-surface p-8">
               <img
-                src={t.img.url}
+                src={t.image}
                 alt={`${t.name}, ${t.role}`}
                 width={800}
                 height={1008}

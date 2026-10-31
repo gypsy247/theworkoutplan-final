@@ -1,27 +1,7 @@
-import studioLifting from "@/assets/studio-lifting.jpg.asset.json";
-import studioActionIzzy from "@/assets/studio-action-izzy.jpg.asset.json";
-import studioLiftingAnaline from "@/assets/studio-lifting-analine.jpg.asset.json";
-import studioLiftingDev from "@/assets/studio-lifting-dev.jpg.asset.json";
-import studioMobilityAnaline from "@/assets/studio-mobility-analine.jpg.asset.json";
-import studioMobilityDev from "@/assets/studio-mobility-dev.jpg.asset.json";
-import appTracking from "@/assets/app-workout-tracking.png.asset.json";
-import appAnalytics from "@/assets/app-progress-analytics.png.asset.json";
-import appRecipes from "@/assets/app-recipe-guide.png.asset.json";
+import siteContent from "@/data/siteContent.json";
 
-const studioShots = [
-  { img: studioLifting.url, label: "1:1 Strength Training" },
-  { img: studioActionIzzy.url, label: "Strength & Conditioning" },
-  { img: studioLiftingAnaline.url, label: "Dumbbell Strength Work" },
-  { img: studioLiftingDev.url, label: "Barbell Training" },
-  { img: studioMobilityAnaline.url, label: "Mobility & Movement" },
-  { img: studioMobilityDev.url, label: "Core & Pilates" },
-];
-
-const appShots = [
-  { img: appTracking.url, label: "Workout Tracking" },
-  { img: appAnalytics.url, label: "Progress Analytics" },
-  { img: appRecipes.url, label: "Custom Recipe Guide" },
-];
+const studioShots = siteContent.studioPhotos;
+const appShots = siteContent.appScreenshots;
 
 export function StudioGallery() {
   return (
@@ -29,15 +9,15 @@ export function StudioGallery() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside The Workout Plant</h3>
           <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {studioShots.map(({ img, label }) => (
-              <figure key={label}>
+            {studioShots.map(({ image, caption }) => (
+              <figure key={caption}>
                 <img
-                  src={img}
-                  alt={label}
+                  src={image}
+                  alt={caption}
                   loading="lazy"
                   className="aspect-[4/3] w-full rounded-2xl border border-border object-cover transition-colors hover:border-primary/60"
                 />
-                <figcaption className="mt-3 text-sm font-semibold">{label}</figcaption>
+                <figcaption className="mt-3 text-sm font-semibold">{caption}</figcaption>
               </figure>
             ))}
           </div>
@@ -45,15 +25,15 @@ export function StudioGallery() {
         <div className="mt-20">
           <h3 className="text-2xl font-extrabold md:text-3xl">Inside The Workout Plant App</h3>
           <div className="mt-8 grid gap-10 md:grid-cols-3">
-            {appShots.map(({ img, label }) => (
-              <figure key={label}>
+            {appShots.map(({ image, caption }) => (
+              <figure key={caption}>
                 <img
-                  src={img}
-                  alt={`${label} — The Workout Plant App`}
+                  src={image}
+                  alt={`${caption} — The Workout Plant App`}
                   loading="lazy"
                   className="phone-shadow mx-auto aspect-[9/19] w-full max-w-[280px] rounded-3xl border-2 border-border bg-secondary object-cover transition-colors hover:border-primary/60"
                 />
-                <figcaption className="mt-4 text-center text-sm font-semibold">{label}</figcaption>
+                <figcaption className="mt-4 text-center text-sm font-semibold">{caption}</figcaption>
               </figure>
             ))}
           </div>
