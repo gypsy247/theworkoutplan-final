@@ -5,6 +5,13 @@
 - [x] Place real logo, trainer portraits, studio photos and app screenshots across the site.
 - [x] Add the supplied Google review quotes.
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
+
+# CMS
+- [x] Centralize all site content into src/data/siteContent.json and src/data/articles.json; wire every section to read from them.
+- [x] Copy all uploaded images into public/images for CMS media management.
+- [x] Add Decap CMS (public/admin + config.yml), Pages CMS (.pages.yml), /admin hosting rewrites, and Netlify Identity invite redirect.
+- [x] Remove remaining Pilates mentions from trainer roles/bios and gallery captions.
+- [ ] Enable Netlify Identity + Git Gateway on the Netlify deployment so /admin login works (owner action outside this repo).
 - [x] Test prices, policies, booking flow and page layout.
 
 # Indexed Google URLs
