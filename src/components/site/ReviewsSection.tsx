@@ -75,7 +75,7 @@ export function ReviewsSection() {
           {reviews.map((r) => (
             <article key={r.text} className="card-surface flex flex-col p-8">
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-bold text-primary">{initials(r.name)}</span>
+                <span className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>
                 <div>
                   <p className="font-bold">{r.name}</p>
                   <p className="text-xs text-muted-foreground">{r.when}</p>
