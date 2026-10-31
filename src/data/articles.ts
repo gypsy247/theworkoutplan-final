@@ -12,7 +12,7 @@ export type Article = {
 };
 
 // Article content lives in articles.json so the CMS (Decap / Pages CMS) can edit it.
-export const ARTICLES: Article[] = articlesJson as Article[];
+export const ARTICLES: Article[] = articlesJson.articles as Article[];
 
 export function getArticle(slug: string): Article | undefined {
   return ARTICLES.find((a) => a.slug === slug);
