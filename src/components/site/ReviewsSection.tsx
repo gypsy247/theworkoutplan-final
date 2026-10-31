@@ -1,4 +1,5 @@
 import { ExternalLink, MapPin, Phone } from "lucide-react";
+import siteContent from "@/data/siteContent.json";
 import { GoogleG, MAP_EMBED, MAPS_URL, Stars } from "./brand";
 
 const dist = [
@@ -9,11 +10,7 @@ const dist = [
   { s: 1, p: 0 },
 ];
 
-const reviews = [
-  { name: "Delaney Kelly", when: "Google Review", text: "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best." },
-  { name: "Verified Google Reviewer", when: "Google Review", text: "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg." },
-  { name: "Verified Google Reviewer", when: "Google Review", text: "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency." },
-];
+const reviews = siteContent.reviews.map((r) => ({ ...r, when: "Google Review" }));
 
 const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
 
