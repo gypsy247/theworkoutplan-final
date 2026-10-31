@@ -1,18 +1,24 @@
-# Welcome to your Lovable project
+# The Workout Plant — Website
 
-This project was built with [Lovable](https://lovable.dev).
+Marketing website for The Workout Plant, a private 1-on-1 personal training and nutrition coaching studio at 139 Frost St, Williamsburg, Brooklyn.
 
-## Build with Lovable
+## Editing Content (No Code Required)
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+All editable site content lives in two JSON files:
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- `src/data/siteContent.json` — promo banner, homepage hero, studio info, The Plan pillars, studio photos, app screenshots, trainers, pricing tiers, Google reviews, FAQs, and studio policies.
+- `src/data/articles.json` — the full articles shown on the Articles pages.
+
+You can edit these files directly, or use a visual CMS connected to this GitHub repository:
+
+- **Decap CMS** — available at `/admin` when the site is deployed on Netlify with Netlify Identity and Git Gateway enabled. Configuration: `public/admin/config.yml`.
+- **Pages CMS** — connect the repository at [pagescms.org](https://pagescms.org). Configuration: `.pages.yml` in the project root.
+
+Images uploaded through either CMS are stored in `public/images/` and referenced as `/images/...`.
 
 ## Development
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Requires Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
 git clone <this-repository-url>
@@ -21,9 +27,9 @@ npm i
 npm run dev
 ```
 
-## Built with
+## Built With
 
-- TanStack Start
+- TanStack Start (React + SSR)
 - TypeScript
-- React
 - Tailwind CSS
+- shadcn/ui
