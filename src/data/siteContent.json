@@ -1,0 +1,189 @@
+{
+  "promoBanner": {
+    "enabled": true,
+    "text": "NEW CLIENT SPECIAL: Buy One Get One Free on Intro Sessions! Use Code: BOGO at Booking →",
+    "code": "BOGO"
+  },
+  "hero": {
+    "badgeText": "70+ Verified Google Reviews • Personal Trainer in New York",
+    "headlineStart": "Cut the Bullsh*t.",
+    "headlineHighlight": "Evidence-Based",
+    "headlineEnd": "Private Training That Actually Works.",
+    "subheadline": "The Workout Plant is Williamsburg's private 1-on-1 personal training & nutrition coaching studio (139 Frost St). Improve strength, body composition, and overall fitness in just 1 hour, 2–3 days a week.",
+    "primaryCta": "Claim New Client BOGO Offer",
+    "secondaryCta": "See Our 70+ Google Reviews"
+  },
+  "studioInfo": {
+    "name": "The Workout Plant",
+    "headCoach": "Izzy Jacobus",
+    "rating": "4.9",
+    "reviewCount": "70+",
+    "address": "139 Frost St, Brooklyn, NY 11211",
+    "phone": "(917) 992-2395",
+    "email": "izzy@theworkoutplant.com",
+    "acuityDirectUrl": "https://TheWorkoutPlant.as.me/",
+    "acuityEmbedUrl": "https://app.acuityscheduling.com/schedule.php?owner=33537878&ref=embedded_csp",
+    "instagramUrl": "https://www.instagram.com/theworkoutplant/",
+    "facebookUrl": "https://www.facebook.com/TheWorkoutPlant/",
+    "tiktokUrl": "https://www.tiktok.com/@theworkoutplant"
+  },
+  "pillars": [
+    {
+      "number": "01",
+      "title": "Individual 1:1 Strength Training",
+      "description": "Each 60-minute private session combines progressive strength training with functional movement, mobility, conditioning, or kickboxing, tailored to your goals.",
+      "tags": []
+    },
+    {
+      "number": "02",
+      "title": "Evidence-Based Nutrition Coaching",
+      "description": "While we specialize in plant-based nutrition, all dietary approaches are supported and tailored to your body composition goals.",
+      "tags": []
+    },
+    {
+      "number": "03",
+      "title": "24/7 App & Direct Messaging Accountability",
+      "description": "Coaching doesn't stop when you leave 139 Frost St. Through The Workout Plant App, you get:",
+      "tags": ["Results Tracking", "Custom Recipe Guide", "Home & Vacation Workouts", "Training & Coaching Guides"]
+    }
+  ],
+  "studioPhotos": [
+    { "image": "/images/studio-lifting.jpg", "caption": "1:1 Strength Training" },
+    { "image": "/images/studio-action-izzy.jpg", "caption": "Strength & Conditioning" },
+    { "image": "/images/studio-lifting-analine.jpg", "caption": "Dumbbell Strength Work" },
+    { "image": "/images/studio-lifting-dev.jpg", "caption": "Barbell Training" },
+    { "image": "/images/studio-mobility-analine.jpg", "caption": "Mobility & Movement" },
+    { "image": "/images/studio-mobility-dev.jpg", "caption": "Core & Functional Conditioning" }
+  ],
+  "appScreenshots": [
+    { "image": "/images/app-workout-tracking.png", "caption": "Workout Tracking" },
+    { "image": "/images/app-progress-analytics.png", "caption": "Progress Analytics" },
+    { "image": "/images/app-recipe-guide.png", "caption": "Custom Recipe Guide" }
+  ],
+  "trainers": [
+    {
+      "name": "Izzy Jacobus",
+      "role": "Head Coach / Trainer & Founder",
+      "bio": "Creator of THE PLAN. Former nutritional counselor at Brooklyn Nurse Practitioners Clinic and experienced kickboxing & strength coach specializing in advanced 1:1 strength training, athletic goals, and individualized nutrition coaching.",
+      "quote": "A little over a decade ago, I was obese, sedentary, and struggling with chronic pain that made even everyday activities difficult. I started rebuilding my health with small steps. Walking led to bodyweight exercises, and eventually yoga, kickboxing, and strength training. What began as an effort to reclaim my own health became a passion for helping others do the same.",
+      "image": "/images/trainer-izzy-boxing.jpg"
+    },
+    {
+      "name": "Analine Ignacio",
+      "role": "1:1 Personal Trainer & Mobility Coach",
+      "bio": "Analine combines 1-on-1 progressive strength training with a passion for functional movement, mobility, and core stability. She brings a thoughtful, encouraging approach to helping clients build strength, improve movement, and develop lasting fitness habits.",
+      "quote": "I'd always been active and never worried much about nutrition, but during the pandemic, I gained weight and struggled to lose it. I started making small, sustainable changes—improving my eating habits, gradually increasing my daily steps, and focusing on consistent strength and movement along the way. Losing 40 pounds taught me that consistency matters more than perfection and inspired me to help others make lasting changes.",
+      "image": "/images/trainer-analine-real.jpg"
+    },
+    {
+      "name": "Dev Buchanan",
+      "role": "1:1 Junior Personal Trainer",
+      "bio": "Dev blends 1-on-1 progressive strength training, athletic conditioning, and core-focused movement to help clients build confidence, improve their fitness, and feel stronger in everyday life.",
+      "quote": "I've always been passionate about fitness, cycling through phases of spin, CrossFit, jiu-jitsu, and strength training. But for a long time, partying and unhealthy habits took priority over consistency. In 2023, I made the decision to commit to sobriety for good. Strength training became my anchor, giving me structure, transforming my body composition, and helping me rebuild my confidence. What began as a personal transformation grew into a passion that ultimately inspired me to pursue fitness professionally.",
+      "image": "/images/trainer-dev-real.jpg"
+    }
+  ],
+  "pricingTiers": [
+    {
+      "id": "izzy",
+      "name": "1:1 Personal Training — Head Coach Izzy",
+      "price": 170,
+      "duration": "1 hour",
+      "badge": "",
+      "featured": false,
+      "description": "One-on-one training session with Head Trainer/Coach, Izzy Jacobus. Includes nutrition and health coaching + Full App access.",
+      "features": ["Advanced strength & kickboxing", "Nutrition & health coaching", "Full Workout Plant App access"]
+    },
+    {
+      "id": "analine",
+      "name": "1:1 Personal Training — Trainer Analine",
+      "price": 115,
+      "duration": "1 hour",
+      "badge": "MOST POPULAR",
+      "featured": true,
+      "description": "One-on-one strength & mobility training session. Includes nutrition and health coaching with Coach Izzy + Full App access.",
+      "features": ["1:1 strength & mobility", "Nutrition coaching with Coach Izzy", "Full Workout Plant App access"]
+    },
+    {
+      "id": "dev",
+      "name": "1:1 Personal Training — Jr. Trainer Dev",
+      "price": 95,
+      "duration": "1 hour",
+      "badge": "BEST VALUE",
+      "featured": false,
+      "description": "One-on-one strength & conditioning session. Includes nutrition and health coaching + Full App access.",
+      "features": ["1:1 strength & conditioning", "Nutrition & health coaching", "Full Workout Plant App access"]
+    },
+    {
+      "id": "virtual",
+      "name": "1:1 Virtual Session w/ Coach Izzy",
+      "price": 150,
+      "duration": "1 hour",
+      "badge": "",
+      "featured": false,
+      "description": "Live 1-on-1 remote personal training and nutrition coaching from anywhere.",
+      "features": ["Live remote 1-on-1 training", "Nutrition coaching", "Train from anywhere"]
+    }
+  ],
+  "reviews": [
+    {
+      "name": "Delaney Kelly",
+      "initials": "DK",
+      "rating": 5,
+      "text": "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best."
+    },
+    {
+      "name": "Verified Google Reviewer",
+      "initials": "VG",
+      "rating": 5,
+      "text": "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg."
+    },
+    {
+      "name": "Verified Google Reviewer",
+      "initials": "VG",
+      "rating": 5,
+      "text": "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Do I need to be vegan or plant-based to train here?",
+      "answer": "No! While we specialize in plant-based nutrition, all dietary approaches are supported and tailored to your goals."
+    },
+    {
+      "question": "How often do I need to train to see results?",
+      "answer": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
+    },
+    {
+      "question": "How does the New Client BOGO Sale work?",
+      "answer": "Use code BOGO when booking your first session to get your second session free."
+    },
+    {
+      "question": "What should I wear and bring?",
+      "answer": "Wear something comfortable and bring a water bottle. No shoes in the studio! We provide towels and everything else you'll need."
+    },
+    {
+      "question": "What is your cancellation and rescheduling policy?",
+      "answer": "No refunds. Reschedule up to 48 hours before your session. No-shows are charged the full session amount."
+    },
+    {
+      "question": "What happens if I arrive late?",
+      "answer": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session."
+    },
+    {
+      "question": "Where is the studio located?",
+      "answer": "139 Frost St, Brooklyn, NY 11211 in Williamsburg."
+    },
+    {
+      "question": "How do I know which trainer to choose?",
+      "answer": "Choose Head Coach Izzy ($170, or $150 virtual) for advanced 1:1 strength training and individualized nutrition coaching, Analine ($115) for progressive strength and mobility, or Dev ($95) for strength and conditioning. All sessions are private, one-on-one, and one hour."
+    }
+  ],
+  "policies": {
+    "firstTimers": "If this is your first session, send a message to introduce yourself and let us know if you have any limitations, concerns, or questions—or if you'd like a brief phone consultation.",
+    "attire": "Wear something comfortable and bring a water bottle. No shoes in the studio! We provide towels and everything else you'll need.",
+    "cancellation": "No refunds. Reschedule up to 48 hours before your session. No-shows are charged the full session amount.",
+    "late": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session.",
+    "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
+  }
+}
