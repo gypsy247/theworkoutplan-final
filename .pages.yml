@@ -1,0 +1,136 @@
+media:
+  input: public/images
+  output: /images
+  categories: [image]
+
+content:
+  - name: site-content
+    label: Site Content
+    type: file
+    path: src/data/siteContent.json
+    fields:
+      - name: promoBanner
+        label: Promo Banner
+        type: object
+        fields:
+          - { name: enabled, label: Show Banner, type: boolean }
+          - { name: text, label: Banner Text, type: string }
+          - { name: code, label: Promo Code, type: string }
+      - name: hero
+        label: Homepage Hero
+        type: object
+        fields:
+          - { name: badgeText, label: Badge Text, type: string }
+          - { name: headlineStart, label: "Headline — Start", type: string }
+          - { name: headlineHighlight, label: "Headline — Highlighted Word(s)", type: string }
+          - { name: headlineEnd, label: "Headline — End", type: string }
+          - { name: subheadline, label: Subheadline, type: text }
+          - { name: primaryCta, label: Primary Button Text, type: string }
+          - { name: secondaryCta, label: Secondary Button Text, type: string }
+      - name: studioInfo
+        label: Studio Info
+        type: object
+        fields:
+          - { name: name, label: Studio Name, type: string }
+          - { name: headCoach, label: Head Coach, type: string }
+          - { name: rating, label: Google Rating, type: string }
+          - { name: reviewCount, label: Review Count, type: string }
+          - { name: address, label: Address, type: string }
+          - { name: phone, label: Phone, type: string }
+          - { name: email, label: Email, type: string }
+          - { name: acuityDirectUrl, label: Acuity Booking Page URL, type: string }
+          - { name: acuityEmbedUrl, label: Acuity Embed URL, type: string }
+          - { name: instagramUrl, label: Instagram URL, type: string }
+          - { name: facebookUrl, label: Facebook URL, type: string }
+          - { name: tiktokUrl, label: TikTok URL, type: string }
+      - name: pillars
+        label: The Plan — Pillars
+        type: collection
+        fields:
+          - { name: number, label: Number, type: string }
+          - { name: title, label: Title, type: string }
+          - { name: description, label: Description, type: text }
+          - name: tags
+            label: Feature Tags
+            type: collection
+            required: false
+            fields:
+              - { name: tag, label: Tag, type: string }
+      - name: studioPhotos
+        label: Studio Gallery Photos
+        type: collection
+        fields:
+          - { name: image, label: Photo, type: image }
+          - { name: caption, label: Caption, type: string }
+      - name: appScreenshots
+        label: App Screenshots
+        type: collection
+        fields:
+          - { name: image, label: Screenshot, type: image }
+          - { name: caption, label: Caption, type: string }
+      - name: trainers
+        label: Trainers
+        type: collection
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: role, label: Role Badge, type: string }
+          - { name: bio, label: Bio, type: text }
+          - { name: quote, label: Personal Quote, type: text, required: false }
+          - { name: image, label: Portrait Photo, type: image }
+      - name: pricingTiers
+        label: 1:1 Pricing Tiers
+        type: collection
+        fields:
+          - { name: id, label: "ID (lowercase, no spaces)", type: string }
+          - { name: name, label: Name, type: string }
+          - { name: price, label: Price (USD), type: number }
+          - { name: duration, label: Duration, type: string }
+          - { name: badge, label: Badge (optional), type: string, required: false }
+          - { name: featured, label: Highlight This Tier, type: boolean }
+          - { name: description, label: Description, type: text }
+          - name: features
+            label: Features
+            type: collection
+            fields:
+              - { name: feature, label: Feature, type: string }
+      - name: reviews
+        label: Google Reviews
+        type: collection
+        fields:
+          - { name: name, label: Reviewer Name, type: string }
+          - { name: initials, label: Initials, type: string }
+          - { name: rating, label: Rating (1–5), type: number }
+          - { name: text, label: Review Text, type: text }
+      - name: faqs
+        label: FAQs
+        type: collection
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - name: policies
+        label: Studio Policies
+        type: object
+        fields:
+          - { name: firstTimers, label: First-Timers, type: text }
+          - { name: attire, label: What to Wear / Bring, type: text }
+          - { name: cancellation, label: Cancellation & Rescheduling, type: text }
+          - { name: late, label: Late Arrivals, type: text }
+          - { name: philosophy, label: Training Philosophy, type: text }
+
+  - name: articles
+    label: Articles
+    type: file
+    path: src/data/articles.json
+    fields:
+      - name: articles
+        label: Articles
+        type: collection
+        fields:
+          - { name: title, label: Title, type: string }
+          - { name: slug, label: "URL Slug (lowercase-with-dashes)", type: string }
+          - { name: author, label: Author, type: string }
+          - { name: date, label: Date, type: string }
+          - { name: readTime, label: Read Time, type: string }
+          - { name: category, label: Category, type: string }
+          - { name: excerpt, label: Excerpt, type: text }
+          - { name: content, label: Body (Markdown), type: rich-text }

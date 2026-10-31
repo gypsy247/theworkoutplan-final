@@ -93,6 +93,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
+    scripts: [
+      { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
+      {
+        children:
+          "if (window.location.hash && /invite_token|recovery_token|confirmation_token/.test(window.location.hash)) { window.location.href = '/admin/' + window.location.hash; }",
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,

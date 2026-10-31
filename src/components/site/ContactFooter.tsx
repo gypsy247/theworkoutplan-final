@@ -2,16 +2,16 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Sprout, User } from "lucide-react";
 import logo from "@/assets/logo-white.png.asset.json";
 import { ConsultationForm } from "./ConsultationForm";
-import { EMAIL } from "./data";
+import { EMAIL, SITE } from "./data";
 import { PHONE, PHONE_HREF, Stars } from "./brand";
 import { SOCIAL_LIST } from "./social";
 
 export function ContactDetails() {
   const rows = [
-    { Icon: Sprout, text: "The Workout Plant", strong: true },
-    { Icon: User, text: "Izzy Jacobus — Head Coach" },
-    { Icon: MapPin, text: "139 Frost St, Brooklyn, NY 11211" },
-    { Icon: Phone, text: "+1 917-992-2395 (call or text)", href: PHONE_HREF },
+    { Icon: Sprout, text: SITE.name, strong: true },
+    { Icon: User, text: `${SITE.headCoach} — Head Coach` },
+    { Icon: MapPin, text: SITE.address },
+    { Icon: Phone, text: `${SITE.phone} (call or text)`, href: PHONE_HREF },
     { Icon: Mail, text: EMAIL, href: `mailto:${EMAIL}` },
   ];
   return (

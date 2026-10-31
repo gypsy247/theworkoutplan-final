@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import logo from "@/assets/logo-white.png.asset.json";
 import { PHONE, PHONE_HREF } from "./brand";
+import { PROMO } from "./data";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
@@ -29,9 +30,11 @@ export function Navbar() {
   );
   return (
     <>
-      <Button onClick={() => open()} className="block h-auto w-full whitespace-normal rounded-none px-4 py-2 text-center text-sm font-bold">
-        NEW CLIENT SPECIAL: Buy One Get One Free on Intro Sessions! Use Code: BOGO at Booking →
-      </Button>
+      {PROMO.enabled && (
+        <Button onClick={() => open()} className="block h-auto w-full whitespace-normal rounded-none px-4 py-2 text-center text-sm font-bold">
+          {PROMO.text}
+        </Button>
+      )}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">

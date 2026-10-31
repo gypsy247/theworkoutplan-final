@@ -1,34 +1,18 @@
 import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
+import siteContent from "@/data/siteContent.json";
 import { POLICIES } from "./data";
 import { StudioGallery } from "./StudioGallery";
 
-const pillars = [
-  {
-    n: "01",
-    icon: Dumbbell,
-    title: "Individual 1:1 Strength Training",
-    text: "Each 60-minute private session combines progressive strength training with functional movement, mobility, conditioning, or kickboxing, tailored to your goals.",
-  },
-  {
-    n: "02",
-    icon: Salad,
-    title: "Evidence-Based Nutrition Coaching",
-    text: "While we specialize in plant-based nutrition, all dietary approaches are supported and tailored to your body composition goals.",
-  },
-  {
-    n: "03",
-    icon: MessageCircle,
-    title: "24/7 App & Direct Messaging Accountability",
-    text: "Coaching doesn't stop when you leave 139 Frost St. Through The Workout Plant App, you get:",
-  },
-];
+const pillarIcons = [Dumbbell, Salad, MessageCircle];
+const tagIcons = [LineChart, UtensilsCrossed, Plane, BookOpen];
 
-const badges = [
-  { icon: LineChart, label: "Results Tracking" },
-  { icon: UtensilsCrossed, label: "Custom Recipe Guide" },
-  { icon: Plane, label: "Home & Vacation Workouts" },
-  { icon: BookOpen, label: "Training & Coaching Guides" },
-];
+const pillars = siteContent.pillars.map((p, i) => ({
+  n: p.number,
+  icon: pillarIcons[i] ?? Dumbbell,
+  title: p.title,
+  text: p.description,
+  badges: p.tags.map((label, j) => ({ icon: tagIcons[j] ?? LineChart, label })),
+}));
 
 export function ThePlanSection() {
   return (
@@ -56,9 +40,9 @@ export function ThePlanSection() {
               </div>
               <h3 className="mt-6 text-xl font-extrabold tracking-tight">{p.title}</h3>
               <p className="mt-3 text-muted-foreground">{p.text}</p>
-              {i === 2 && (
+              {p.badges.length > 0 && (
                 <div className="mt-6 grid grid-cols-2 gap-2">
-                  {badges.map((b) => (
+                  {p.badges.map((b) => (
                     <span
                       key={b.label}
                       className="flex items-center gap-2 rounded-lg border border-border bg-secondary px-3 py-2 text-xs font-semibold"
