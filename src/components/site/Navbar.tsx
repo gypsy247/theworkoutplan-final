@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import logo from "@/assets/logo-white.png.asset.json";
 import { PHONE, PHONE_HREF } from "./brand";
-import { PROMO } from "./data";
+import { PROMO, SITE } from "./data";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
@@ -38,7 +37,7 @@ export function Navbar() {
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
           <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">
-            <img src={logo.url} alt="The Workout Plant logo" className="h-9 w-9 rounded-full object-cover" />
+            <img src={SITE.logoImage} alt="The Workout Plant logo" className="h-9 w-9 rounded-full object-cover" />
             <span className="hidden sm:inline">THE WORKOUT PLANT</span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm text-muted-foreground lg:flex">{items}</nav>

@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
   type ErrorComponentProps,
@@ -93,13 +94,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
-    scripts: [
-      { src: "https://identity.netlify.com/v1/netlify-identity-widget.js" },
-      {
-        children:
-          "if (window.location.hash && /invite_token|recovery_token|confirmation_token/.test(window.location.hash)) { window.location.href = '/admin/' + window.location.hash; }",
-      },
-    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -124,16 +118,17 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const isAdmin = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") === "/admin" });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <BookingProvider>
-        <Navbar />
+        {!isAdmin && <Navbar />}
         <main>
           <Outlet />
         </main>
-        <Footer />
+        {!isAdmin && <Footer />}
         <Toaster position="top-center" />
       </BookingProvider>
     </QueryClientProvider>

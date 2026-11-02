@@ -1,9 +1,11 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
+import { pageHead } from "@/lib/site-seo";
 
-// The CMS admin UI is a static file in public/admin/. This route sends
-// /admin to it on hosts where the SPA router would otherwise 404.
 export const Route = createFileRoute("/admin")({
-  beforeLoad: () => {
-    throw redirect({ href: "/admin/index.html" });
+  head: () => {
+    const head = pageHead("/admin", "Studio Manager | The Workout Plant", "The Workout Plant studio content editor.");
+    return { ...head, meta: [...head.meta, { name: "robots", content: "noindex, nofollow" }] };
   },
+  component: AdminDashboard,
 });
