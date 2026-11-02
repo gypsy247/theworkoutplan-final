@@ -23,6 +23,7 @@ import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as OnbeatPilatesRouteImport } from './routes/onbeat-pilates'
 import { Route as PhotosRouteImport } from './routes/photos'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
 
@@ -96,6 +97,11 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   id: '/terms-of-service',
   path: '/terms-of-service',
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
 }
@@ -140,6 +147,7 @@ export interface FileRoutesByTo {
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
 }
@@ -159,6 +167,7 @@ export interface FileRoutesById {
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms-of-service': typeof TermsOfServiceRoute
   '/post/$slug': typeof PostSlugRoute
 }
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/onbeat-pilates'
     | '/photos'
     | '/privacy-policy'
+    | '/reset-password'
     | '/terms-of-service'
     | '/post/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/onbeat-pilates'
     | '/photos'
     | '/privacy-policy'
+    | '/reset-password'
     | '/terms-of-service'
     | '/post/$slug'
   id:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/onbeat-pilates'
     | '/photos'
     | '/privacy-policy'
+    | '/reset-password'
     | '/terms-of-service'
     | '/post/$slug'
   fileRoutesById: FileRoutesById
@@ -234,6 +246,7 @@ export interface RootRouteChildren {
   OnbeatPilatesRoute: typeof OnbeatPilatesRoute
   PhotosRoute: typeof PhotosRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
   PostSlugRoute: typeof PostSlugRoute
 }
@@ -338,6 +351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms-of-service': {
       id: '/terms-of-service'
       path: '/terms-of-service'
@@ -370,6 +390,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnbeatPilatesRoute: OnbeatPilatesRoute,
   PhotosRoute: PhotosRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
   PostSlugRoute: PostSlugRoute,
 }
