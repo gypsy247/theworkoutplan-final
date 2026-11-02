@@ -7,6 +7,7 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
+- [ ] Replace /admin with a six-tab visual editor, PIN privacy screen, local drafts and verified JSON downloads.
 - [x] Centralize all site content into src/data/siteContent.json and src/data/articles.json; wire every section to read from them.
 - [x] Copy all uploaded images into public/images for CMS media management.
 - [x] Add Decap CMS (public/admin + config.yml), Pages CMS (.pages.yml), /admin hosting rewrites, and Netlify Identity invite redirect.
