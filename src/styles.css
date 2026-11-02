@@ -91,8 +91,8 @@
   --background: var(--admin-background);
   --card: var(--admin-card);
   --primary: var(--admin-primary);
-  min-height: 100vh;
   background: var(--background);
 }
+.studio-manager:not([role="dialog"]) { min-height: 100vh; }
 .studio-manager input, .studio-manager textarea { background: var(--background); }
 .studio-manager input:focus-visible, .studio-manager textarea:focus-visible { border-color: var(--primary); }

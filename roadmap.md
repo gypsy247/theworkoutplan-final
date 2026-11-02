@@ -7,12 +7,12 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
-- [ ] Replace /admin with a six-tab visual editor, PIN privacy screen, local drafts and verified JSON downloads.
+- [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and verified JSON downloads (29 tests and end-to-end export check pass).
 - [x] Centralize all site content into src/data/siteContent.json and src/data/articles.json; wire every section to read from them.
 - [x] Copy all uploaded images into public/images for CMS media management.
 - [x] Add Decap CMS (public/admin + config.yml), Pages CMS (.pages.yml), /admin hosting rewrites, and Netlify Identity invite redirect.
 - [x] Remove remaining Pilates mentions from trainer roles/bios and gallery captions.
-- [ ] Enable Netlify Identity + Git Gateway on the Netlify deployment so /admin login works (owner action outside this repo).
+- [x] Retire the Netlify Identity requirement in favor of the user-selected PIN and JSON-download workflow.
 - [x] Test prices, policies, booking flow and page layout.
 
 # Indexed Google URLs
