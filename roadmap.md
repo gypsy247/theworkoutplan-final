@@ -9,7 +9,7 @@
 # CMS
 - [x] Add and remove pricing tiers, FAQs, reviews and gallery photos with source-compatible JSON exports; browser-tested all four dynamic collections.
 - [x] Add owner sign-in, server-verified roles, atomic GitHub JSON commits, loading/error states and separate Netlify status checking.
-- [ ] Assign publishing access and verify authenticated publishing end-to-end (owner email still missing; no approved owners exist).
+- [ ] Assign publishing access to gypsytalha@gmail.com and verify authenticated publishing end-to-end (approved email supplied, but no matching registered account exists; owner must sign in first).
 - [ ] Enable photo file uploads (workspace blocks public storage buckets; HTTPS photo URL entry works).
 - [x] Remove legacy static admin files and verify /admin and /admin/ directly render the React PIN and six-tab flow; browser checks and eight focused tests pass.
 - [ ] Confirm GitHub sync and Netlify deployment (requires owner checking Project settings → Git and Netlify deploy status).
