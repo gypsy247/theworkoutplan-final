@@ -107,6 +107,7 @@ function RootShell({ children }: { children: ReactNode }) {
       <head>
         <HeadContent />
         <script src="https://embed.acuityscheduling.com/js/embed.js" type="text/javascript" defer />
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer />
       </head>
       <body>
         {children}
