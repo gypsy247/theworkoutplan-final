@@ -7,6 +7,8 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
+- [ ] Add and remove pricing tiers, FAQs, reviews and gallery photos with source-compatible JSON exports.
+- [ ] Enable secure owner-only GitHub publishing (owner email/profile requirements still needed; Netlify deployment must be confirmed before claiming live).
 - [x] Remove legacy static admin files and verify /admin and /admin/ directly render the React PIN and six-tab flow; browser checks and eight focused tests pass.
 - [ ] Confirm GitHub sync and Netlify deployment (requires owner checking Project settings → Git and Netlify deploy status).
 - [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and verified JSON downloads (29 tests and end-to-end export check pass).
