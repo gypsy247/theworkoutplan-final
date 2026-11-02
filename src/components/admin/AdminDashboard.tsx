@@ -23,7 +23,7 @@ const sections = [
 const surface = "rounded-lg border border-border bg-card p-5 md:p-6";
 
 function Field({ label, value, onChange, multiline = false, numeric = false }: { label: string; value: string | number; onChange: (value: string) => void; multiline?: boolean; numeric?: boolean }) {
-  return <label className="grid min-w-0 gap-2 text-sm font-medium"><span className="text-muted-foreground">{label}</span>{multiline ? <Textarea value={value} onChange={(event) => onChange(event.target.value)} className="min-h-28 resize-y text-sm leading-relaxed" /> : <Input type={numeric ? "number" : "text"} min={numeric ? 0 : undefined} step={numeric ? "0.01" : undefined} value={value} onChange={(event) => onChange(event.target.value)} className="h-11 text-sm" />}</label>;
+  return <label className="grid min-w-0 gap-2 text-sm font-medium"><span className="text-muted-foreground">{label}</span>{multiline ? <Textarea aria-label={label} value={value} onChange={(event) => onChange(event.target.value)} className="min-h-28 resize-y text-sm leading-relaxed" /> : <Input aria-label={label} type={numeric ? "number" : "text"} min={numeric ? 0 : undefined} step={numeric ? "0.01" : undefined} value={value} onChange={(event) => onChange(event.target.value)} className="h-11 text-sm" />}</label>;
 }
 function SectionTitle({ children, count }: { children: ReactNode; count?: number }) {
   return <div className="mb-5 flex items-center justify-between gap-3"><h3 className="font-display text-lg font-bold">{children}</h3>{count !== undefined && <span className="text-xs text-muted-foreground">{count} entries</span>}</div>;
