@@ -7,18 +7,20 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
+- [x] Replace Cloud publishing with standalone Netlify Identity/Git Gateway and optional in-memory GitHub token access.
+- [x] Add repository photo uploads and add/reorder/delete support for every repeated editor collection.
+- [x] Test standalone editor and simulated publishing behavior; 51 tests pass, photo previews and collection controls browser-verified, Netlify owner setup documented.
 - [x] Add and remove pricing tiers, FAQs, reviews and gallery photos with source-compatible JSON exports; browser-tested all four dynamic collections.
-- [x] Add owner sign-in, server-verified roles, atomic GitHub JSON commits, loading/error states and separate Netlify status checking.
-- [ ] Assign publishing access to gypsytalha@gmail.com and verify authenticated publishing end-to-end (approved email supplied, but no matching registered account exists; owner must sign in first).
-- [ ] Enable photo file uploads (workspace blocks public storage buckets; HTTPS photo URL entry works).
+- [x] Add Netlify owner sign-in, provider-enforced permissions, atomic GitHub JSON/image commits, loading/error states and deployed release verification.
+- [ ] Verify real Netlify owner login and live publishing end-to-end (requires the owner's Netlify site with Identity and Git Gateway enabled).
 - [x] Remove legacy static admin files and verify /admin and /admin/ directly render the React PIN and six-tab flow; browser checks and eight focused tests pass.
 - [ ] Confirm GitHub sync and Netlify deployment (requires owner checking Project settings → Git and Netlify deploy status).
-- [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and verified JSON downloads (29 tests and end-to-end export check pass).
+- [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and standalone publishing controls.
 - [x] Centralize all site content into src/data/siteContent.json and src/data/articles.json; wire every section to read from them.
 - [x] Copy all uploaded images into public/images for CMS media management.
-- [x] Add Decap CMS (public/admin + config.yml), Pages CMS (.pages.yml), /admin hosting rewrites, and Netlify Identity invite redirect.
+- [x] Keep Pages CMS (.pages.yml), remove retired Decap static files, and configure standalone Netlify SSR hosting.
 - [x] Remove remaining Pilates mentions from trainer roles/bios and gallery captions.
-- [x] Retire the Netlify Identity requirement in favor of the user-selected PIN and JSON-download workflow.
+- [x] Keep PIN preview mode alongside Netlify Identity publishing; no manual downloads required.
 - [x] Test prices, policies, booking flow and page layout.
 
 # Indexed Google URLs

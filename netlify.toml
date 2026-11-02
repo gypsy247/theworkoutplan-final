@@ -1,0 +1,12 @@
+[build]
+  command = "bun run build"
+  publish = "dist"
+
+[build.environment]
+  NITRO_PRESET = "netlify"
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/studio-version.json"
+  [headers.values]
+    Cache-Control = "no-store"

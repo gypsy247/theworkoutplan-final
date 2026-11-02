@@ -11,10 +11,10 @@
 
 - Keep brand colors in OKLCH semantic tokens in src/styles.css; the project uses Tailwind v4, so legacy CSS/config filenames are not applicable.
 - Share Acuity scheduler and policy UI between the booking dialog and TanStack booking route to keep the two booking experiences consistent; load its embed script once in the root document.
-- Centralize editable site content in src/data/siteContent.json and articles in src/data/articles.json; public consumers retain build-time reads while /admin edits isolated drafts, exports source-compatible JSON, or commits both files atomically to the fixed GitHub main branch after server-verified admin authorization. CMS media lives in public/images; asset pointers stay untouched.
-- Keep roles in protected user_roles, never infer publishing rights from PIN or profile data; new accounts receive no role because publishing requires explicit owner approval.
-- Put GitHub calls behind authenticated TanStack server functions using the linked connector; never force branch updates and never call a commit live without successful Netlify status.
-- Use StudioSession once around the editor for auth state and publisher query cleanup; preserve the generated auth-attacher in src/start.ts.
+- Centralize editable site content in src/data/siteContent.json and articles in src/data/articles.json; public consumers retain build-time reads while /admin edits isolated drafts and commits JSON plus pending images atomically through Git data APIs, avoiding partial deploys.
+- Standalone Studio publishing uses Netlify Identity JWTs and same-origin Git Gateway, with optional repository-scoped personal tokens kept only in React memory; Netlify/GitHub enforce permissions, never PINs or client email/role checks.
+- Keep repository operations in src/lib/netlify-publish.ts; non-forced main-branch writes detect concurrent changes, and a deployed studio-version.json release marker—not a commit—establishes live status.
+- Use StudioSession once around the editor to manage Netlify widget events and ephemeral token access; Cloud clients and auth-attacher remain generated but unreferenced by the application.
 - Keep the custom Studio Manager in src/components/admin behind the /admin TanStack route, without public navbar/footer; its PIN is only a privacy screen for public-content drafts, never authorization for live writes.
 - Do not recreate public/admin static files or a competing App.tsx/pages router; /admin belongs exclusively to TanStack Start so static hosting cannot shadow the dashboard.
 - Store the editable shared logo path in studioInfo.logoImage so exported logo changes reach both navbar and footer after deployment.

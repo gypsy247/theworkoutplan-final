@@ -14,7 +14,7 @@ export function createEditorDraft(): EditorDraft {
   return structuredClone({ site: siteContent, blog: articlesContent });
 }
 
-export type DynamicCollection = "pricingTiers" | "faqs" | "reviews" | "studioPhotos" | "appScreenshots";
+export type DynamicCollection = "pricingTiers" | "trainers" | "faqs" | "reviews" | "studioPhotos" | "appScreenshots";
 export function addContentItem(draft: EditorDraft, collection: DynamicCollection): EditorDraft {
   const copy = structuredClone(draft);
   if (collection === "pricingTiers") {
@@ -22,7 +22,8 @@ export function addContentItem(draft: EditorDraft, collection: DynamicCollection
     let index = 2;
     while (copy.site.pricingTiers.some((tier) => tier.id === id)) id = `new-tier-${index++}`;
     copy.site.pricingTiers.push({ id, name: "New 1:1 session", price: 0, duration: "1 hour", badge: "", featured: false, description: "", features: [] });
-  } else if (collection === "faqs") copy.site.faqs.push({ question: "", answer: "" });
+  } else if (collection === "trainers") copy.site.trainers.push({ name: "New trainer", role: "1:1 Personal Trainer", bio: "", quote: "", image: "/images/logo-white.png" });
+  else if (collection === "faqs") copy.site.faqs.push({ question: "", answer: "" });
   else if (collection === "reviews") copy.site.reviews.push({ name: "", initials: "", rating: 5, text: "" });
   else copy.site[collection].push({ image: "", caption: "" });
   return copy;
@@ -33,6 +34,15 @@ export function removeContentItem(draft: EditorDraft, collection: DynamicCollect
   if (index < 0 || index >= copy.site[collection].length) throw new Error("Item no longer exists");
   copy.site[collection].splice(index, 1);
   return copy;
+}
+
+export function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
+  const next = [...items];
+  const destination = index + direction;
+  if (index < 0 || index >= next.length || destination < 0 || destination >= next.length) return next;
+  const [item] = next.splice(index, 1);
+  if (item !== undefined) next.splice(destination, 0, item);
+  return next;
 }
 
 export function updateDraft<T>(draft: T, path: (string | number)[], value: unknown): T {
