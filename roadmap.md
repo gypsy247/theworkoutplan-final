@@ -7,10 +7,12 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
+- [ ] Replace Cloud publishing with standalone Netlify Identity/Git Gateway and optional in-memory GitHub token access.
+- [ ] Add repository photo uploads and add/reorder/delete support for every repeated editor collection.
+- [ ] Test standalone editor and publishing behavior; document Netlify owner setup and verification limitations.
 - [x] Add and remove pricing tiers, FAQs, reviews and gallery photos with source-compatible JSON exports; browser-tested all four dynamic collections.
 - [x] Add owner sign-in, server-verified roles, atomic GitHub JSON commits, loading/error states and separate Netlify status checking.
-- [ ] Assign publishing access to gypsytalha@gmail.com and verify authenticated publishing end-to-end (approved email supplied, but no matching registered account exists; owner must sign in first).
-- [ ] Enable photo file uploads (workspace blocks public storage buckets; HTTPS photo URL entry works).
+- [ ] Verify real Netlify owner login and live publishing end-to-end (requires the owner's Netlify site with Identity and Git Gateway enabled).
 - [x] Remove legacy static admin files and verify /admin and /admin/ directly render the React PIN and six-tab flow; browser checks and eight focused tests pass.
 - [ ] Confirm GitHub sync and Netlify deployment (requires owner checking Project settings → Git and Netlify deploy status).
 - [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and verified JSON downloads (29 tests and end-to-end export check pass).
