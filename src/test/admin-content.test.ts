@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { addContentItem, removeContentItem, createArticle, createEditorDraft, isValidEditorPin, serializeExports, updateDraft, validateDraft } from "@/lib/admin-content";
+import { addContentItem, removeContentItem, moveItem, createArticle, createEditorDraft, isValidEditorPin, serializeExports, updateDraft, validateDraft } from "@/lib/admin-content";
 
 describe("Studio content editor", () => {
-  it.each([['pricingTiers', 4], ['faqs', 8], ['reviews', 3], ['studioPhotos', 6]] as const)('adds and removes %s in exact source exports', (collection, initial) => {
+  it.each([['pricingTiers', 4], ['trainers', 3], ['faqs', 8], ['reviews', 3], ['studioPhotos', 6], ['appScreenshots', 3]] as const)('adds and removes %s in exact source exports', (collection, initial) => {
     const original = createEditorDraft();
     const added = addContentItem(original, collection);
     expect(added.site[collection]).toHaveLength(initial + 1);
@@ -10,6 +10,22 @@ describe("Studio content editor", () => {
     expect(exported[collection]).toHaveLength(initial + 1);
     expect(exported[collection][initial]).toEqual(added.site[collection][initial]);
     expect(removeContentItem(added, collection, initial)).toEqual(original);
+  });
+  it.each(['pricingTiers', 'trainers', 'faqs', 'reviews', 'studioPhotos', 'appScreenshots'] as const)('reorders %s without losing an item', collection => {
+    const draft = createEditorDraft();
+    const items = draft.site[collection] as unknown[];
+    const moved = moveItem(items, 0, 1);
+    expect(moved[1]).toEqual(items[0]);
+    expect(moved[0]).toEqual(items[1]);
+    expect(moveItem(moved, 1, -1)).toEqual(items);
+  });
+  it('reorders and removes articles in source-compatible JSON', () => {
+    const draft = createEditorDraft();
+    const original = draft.blog.articles[0];
+    draft.blog.articles = moveItem(draft.blog.articles, 0, 1);
+    expect(draft.blog.articles[1]).toEqual(original);
+    draft.blog.articles.splice(1, 1);
+    expect(JSON.parse(serializeExports(draft)[1]?.content ?? '{}').articles).toHaveLength(5);
   });
   it("accepts only the requested four-digit PIN 1390", () => {
     expect(isValidEditorPin("1390")).toBe(true);
