@@ -1,32 +1,58 @@
-import { useState } from 'react';
-import { useServerFn } from '@tanstack/react-start';
-import { useQuery } from '@tanstack/react-query';
-import { LoaderCircle, CloudUpload } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { LoaderCircle, CloudUpload, KeyRound, LogIn } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { supabase } from '@/integrations/supabase/client';
-import { lovable } from '@/integrations/lovable';
-import { getPublisher, publishStudio, checkStudioDeployment } from '@/lib/studio-publish.functions';
-import { validateDraft, type EditorDraft } from '@/lib/admin-content';
+import { getRepositoryHead, isReleaseLive, publishRepository, repositoryRequest, type PendingImage } from '@/lib/netlify-publish';
+import type { EditorDraft } from '@/lib/admin-content';
 import { useStudioSession } from './StudioSession';
 
-export function PublisherControls({ draft, onPublished }: { draft: EditorDraft; onPublished: () => void }) {
+export function NetlifyLogin() {
   const session = useStudioSession();
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
+  return <div className="grid gap-2"><Button disabled={!session.ready} onClick={session.login}><LogIn />Log In with Netlify Identity to Publish Live</Button><Button variant="link" onClick={() => setOpen(true)}><KeyRound />Use a GitHub token instead</Button><Dialog open={open} onOpenChange={setOpen}><DialogContent className="studio-manager"><DialogHeader><DialogTitle>GitHub token fallback</DialogTitle><DialogDescription>Use a fine-grained token restricted to this repository with Contents read/write permission. It stays in memory until sign-out or refresh.</DialogDescription></DialogHeader><Input aria-label="GitHub personal access token" type="password" autoComplete="off" value={token} onChange={event => setToken(event.target.value)} /><Button disabled={!token.trim()} onClick={() => { session.useToken(token); setToken(''); setOpen(false); }}>Connect repository</Button></DialogContent></Dialog></div>;
+}
+
+export function PublisherControls({ draft, images, onPublished, onBusy }: { draft: EditorDraft; images: PendingImage[]; onPublished: () => void; onBusy: (value: boolean) => void }) {
+  const session = useStudioSession();
+  const kind = session.access?.kind;
+  const email = session.user?.email;
+  const [head, setHead] = useState('');
+  const [connected, setConnected] = useState(false);
   const [busy, setBusy] = useState(false);
-  const [commit, setCommit] = useState<{ sha: string; url: string } | null>(null);
+  const [error, setError] = useState('');
+  const [commit, setCommit] = useState<{ url: string; releaseId: string } | null>(null);
   const [message, setMessage] = useState('');
-  const getAccess = useServerFn(getPublisher);
-  const publish = useServerFn(publishStudio);
-  const checkDeployment = useServerFn(checkStudioDeployment);
-  const access = useQuery({ queryKey: ['studio-publisher', session?.user.id], queryFn: () => getAccess(), enabled: Boolean(session), retry: false, staleTime: Infinity });
-  async function run(action: () => Promise<void>) {
-    setBusy(true);
-    try { await action(); } catch (error) { toast.error(error instanceof Error ? error.message : 'Unable to complete this action.'); } finally { setBusy(false); }
-  }
-  return <><Button disabled={busy} className="h-10 font-bold" onClick={() => setOpen(true)}>{busy ? <LoaderCircle className="animate-spin" /> : <CloudUpload />}Save & Publish</Button><Dialog open={open} onOpenChange={setOpen}><DialogContent className="studio-manager"><DialogHeader><DialogTitle>Publish studio content</DialogTitle><DialogDescription>Owner-only publishing to GitHub. Netlify goes live after a successful deployment.</DialogDescription></DialogHeader>{!session ? <div className="space-y-4"><label className="grid gap-2 text-sm">Owner email<Input aria-label="Owner email" type="email" value={email} onChange={e => setEmail(e.target.value)} /></label><label className="grid gap-2 text-sm">Password<Input aria-label="Owner password" type="password" value={password} onChange={e => setPassword(e.target.value)} /></label><Button disabled={busy} className="w-full" onClick={() => run(async () => { const { error } = await supabase.auth.signInWithPassword({ email, password }); if (error) throw error; setPassword(''); })}>Sign in</Button><Button variant="link" onClick={() => run(async () => { const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` }); if (error) throw error; toast.success('Check your email for a password reset link.'); })}>Forgot password?</Button>{(['google', 'lovable'] as const).map(provider => <Button key={provider} variant="outline" disabled={busy} className="w-full" onClick={() => run(async () => { const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: `${window.location.origin}/admin` }); if (result.error) throw new Error(result.error.message); })}>Sign in with {provider === 'google' ? 'Google' : 'Lovable'}</Button>)}<p className="text-xs text-muted-foreground">Use an existing owner account. Publishing access must be assigned separately; signing in never grants it.</p></div> : <div className="space-y-4"><p className="break-all text-sm">Signed in as {session.user.email}</p>{access.isPending ? <p className="flex gap-2 text-sm"><LoaderCircle className="h-4 w-4 animate-spin" />Checking owner access…</p> : access.error ? <p role="alert" className="text-sm text-destructive">{access.error.message}</p> : !access.data?.allowed ? <p role="alert" className="text-sm text-muted-foreground">This account has not been approved to publish. Send the owner email in the project chat to assign access.</p> : <><Button disabled={busy} className="w-full" onClick={() => run(async () => { const error = validateDraft(draft); if (error) throw new Error(error); const result = await publish({ data: { draft, expectedHead: access.data?.head ?? '' } }); setCommit(result); setMessage('Saved to GitHub. Deployment is not yet confirmed.'); toast.success('Saved to GitHub. Waiting for Netlify deployment.'); onPublished(); await access.refetch(); })}>{busy && <LoaderCircle className="animate-spin" />}Publish changes to GitHub</Button>{commit && <><a href={commit.url} target="_blank" rel="noreferrer" className="text-sm text-primary">View saved commit</a><p role="status" className="text-sm">{message}</p><Button variant="outline" disabled={busy} onClick={() => run(async () => { const status = await checkDeployment({ data: { sha: commit.sha } }); if (status.state === 'live') { setMessage('Changes published live successfully!'); toast.success('Changes published live successfully!'); } else setMessage(status.state === 'failed' ? 'Netlify deployment failed. Your files are saved in GitHub.' : status.state === 'unknown' ? 'GitHub has no Netlify deployment confirmation for this commit yet.' : 'Netlify is still building your changes.'); })}>Check Netlify deployment</Button></>}</>}<Button variant="outline" disabled={busy} onClick={() => run(async () => { await supabase.auth.signOut(); setCommit(null); })}>Sign out</Button></div>}</DialogContent></Dialog></>;
+  useEffect(() => {
+    let active = true;
+    setHead(''); setConnected(false); setError(''); setCommit(null);
+    if (session.access) getRepositoryHead(repositoryRequest(session.access)).then(value => { if (active) { setHead(value); setConnected(true); } }).catch(reason => { if (active) setError(reason.message); });
+    return () => { active = false; };
+  }, [kind, email]);
+  useEffect(() => {
+    if (!commit) return;
+    let active = true;
+    let attempts = 0;
+    const check = async () => {
+      try { if (await isReleaseLive(commit.releaseId)) { if (active) { setMessage('Changes published live successfully!'); toast.success('Changes published live successfully!'); } window.clearInterval(timer); } } catch { /* A deploying site may temporarily be unavailable. */ }
+      if (++attempts >= 60) window.clearInterval(timer);
+    };
+    const timer = window.setInterval(check, 5000);
+    void check();
+    return () => { active = false; window.clearInterval(timer); };
+  }, [commit]);
+  if (!session.access) return <NetlifyLogin />;
+  return <div className="grid max-w-md gap-2"><div className="flex flex-wrap items-center gap-2"><Button disabled={!head || busy} onClick={async () => {
+    const access = session.access;
+    if (!access) return;
+    setBusy(true); onBusy(true); setError('');
+    try {
+      const result = await publishRepository(repositoryRequest(access), structuredClone(draft), head, images, crypto.randomUUID());
+      setCommit(result); setHead(result.sha); setMessage('Saved to GitHub. Waiting for Netlify deployment.'); onPublished();
+      toast.success('Saved to GitHub. Netlify deployment pending.');
+    } catch (reason) { const text = reason instanceof Error ? reason.message : 'Publishing failed.'; setError(text); toast.error(text); }
+    finally { setBusy(false); onBusy(false); }
+  }}>{busy ? <LoaderCircle className="animate-spin" /> : <CloudUpload />}Publish Changes Live</Button><Button variant="ghost" disabled={busy} onClick={() => void session.logout()}>Sign out</Button></div><p className="text-xs text-muted-foreground">{connected ? kind === 'netlify' ? 'Connected to Live Site (Netlify + GitHub)' : 'Connected to GitHub (token)' : 'Connecting to repository…'}</p>{error && <p role="alert" className="break-words text-xs text-destructive">{error}</p>}{commit && <><p role="status" className="text-xs">{message}</p><a className="text-xs text-primary" href={commit.url} target="_blank" rel="noreferrer">View saved commit</a><Button variant="link" onClick={async () => { try { setMessage(await isReleaseLive(commit.releaseId) ? 'Changes published live successfully!' : 'Deployment is not confirmed yet. Check Netlify for build errors or pending deployments.'); } catch { setMessage('Unable to reach the deployed site. Check Netlify deployment status.'); } }}>Check live deployment</Button></>}</div>;
 }
