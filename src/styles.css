@@ -35,9 +35,15 @@
   --color-g-yellow: var(--g-yellow);
   --color-g-green: var(--g-green);
   --color-scheduler: var(--scheduler);
+  --color-admin-background: var(--admin-background);
+  --color-admin-card: var(--admin-card);
+  --color-admin-primary: var(--admin-primary);
 }
 
 :root {
+  --admin-background: oklch(0.136 0.004 286);
+  --admin-card: oklch(0.175 0.008 286);
+  --admin-primary: oklch(0.625 0.238 351);
   --radius: 0.5rem;
   --background: oklch(0.13552 0.00417 285.830);
   --foreground: oklch(0.985 0 0);
@@ -80,3 +86,13 @@
 }
 
 @utility phone-shadow { box-shadow: var(--shadow-phone); }
+
+.studio-manager {
+  --background: var(--admin-background);
+  --card: var(--admin-card);
+  --primary: var(--admin-primary);
+  background: var(--background);
+}
+.studio-manager:not([role="dialog"]) { min-height: 100vh; }
+.studio-manager input, .studio-manager textarea { background: var(--background); }
+.studio-manager input:focus-visible, .studio-manager textarea:focus-visible { border-color: var(--primary); }

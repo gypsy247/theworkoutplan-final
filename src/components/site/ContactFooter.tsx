@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Sprout, User } from "lucide-react";
-import logo from "@/assets/logo-white.png.asset.json";
 import { ConsultationForm } from "./ConsultationForm";
 import { EMAIL, SITE } from "./data";
 import { PHONE, PHONE_HREF, Stars } from "./brand";
@@ -62,7 +61,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">
-            <img src={logo.url} alt="The Workout Plant logo" className="h-9 w-9 rounded-full object-cover" />
+            <img src={SITE.logoImage} alt="The Workout Plant logo" className="h-9 w-9 rounded-full object-cover" />
             THE WORKOUT PLANT
           </Link>
           <p className="mt-4 text-sm text-muted-foreground">Evidence-based private training & nutrition coaching in Williamsburg, Brooklyn.</p>

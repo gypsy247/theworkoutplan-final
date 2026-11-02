@@ -5,25 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>The Workout Plant — Content Manager</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <meta http-equiv="refresh" content="0;url=/admin" />
     <style>
       html, body { margin: 0; padding: 0; background: #0a0a0a; color: #fafafa; font-family: system-ui, sans-serif; }
       #nc-root { min-height: 100vh; }
     </style>
   </head>
   <body>
-    <div id="nc-root"></div>
-    <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", function (user) {
-          if (!user) {
-            window.netlifyIdentity.on("login", function () {
-              document.location.href = "/admin/";
-            });
-          }
-        });
-      }
-    </script>
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <a href="/admin">Open The Workout Plant Studio Manager</a>
+    <script>window.location.replace("/admin");</script>
   </body>
 </html>

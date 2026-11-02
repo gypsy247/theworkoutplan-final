@@ -9,12 +9,12 @@ All editable site content lives in two JSON files:
 - `src/data/siteContent.json` — promo banner, homepage hero, studio info, The Plan pillars, studio photos, app screenshots, trainers, pricing tiers, Google reviews, FAQs, and studio policies.
 - `src/data/articles.json` — the full articles shown on the Articles pages.
 
-You can edit these files directly, or use a visual CMS connected to this GitHub repository:
+You can edit these files directly, or use the Studio Manager:
 
-- **Decap CMS** — available at `/admin` when the site is deployed on Netlify with Netlify Identity and Git Gateway enabled. Configuration: `public/admin/config.yml`.
+- **Studio Manager** — open `/admin` and enter PIN `1390`. This is a convenience privacy screen, not secure authentication. Edit six content tabs, then select **Save & Download JSON** and download both files. Send them in the project chat to apply them, or replace the matching files in `src/data/`, then publish. Downloads do not update the live site. Unsaved drafts exist only in the current browser tab and disappear on refresh.
 - **Pages CMS** — connect the repository at [pagescms.org](https://pagescms.org). Configuration: `.pages.yml` in the project root.
 
-Images uploaded through either CMS are stored in `public/images/` and referenced as `/images/...`.
+Images are stored in `public/images/` and referenced as `/images/...`; the Studio Manager can change these references or use HTTPS image URLs. The former Decap configuration remains available for optional repository tooling, but its interface is no longer served at `/admin`.
 
 ## Development
 
