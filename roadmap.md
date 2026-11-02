@@ -7,6 +7,8 @@
 - [ ] Update group and Pilates listings inside Acuity (requires owner changes in external Acuity account).
 
 # CMS
+- [x] Remove legacy static admin files and verify /admin and /admin/ directly render the React PIN and six-tab flow; browser checks and eight focused tests pass.
+- [ ] Confirm GitHub sync and Netlify deployment (requires owner checking Project settings → Git and Netlify deploy status).
 - [x] Replace /admin with a six-tab visual editor, PIN privacy screen, in-tab drafts and verified JSON downloads (29 tests and end-to-end export check pass).
 - [x] Centralize all site content into src/data/siteContent.json and src/data/articles.json; wire every section to read from them.
 - [x] Copy all uploaded images into public/images for CMS media management.
