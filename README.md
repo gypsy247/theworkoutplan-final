@@ -14,7 +14,7 @@ You can edit these files directly, or use the Studio Manager:
 - **Studio Manager** — open `/admin` and enter PIN `1390`. This is a convenience privacy screen, not secure authentication. Edit six content tabs, then select **Save & Download JSON** and download both files. Send them in the project chat to apply them, or replace the matching files in `src/data/`, then publish. Downloads do not update the live site. Unsaved drafts exist only in the current browser tab and disappear on refresh.
 - **Pages CMS** — connect the repository at [pagescms.org](https://pagescms.org). Configuration: `.pages.yml` in the project root.
 
-Images are stored in `public/images/` and referenced as `/images/...`; the Studio Manager can change these references or use HTTPS image URLs. The former Decap configuration remains available for optional repository tooling, but its interface is no longer served at `/admin`.
+Images are stored in `public/images/` and referenced as `/images/...`; the Studio Manager can change these references or use HTTPS image URLs. The former static Decap files have been removed so `/admin` is served only by the React dashboard.
 
 ## Development
 
