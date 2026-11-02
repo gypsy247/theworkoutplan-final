@@ -4,8 +4,8 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { getRepositoryHead, isReleaseLive, publishRepository, repositoryRequest, type PendingImage } from '@/lib/netlify-publish';
-import type { EditorDraft } from '@/lib/admin-content';
+import { connectRepository, isReleaseLive, publishRepository, repositoryRequest, type PendingImage } from '@/lib/netlify-publish';
+import { createEditorDraft, type EditorDraft } from '@/lib/admin-content';
 import { useStudioSession } from './StudioSession';
 
 export function NetlifyLogin() {
@@ -28,7 +28,7 @@ export function PublisherControls({ draft, images, onPublished, onBusy }: { draf
   useEffect(() => {
     let active = true;
     setHead(''); setConnected(false); setError(''); setCommit(null);
-    if (session.access) getRepositoryHead(repositoryRequest(session.access)).then(value => { if (active) { setHead(value); setConnected(true); } }).catch(reason => { if (active) setError(reason.message); });
+    if (session.access) connectRepository(repositoryRequest(session.access), createEditorDraft()).then(value => { if (active) { setHead(value); setConnected(true); } }).catch(reason => { if (active) setError(reason.message); });
     return () => { active = false; };
   }, [kind, email]);
   useEffect(() => {

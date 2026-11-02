@@ -39,6 +39,17 @@ export async function getRepositoryHead(request: RepositoryRequest): Promise<str
   return ref.object.sha;
 }
 
+export async function connectRepository(request: RepositoryRequest, deployedContent: EditorDraft): Promise<string> {
+  const head = await getRepositoryHead(request);
+  for (const file of serializeExports(deployedContent)) {
+    const remote = await request(`/contents/src/data/${file.filename}?ref=${encodeURIComponent(head)}`);
+    if (typeof remote.content !== 'string') throw new Error('Unable to read the current content files.');
+    const bytes = Uint8Array.from(atob(remote.content.replace(/\s/g, '')), character => character.charCodeAt(0));
+    if (JSON.stringify(JSON.parse(new TextDecoder().decode(bytes))) !== JSON.stringify(JSON.parse(file.content))) throw new Error('GitHub has newer content than this deployed site. Wait for Netlify to deploy, then reload before publishing.');
+  }
+  return head;
+}
+
 // Git tree + commit + non-forced ref update keeps JSON and images together in one deploy.
 export async function publishRepository(request: RepositoryRequest, draft: EditorDraft, expectedHead: string, images: PendingImage[], releaseId: string) {
   const error = validateDraft(draft);

@@ -1,7 +1,12 @@
 import { describe, it, expect, vi } from 'vitest';
-import { publishRepository, encodeUtf8, isReleaseLive, repositoryRequest } from '@/lib/netlify-publish';
+import { publishRepository, connectRepository, encodeUtf8, isReleaseLive, repositoryRequest } from '@/lib/netlify-publish';
 import { createEditorDraft } from '@/lib/admin-content';
 describe('GitHub publishing', () => {
+  it('blocks stale deployed content from overwriting newer GitHub data', async () => {
+    const request = vi.fn().mockResolvedValueOnce({ object: { sha: 'new-head' } }).mockResolvedValueOnce({ content: encodeUtf8(JSON.stringify({ newer: true })) });
+    await expect(connectRepository(request, createEditorDraft())).rejects.toThrow('newer content');
+    expect(request.mock.calls[1]?.[0]).toBe('/contents/src/data/siteContent.json?ref=new-head');
+  });
   it('commits both exact JSON files atomically without forcing the branch', async () => {
     const request = vi.fn().mockResolvedValueOnce({ object: { sha: 'parent' } }).mockResolvedValueOnce({ tree: { sha: 'old-tree' } }).mockResolvedValueOnce({ sha: 'new-tree' }).mockResolvedValueOnce({ sha: 'new-commit' }).mockResolvedValueOnce({});
     const draft = createEditorDraft();
