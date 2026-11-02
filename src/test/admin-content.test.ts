@@ -1,7 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { createArticle, createEditorDraft, isValidEditorPin, serializeExports, updateDraft, validateDraft } from "@/lib/admin-content";
+import { addContentItem, removeContentItem, createArticle, createEditorDraft, isValidEditorPin, serializeExports, updateDraft, validateDraft } from "@/lib/admin-content";
 
 describe("Studio content editor", () => {
+  it.each([['pricingTiers', 4], ['faqs', 8], ['reviews', 3], ['studioPhotos', 6]] as const)('adds and removes %s in exact source exports', (collection, initial) => {
+    const original = createEditorDraft();
+    const added = addContentItem(original, collection);
+    expect(added.site[collection]).toHaveLength(initial + 1);
+    const exported = JSON.parse(serializeExports(added)[0]?.content ?? '{}');
+    expect(exported[collection]).toHaveLength(initial + 1);
+    expect(exported[collection][initial]).toEqual(added.site[collection][initial]);
+    expect(removeContentItem(added, collection, initial)).toEqual(original);
+  });
   it("accepts only the requested four-digit PIN 1390", () => {
     expect(isValidEditorPin("1390")).toBe(true);
     for (const value of ["139", "13900", "0000", " 1390", "abcd"]) expect(isValidEditorPin(value)).toBe(false);
