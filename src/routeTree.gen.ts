@@ -16,15 +16,21 @@ import { Route as BookASessionRouteImport } from './routes/book-a-session'
 import { Route as ClientLoginRouteImport } from './routes/client-login'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FitnessArticlesRouteImport } from './routes/fitness-articles'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as GroupPersonalTrainingRouteImport } from './routes/group-personal-training'
 import { Route as HighProteinVeganRecipesRouteImport } from './routes/high-protein-vegan-recipes'
 import { Route as MembershipRouteImport } from './routes/membership'
 import { Route as OnbeatPilatesRouteImport } from './routes/onbeat-pilates'
 import { Route as PhotosRouteImport } from './routes/photos'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as ThePlanRouteImport } from './routes/the-plan'
+import { Route as TrainersRouteImport } from './routes/trainers'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -62,9 +68,19 @@ const DisclaimerRoute = DisclaimerRouteImport.update({
   path: '/disclaimer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FitnessArticlesRoute = FitnessArticlesRouteImport.update({
   id: '/fitness-articles',
   path: '/fitness-articles',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GroupPersonalTrainingRoute = GroupPersonalTrainingRouteImport.update({
@@ -92,6 +108,11 @@ const PhotosRoute = PhotosRouteImport.update({
   path: '/photos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
@@ -102,9 +123,24 @@ const ResetPasswordRoute = ResetPasswordRouteImport.update({
   path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   id: '/terms-of-service',
   path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ThePlanRoute = ThePlanRouteImport.update({
+  id: '/the-plan',
+  path: '/the-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrainersRoute = TrainersRouteImport.update({
+  id: '/trainers',
+  path: '/trainers',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PostSlugRoute = PostSlugRouteImport.update({
@@ -121,15 +157,21 @@ export interface FileRoutesByFullPath {
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/faq': typeof FaqRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/gallery': typeof GalleryRoute
   '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/membership': typeof MembershipRoute
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
+  '/pricing': typeof PricingRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/reviews': typeof ReviewsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/the-plan': typeof ThePlanRoute
+  '/trainers': typeof TrainersRoute
   '/post/$slug': typeof PostSlugRoute
 }
 export interface FileRoutesByTo {
@@ -140,15 +182,21 @@ export interface FileRoutesByTo {
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/faq': typeof FaqRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/gallery': typeof GalleryRoute
   '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/membership': typeof MembershipRoute
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
+  '/pricing': typeof PricingRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/reviews': typeof ReviewsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/the-plan': typeof ThePlanRoute
+  '/trainers': typeof TrainersRoute
   '/post/$slug': typeof PostSlugRoute
 }
 export interface FileRoutesById {
@@ -160,15 +208,21 @@ export interface FileRoutesById {
   '/client-login': typeof ClientLoginRoute
   '/contact': typeof ContactRoute
   '/disclaimer': typeof DisclaimerRoute
+  '/faq': typeof FaqRoute
   '/fitness-articles': typeof FitnessArticlesRoute
+  '/gallery': typeof GalleryRoute
   '/group-personal-training': typeof GroupPersonalTrainingRoute
   '/high-protein-vegan-recipes': typeof HighProteinVeganRecipesRoute
   '/membership': typeof MembershipRoute
   '/onbeat-pilates': typeof OnbeatPilatesRoute
   '/photos': typeof PhotosRoute
+  '/pricing': typeof PricingRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/reset-password': typeof ResetPasswordRoute
+  '/reviews': typeof ReviewsRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/the-plan': typeof ThePlanRoute
+  '/trainers': typeof TrainersRoute
   '/post/$slug': typeof PostSlugRoute
 }
 export interface FileRouteTypes {
@@ -181,15 +235,21 @@ export interface FileRouteTypes {
     | '/client-login'
     | '/contact'
     | '/disclaimer'
+    | '/faq'
     | '/fitness-articles'
+    | '/gallery'
     | '/group-personal-training'
     | '/high-protein-vegan-recipes'
     | '/membership'
     | '/onbeat-pilates'
     | '/photos'
+    | '/pricing'
     | '/privacy-policy'
     | '/reset-password'
+    | '/reviews'
     | '/terms-of-service'
+    | '/the-plan'
+    | '/trainers'
     | '/post/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -200,15 +260,21 @@ export interface FileRouteTypes {
     | '/client-login'
     | '/contact'
     | '/disclaimer'
+    | '/faq'
     | '/fitness-articles'
+    | '/gallery'
     | '/group-personal-training'
     | '/high-protein-vegan-recipes'
     | '/membership'
     | '/onbeat-pilates'
     | '/photos'
+    | '/pricing'
     | '/privacy-policy'
     | '/reset-password'
+    | '/reviews'
     | '/terms-of-service'
+    | '/the-plan'
+    | '/trainers'
     | '/post/$slug'
   id:
     | '__root__'
@@ -219,15 +285,21 @@ export interface FileRouteTypes {
     | '/client-login'
     | '/contact'
     | '/disclaimer'
+    | '/faq'
     | '/fitness-articles'
+    | '/gallery'
     | '/group-personal-training'
     | '/high-protein-vegan-recipes'
     | '/membership'
     | '/onbeat-pilates'
     | '/photos'
+    | '/pricing'
     | '/privacy-policy'
     | '/reset-password'
+    | '/reviews'
     | '/terms-of-service'
+    | '/the-plan'
+    | '/trainers'
     | '/post/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -239,15 +311,21 @@ export interface RootRouteChildren {
   ClientLoginRoute: typeof ClientLoginRoute
   ContactRoute: typeof ContactRoute
   DisclaimerRoute: typeof DisclaimerRoute
+  FaqRoute: typeof FaqRoute
   FitnessArticlesRoute: typeof FitnessArticlesRoute
+  GalleryRoute: typeof GalleryRoute
   GroupPersonalTrainingRoute: typeof GroupPersonalTrainingRoute
   HighProteinVeganRecipesRoute: typeof HighProteinVeganRecipesRoute
   MembershipRoute: typeof MembershipRoute
   OnbeatPilatesRoute: typeof OnbeatPilatesRoute
   PhotosRoute: typeof PhotosRoute
+  PricingRoute: typeof PricingRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ReviewsRoute: typeof ReviewsRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
+  ThePlanRoute: typeof ThePlanRoute
+  TrainersRoute: typeof TrainersRoute
   PostSlugRoute: typeof PostSlugRoute
 }
 
@@ -302,11 +380,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisclaimerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fitness-articles': {
       id: '/fitness-articles'
       path: '/fitness-articles'
       fullPath: '/fitness-articles'
       preLoaderRoute: typeof FitnessArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/group-personal-training': {
@@ -344,6 +436,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PhotosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy-policy': {
       id: '/privacy-policy'
       path: '/privacy-policy'
@@ -358,11 +457,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms-of-service': {
       id: '/terms-of-service'
       path: '/terms-of-service'
       fullPath: '/terms-of-service'
       preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/the-plan': {
+      id: '/the-plan'
+      path: '/the-plan'
+      fullPath: '/the-plan'
+      preLoaderRoute: typeof ThePlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trainers': {
+      id: '/trainers'
+      path: '/trainers'
+      fullPath: '/trainers'
+      preLoaderRoute: typeof TrainersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/post/$slug': {
@@ -383,15 +503,21 @@ const rootRouteChildren: RootRouteChildren = {
   ClientLoginRoute: ClientLoginRoute,
   ContactRoute: ContactRoute,
   DisclaimerRoute: DisclaimerRoute,
+  FaqRoute: FaqRoute,
   FitnessArticlesRoute: FitnessArticlesRoute,
+  GalleryRoute: GalleryRoute,
   GroupPersonalTrainingRoute: GroupPersonalTrainingRoute,
   HighProteinVeganRecipesRoute: HighProteinVeganRecipesRoute,
   MembershipRoute: MembershipRoute,
   OnbeatPilatesRoute: OnbeatPilatesRoute,
   PhotosRoute: PhotosRoute,
+  PricingRoute: PricingRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ReviewsRoute: ReviewsRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
+  ThePlanRoute: ThePlanRoute,
+  TrainersRoute: TrainersRoute,
   PostSlugRoute: PostSlugRoute,
 }
 export const routeTree = rootRouteImport
