@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import siteContent from "@/data/siteContent.json";
 import { TIERS } from "@/components/site/data";
+import { Route as MembershipRoute } from "@/routes/membership";
 
 describe("Client revisions", () => {
   it("hides the BOGO promo banner by default", () => {
@@ -29,5 +30,9 @@ describe("Client revisions", () => {
     expect(siteContent).toHaveProperty("trainingVideoUrl");
     expect(siteContent).toHaveProperty("facilityImage");
     expect(siteContent).toHaveProperty("reviewsWidgetScript");
+  });
+  it("noindexes the private membership page", () => {
+    const head = MembershipRoute.options.head?.({});
+    expect(head?.meta).toContainEqual({ name: "robots", content: "noindex, nofollow" });
   });
 });
