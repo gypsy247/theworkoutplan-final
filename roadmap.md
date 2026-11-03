@@ -38,3 +38,7 @@
 - [x] Match requested metadata, canonical URLs, gym schema and sitemap using native server-rendered page heads and redirects instead of incompatible SPA hosting fallbacks.
 - [x] Restore the sixth indexed hydration article using original indexed text from /post/tips-for-drinking-more-water (original image/link destinations unavailable).
 - [x] Verify indexed links, page metadata, gallery and onboarding navigation: 17 pages return 200, four old URLs return 301, all nine gallery images load, 24 tests pass.
+
+# GitHub repository
+- [x] Recreate the owner repository as gypsy247/theworkoutplant (previous repo was deleted) and push all latest project files; publish flow constant updated.
+- [ ] Re-link the Netlify site to the new repository (old repo deletion broke the deploy connection) — needs the owner in Netlify.
