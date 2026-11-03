@@ -2,11 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SITE } from "@/components/site/data";
 import { pageHead } from "@/lib/site-seo";
 
+export function membershipHead() {
+  const base = pageHead("/membership", "Complete Your Workout Plant App Membership", "Private page for onboarded Workout Plant clients to complete their coaching app membership.");
+  return { ...base, meta: [...base.meta, { name: "robots", content: "noindex, nofollow" }] };
+}
+
 export const Route = createFileRoute("/membership")({
-  head: () => {
-    const base = pageHead("/membership", "Complete Your Workout Plant App Membership", "Private page for onboarded Workout Plant clients to complete their coaching app membership.");
-    return { ...base, meta: [...base.meta, { name: "robots", content: "noindex, nofollow" }] };
-  },
+  head: () => membershipHead(),
   component: MembershipPage,
 });
 
