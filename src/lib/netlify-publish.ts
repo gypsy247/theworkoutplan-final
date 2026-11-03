@@ -1,6 +1,6 @@
 import { serializeExports, validateDraft, type EditorDraft } from './admin-content';
 
-export const REPOSITORY = 'gypsy247/screenshot-to-sight-383';
+export const REPOSITORY = 'gypsy247/theworkoutplant';
 export const BRANCH = 'main';
 export type RepositoryAccess = { kind: 'netlify' | 'github'; token: () => Promise<string> };
 export type PendingImage = { path: string; content: string };
