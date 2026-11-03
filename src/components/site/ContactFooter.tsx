@@ -32,7 +32,7 @@ export function ContactSection() {
         <div className="card-surface p-8">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Contact</p>
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight">Ready to Start? Let's Talk.</h2>
-          <p className="mt-4 text-muted-foreground">Request a free consultation and claim your BOGO intro session.</p>
+          <p className="mt-4 text-muted-foreground">Request a free consultation and book your intro session.</p>
           <div className="mt-8"><ContactDetails /></div>
         </div>
         <div className="card-surface p-8">
@@ -45,12 +45,13 @@ export function ContactSection() {
 }
 
 const quick = [
-  { label: "Google Reviews", hash: "reviews" },
-  { label: "The Plan", hash: "the-plan" },
-  { label: "Trainers", hash: "trainers" },
-  { label: "Pricing", hash: "pricing" },
-  { label: "FAQ", hash: "faq" },
-];
+  { label: "The Plan", to: "/the-plan" },
+  { label: "Trainers", to: "/trainers" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Google Reviews", to: "/reviews" },
+  { label: "FAQ", to: "/faq" },
+] as const;
 const programs = ["1:1 w/ Head Coach Izzy", "1:1 w/ Trainer Analine", "1:1 w/ Jr. Trainer Dev", "1:1 Virtual Session w/ Coach Izzy", "Plant-Based & Custom Nutrition", "The Workout Plant App"];
 
 export function Footer() {
@@ -78,10 +79,9 @@ export function Footer() {
           <h4 className={head}>Quick Links</h4>
           <ul className="space-y-2 text-sm">
             <li><Link to="/" className={link}>Home</Link></li>
-            {quick.map((q) => <li key={q.hash}><Link to="/" hash={q.hash} className={link}>{q.label}</Link></li>)}
+            {quick.map((q) => <li key={q.to}><Link to={q.to} className={link}>{q.label}</Link></li>)}
             <li><Link to="/contact" className={link}>Contact Us</Link></li>
             <li><Link to="/book-a-session" className={link}>Book A Session</Link></li>
-            <li><Link to="/membership" className={link}>Membership</Link></li>
             <li><Link to="/photos" className={link}>Studio Photos</Link></li>
             <li><Link to="/high-protein-vegan-recipes" className={link}>Vegan Recipes</Link></li>
             <li><Link to="/fitness-articles" className={link}>Articles</Link></li>
@@ -91,7 +91,7 @@ export function Footer() {
         <div>
           <h4 className={head}>Programs</h4>
           <ul className="space-y-2 text-sm">
-            {programs.map((p) => <li key={p}><Link to="/" hash="pricing" className={link}>{p}</Link></li>)}
+            {programs.map((p) => <li key={p}><Link to="/pricing" className={link}>{p}</Link></li>)}
           </ul>
         </div>
         <div>

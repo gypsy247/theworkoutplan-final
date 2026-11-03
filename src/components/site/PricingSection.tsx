@@ -11,9 +11,7 @@ export function PricingSection() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Pricing</p>
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">Transparent Pricing. Zero Contracts.</h2>
-          <p className="mt-6 inline-block rounded-full border border-primary/40 bg-primary/10 px-4 py-2 text-sm font-bold text-primary">
-            🔥 NEW CLIENT BOGO SALE: Buy 1 Get 1 Free on your intro session! Use code: BOGO
-          </p>
+          <p className="mt-4 text-lg text-muted-foreground">Every session is private, one-on-one, and one full hour.</p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
           {TIERS.map((t) => (
@@ -35,7 +33,7 @@ export function PricingSection() {
                 ))}
               </ul>
               <Button onClick={() => open(t.id)} variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
-                Book With Code: BOGO
+                Book This Session
               </Button>
             </article>
           ))}
