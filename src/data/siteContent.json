@@ -1,16 +1,19 @@
 {
   "promoBanner": {
-    "enabled": true,
+    "enabled": false,
     "text": "NEW CLIENT SPECIAL: Buy One Get One Free on Intro Sessions! Use Code: BOGO at Booking →",
     "code": "BOGO"
   },
+  "trainingVideoUrl": "",
+  "facilityImage": "",
+  "reviewsWidgetScript": "",
   "hero": {
     "badgeText": "70+ Verified Google Reviews • Personal Trainer in New York",
     "headlineStart": "Cut the Bullsh*t.",
     "headlineHighlight": "Evidence-Based",
     "headlineEnd": "Private Training That Actually Works.",
     "subheadline": "The Workout Plant is Williamsburg's private 1-on-1 personal training & nutrition coaching studio (139 Frost St). Improve strength, body composition, and overall fitness in just 1 hour, 2–3 days a week.",
-    "primaryCta": "Claim New Client BOGO Offer",
+    "primaryCta": "Book Your Intro Session",
     "secondaryCta": "See Our 70+ Google Reviews"
   },
   "studioInfo": {
@@ -49,12 +52,12 @@
     }
   ],
   "studioPhotos": [
-    { "image": "/images/studio-lifting.jpg", "caption": "1:1 Strength Training" },
-    { "image": "/images/studio-action-izzy.jpg", "caption": "Strength & Conditioning" },
-    { "image": "/images/studio-lifting-analine.jpg", "caption": "Dumbbell Strength Work" },
-    { "image": "/images/studio-lifting-dev.jpg", "caption": "Barbell Training" },
-    { "image": "/images/studio-mobility-analine.jpg", "caption": "Mobility & Movement" },
-    { "image": "/images/studio-mobility-dev.jpg", "caption": "Core & Functional Conditioning" }
+    { "image": "/images/studio-lifting.jpg", "caption": "1:1 Strength Training", "category": "clients" },
+    { "image": "/images/studio-action-izzy.jpg", "caption": "Strength & Conditioning", "category": "clients" },
+    { "image": "/images/studio-lifting-analine.jpg", "caption": "Dumbbell Strength Work", "category": "clients" },
+    { "image": "/images/studio-lifting-dev.jpg", "caption": "Barbell Training", "category": "clients" },
+    { "image": "/images/studio-mobility-analine.jpg", "caption": "Mobility & Movement", "category": "clients" },
+    { "image": "/images/studio-mobility-dev.jpg", "caption": "Core & Functional Conditioning", "category": "clients" }
   ],
   "appScreenshots": [
     { "image": "/images/app-workout-tracking.png", "caption": "Workout Tracking" },
@@ -100,8 +103,8 @@
       "name": "1:1 Personal Training — Trainer Analine",
       "price": 115,
       "duration": "1 hour",
-      "badge": "MOST POPULAR",
-      "featured": true,
+      "badge": "",
+      "featured": false,
       "description": "One-on-one strength & mobility training session. Includes nutrition and health coaching with Coach Izzy + Full App access.",
       "features": ["1:1 strength & mobility", "Nutrition coaching with Coach Izzy", "Full Workout Plant App access"]
     },
@@ -110,7 +113,7 @@
       "name": "1:1 Personal Training — Jr. Trainer Dev",
       "price": 95,
       "duration": "1 hour",
-      "badge": "BEST VALUE",
+      "badge": "",
       "featured": false,
       "description": "One-on-one strength & conditioning session. Includes nutrition and health coaching + Full App access.",
       "features": ["1:1 strength & conditioning", "Nutrition & health coaching", "Full Workout Plant App access"]
@@ -131,19 +134,49 @@
       "name": "Delaney Kelly",
       "initials": "DK",
       "rating": 5,
+      "date": "Recent",
+      "tag": "Verified Client • Local Guide",
       "text": "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best."
     },
     {
       "name": "Verified Google Reviewer",
       "initials": "VG",
       "rating": 5,
+      "date": "1 month ago",
+      "tag": "Verified Client",
       "text": "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg."
     },
     {
       "name": "Verified Google Reviewer",
       "initials": "VG",
       "rating": 5,
+      "date": "2 months ago",
+      "tag": "Verified Client",
       "text": "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency."
+    },
+    {
+      "name": "Verified Google Reviewer",
+      "initials": "VG",
+      "rating": 5,
+      "date": "3 months ago",
+      "tag": "Verified Client • Local Guide",
+      "text": "The private studio on Frost St is spotless and never crowded. One hour, two to three times a week, and I'm stronger than I've ever been. The app accountability between sessions makes all the difference."
+    },
+    {
+      "name": "Verified Google Reviewer",
+      "initials": "VG",
+      "rating": 5,
+      "date": "4 months ago",
+      "tag": "Verified Client",
+      "text": "As someone new to strength training, I was nervous about starting. The coaches met me exactly where I was and built a plan around my goals. Down 18 pounds and finally consistent."
+    },
+    {
+      "name": "Verified Google Reviewer",
+      "initials": "VG",
+      "rating": 5,
+      "date": "6 months ago",
+      "tag": "Verified Client",
+      "text": "Worth every dollar. Evidence-based programming, real nutrition coaching, and trainers who actually track your progress week to week. Best gym decision I've made in Brooklyn."
     }
   ],
   "faqs": [
