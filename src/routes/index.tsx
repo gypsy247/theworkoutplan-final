@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { HeroSection } from "@/components/site/HeroSection";
+import { VideoShowcase } from "@/components/site/VideoShowcase";
+import { FacilityBanner } from "@/components/site/FacilityBanner";
 import { ReviewsSection } from "@/components/site/ReviewsSection";
 import { ThePlanSection } from "@/components/site/ThePlanSection";
 import { TrainersSection } from "@/components/site/TrainersSection";
@@ -21,8 +23,10 @@ function Index() {
   return (
     <>
       <HeroSection />
+      <VideoShowcase />
       <ReviewsSection />
       <ThePlanSection />
+      <FacilityBanner />
       <TrainersSection />
       <PricingSection />
       <ResourcesSection />
