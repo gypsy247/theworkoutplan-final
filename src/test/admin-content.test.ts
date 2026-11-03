@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { addContentItem, removeContentItem, moveItem, createArticle, createEditorDraft, isValidEditorPin, serializeExports, updateDraft, validateDraft } from "@/lib/admin-content";
 
 describe("Studio content editor", () => {
-  it.each([['pricingTiers', 4], ['trainers', 3], ['faqs', 8], ['reviews', 3], ['studioPhotos', 6], ['appScreenshots', 3]] as const)('adds and removes %s in exact source exports', (collection, initial) => {
+  it.each([['pricingTiers', 4], ['trainers', 3], ['faqs', 8], ['reviews', 6], ['studioPhotos', 6], ['appScreenshots', 3]] as const)('adds and removes %s in exact source exports', (collection, initial) => {
     const original = createEditorDraft();
     const added = addContentItem(original, collection);
     expect(added.site[collection]).toHaveLength(initial + 1);
