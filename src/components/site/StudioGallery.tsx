@@ -64,7 +64,7 @@ export function StudioGallery() {
       )}
 
       <Dialog open={Boolean(lightbox)} onOpenChange={(open) => { if (!open) setLightbox(null); }}>
-        <DialogContent className="max-w-4xl border-border bg-background p-2 sm:p-4" showCloseButton={false}>
+        <DialogContent className="max-w-4xl border-border bg-background p-2 sm:p-4">
           <DialogTitle className="sr-only">{lightbox?.caption ?? "Gallery photo"}</DialogTitle>
           {lightbox && (
             <div className="relative">
