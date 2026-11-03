@@ -6,13 +6,14 @@ import { PROMO, SITE } from "./data";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
-const hashLinks = [
-  { label: "Google Reviews", hash: "reviews" },
-  { label: "The Plan", hash: "the-plan" },
-  { label: "Trainers", hash: "trainers" },
-  { label: "Pricing", hash: "pricing" },
-  { label: "FAQ", hash: "faq" },
-];
+const navLinks = [
+  { label: "The Plan", to: "/the-plan" },
+  { label: "Trainers", to: "/trainers" },
+  { label: "Pricing", to: "/pricing" },
+  { label: "Gallery", to: "/gallery" },
+  { label: "Reviews", to: "/reviews" },
+  { label: "FAQ", to: "/faq" },
+] as const;
 
 export function Navbar() {
   const { open } = useBooking();
@@ -20,8 +21,8 @@ export function Navbar() {
   const linkCls = "transition hover:text-foreground";
   const items = (
     <>
-      {hashLinks.map((l) => (
-        <Link key={l.hash} to="/" hash={l.hash} className={linkCls} onClick={() => setMobile(false)}>{l.label}</Link>
+      {navLinks.map((l) => (
+        <Link key={l.to} to={l.to} className={linkCls} onClick={() => setMobile(false)}>{l.label}</Link>
       ))}
       <Link to="/contact" className={linkCls} onClick={() => setMobile(false)}>Contact Us</Link>
       <Link to="/client-login" className={`${linkCls} text-xs opacity-80`} onClick={() => setMobile(false)}>Client Login</Link>

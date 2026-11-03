@@ -1,25 +1,34 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { CalendarDays, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { createFileRoute } from "@tanstack/react-router";
+import { SITE } from "@/components/site/data";
 import { pageHead } from "@/lib/site-seo";
 
+export function membershipHead() {
+  const base = pageHead("/membership", "Complete Your Workout Plant App Membership", "Private page for onboarded Workout Plant clients to complete their coaching app membership.");
+  return { ...base, meta: [...base.meta, { name: "robots", content: "noindex, nofollow" }] };
+}
+
 export const Route = createFileRoute("/membership")({
-  head: () => pageHead("/membership", "Membership | The Workout Plant", "Activate your Workout Plant account by booking a consultation or first 1:1 session, then access your coaching app using your welcome email."),
+  head: () => membershipHead(),
   component: MembershipPage,
 });
 
 function MembershipPage() {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-3xl">
-        <p className="text-sm font-bold uppercase tracking-widest text-primary">Membership</p>
-        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Create Your Account</h1>
-        <p className="mt-8 text-lg leading-relaxed text-muted-foreground"><strong className="text-foreground">IMPORTANT!</strong> Complete your consultation or first session booking to activate your account and receive your invite link to The Workout Plant App.</p>
-        <p className="mt-5 leading-relaxed text-muted-foreground">If you already have an account with us, please use your registered email address and password in The Workout Plant App (passwords must be between 5 and 15 characters; check your inbox or junk folder for your welcome email).</p>
-        <div className="mt-8 flex flex-wrap gap-4">
-          <Button asChild className="h-auto whitespace-normal px-5 py-3"><Link to="/book-a-session"><CalendarDays />Book 1:1 Intro Session (Code: BOGO)</Link></Button>
-          <Button asChild variant="outline" className="h-auto whitespace-normal px-5 py-3"><Link to="/client-login"><LogIn />Existing Client Login</Link></Button>
-        </div>
+    <section className="px-6 py-16">
+      <div className="mx-auto max-w-3xl text-center">
+        <img src={SITE.logoImage} alt="The Workout Plant logo" className="mx-auto h-16 w-16 rounded-full object-cover" />
+        <h1 className="mt-6 text-4xl font-extrabold md:text-5xl">Complete Your Workout Plant App Membership</h1>
+        <p className="mt-4 text-lg text-muted-foreground">Private page for onboarded clients. Set up your coaching app account below.</p>
+      </div>
+      <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-border bg-card">
+        <iframe
+          width="100%"
+          height="1100px"
+          frameBorder={0}
+          style={{ display: "block", width: "100%", minHeight: "1100px", border: 0 }}
+          src="https://www.ptdistinction.com/ptd_funnel_iframe.php?apk=AJEF32K7HA323889&pkid=31418"
+          title="The Workout Plant Membership Creation"
+        />
       </div>
     </section>
   );

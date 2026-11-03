@@ -1,3 +1,12 @@
+# Client revisions (Nov 2026)
+- [x] Add dedicated routes /the-plan, /trainers, /pricing, /gallery, /reviews, /faq and point nav/footer at them.
+- [x] Make /membership a private noindex PT Distinction funnel page, unlinked from nav and footer.
+- [x] Disable BOGO banner, rename hero CTA, remove tier badges/featured highlight.
+- [x] Upgrade reviews to a Google-style feed (6 reviews, dates, tags, See All button) with optional widget script in /admin.
+- [x] Add Watch How We Train video showcase and 139 Frost St facility banner (URLs editable in /admin).
+- [x] Expand gallery into filterable tabbed lightbox gallery ("The Studio & Our Community in Action").
+- [ ] Supply the real training video URL and panoramic facility photo (currently empty placeholders).
+
 # Studio update
 - [x] Apply neon pink and black branding and four exclusively 1:1 training tiers across site-owned pages.
 - [x] Add live Acuity booking to the popup and a dedicated booking page with policies and fallback link.

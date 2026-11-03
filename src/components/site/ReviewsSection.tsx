@@ -1,4 +1,4 @@
-import { ExternalLink, MapPin, Phone } from "lucide-react";
+import { BadgeCheck, ExternalLink, MapPin, Phone } from "lucide-react";
 import siteContent from "@/data/siteContent.json";
 import { GoogleG, MAP_EMBED, MAPS_URL, Stars } from "./brand";
 
@@ -10,7 +10,8 @@ const dist = [
   { s: 1, p: 0 },
 ];
 
-const reviews = siteContent.reviews.map((r) => ({ ...r, when: "Google Review" }));
+const reviews = siteContent.reviews;
+const widgetScript = siteContent.reviewsWidgetScript;
 
 const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
 
@@ -39,7 +40,7 @@ export function ReviewsSection() {
               <span className="font-display text-6xl font-extrabold">4.9</span>
               <div>
                 <Stars className="text-2xl" />
-                <p className="text-sm text-muted-foreground">Based on 70+ Google Reviews</p>
+                <p className="text-sm text-muted-foreground">70+ Verified Google Reviews</p>
               </div>
             </div>
             <div className="mt-6 space-y-2">
@@ -55,7 +56,7 @@ export function ReviewsSection() {
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground">
-                Open in Google Maps <ExternalLink className="h-4 w-4" />
+                See All 70+ Reviews on Google <ExternalLink className="h-4 w-4" />
               </a>
               <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-border px-4 py-3 text-sm font-semibold hover:border-primary/60">
                 Leave Us a Google Review <ExternalLink className="h-4 w-4" />
@@ -71,26 +72,26 @@ export function ReviewsSection() {
           </div>
         </div>
 
-        <div className="mx-auto grid max-w-3xl grid-cols-1 gap-6">
-          {reviews.map((r) => (
-            <article key={r.text} className="card-surface flex flex-col p-8">
-              <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>
-                <div>
-                  <p className="font-bold">{r.name}</p>
-                  <p className="text-xs text-muted-foreground">{r.when}</p>
+        {widgetScript ? (
+          <div className="mt-8" dangerouslySetInnerHTML={{ __html: widgetScript }} />
+        ) : (
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+            {reviews.map((r) => (
+              <article key={`${r.name}-${r.date}`} className="card-surface flex flex-col p-8">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>
+                  <div className="min-w-0">
+                    <p className="truncate font-bold">{r.name}</p>
+                    <p className="flex items-center gap-1 text-xs text-muted-foreground"><BadgeCheck className="h-3 w-3 shrink-0 text-primary" /> {r.tag} • {r.date}</p>
+                  </div>
+                  <GoogleG className="ml-auto h-5 w-5 shrink-0" />
                 </div>
-              </div>
-              <div className="mt-4 flex items-center justify-between">
-                <Stars className="text-lg" />
-                <span className="inline-flex items-center gap-1 rounded-full border border-border px-2 py-1 text-xs text-muted-foreground">
-                  <GoogleG className="h-3 w-3" /> Verified Google Review
-                </span>
-              </div>
-              <p className="mt-4 leading-relaxed text-muted-foreground">"{r.text}"</p>
-            </article>
-          ))}
-        </div>
+                <Stars className="mt-4 text-lg" />
+                <p className="mt-3 leading-relaxed text-muted-foreground">"{r.text}"</p>
+              </article>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
