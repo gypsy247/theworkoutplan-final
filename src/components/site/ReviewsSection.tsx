@@ -79,7 +79,7 @@ export function ReviewsSection() {
             {reviews.map((r) => (
               <article key={`${r.name}-${r.date}`} className="card-surface flex flex-col p-8">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>
+                  {r.avatarUrl ? <img src={r.avatarUrl} alt={r.name} loading="lazy" referrerPolicy="no-referrer" className="h-11 w-11 shrink-0 rounded-full object-cover" /> : <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>}
                   <div className="min-w-0">
                     <p className="truncate font-bold">{r.name}</p>
                     <p className="flex items-center gap-1 text-xs text-muted-foreground"><BadgeCheck className="h-3 w-3 shrink-0 text-primary" /> {r.tag} • {r.date}</p>

@@ -48,21 +48,59 @@
       "number": "03",
       "title": "24/7 App & Direct Messaging Accountability",
       "description": "Coaching doesn't stop when you leave 139 Frost St. Through The Workout Plant App, you get:",
-      "tags": ["Results Tracking", "Custom Recipe Guide", "Home & Vacation Workouts", "Training & Coaching Guides"]
+      "tags": [
+        "Results Tracking",
+        "Custom Recipe Guide",
+        "Home & Vacation Workouts",
+        "Training & Coaching Guides"
+      ]
     }
   ],
   "studioPhotos": [
-    { "image": "/images/studio-lifting.jpg", "caption": "1:1 Strength Training", "category": "clients" },
-    { "image": "/images/studio-action-izzy.jpg", "caption": "Strength & Conditioning", "category": "clients" },
-    { "image": "/images/studio-lifting-analine.jpg", "caption": "Dumbbell Strength Work", "category": "clients" },
-    { "image": "/images/studio-lifting-dev.jpg", "caption": "Barbell Training", "category": "clients" },
-    { "image": "/images/studio-mobility-analine.jpg", "caption": "Mobility & Movement", "category": "clients" },
-    { "image": "/images/studio-mobility-dev.jpg", "caption": "Core & Functional Conditioning", "category": "clients" }
+    {
+      "image": "/images/studio-lifting.jpg",
+      "caption": "1:1 Strength Training",
+      "category": "clients"
+    },
+    {
+      "image": "/images/studio-action-izzy.jpg",
+      "caption": "Strength & Conditioning",
+      "category": "clients"
+    },
+    {
+      "image": "/images/studio-lifting-analine.jpg",
+      "caption": "Dumbbell Strength Work",
+      "category": "clients"
+    },
+    {
+      "image": "/images/studio-lifting-dev.jpg",
+      "caption": "Barbell Training",
+      "category": "clients"
+    },
+    {
+      "image": "/images/studio-mobility-analine.jpg",
+      "caption": "Mobility & Movement",
+      "category": "clients"
+    },
+    {
+      "image": "/images/studio-mobility-dev.jpg",
+      "caption": "Core & Functional Conditioning",
+      "category": "clients"
+    }
   ],
   "appScreenshots": [
-    { "image": "/images/app-workout-tracking.png", "caption": "Workout Tracking" },
-    { "image": "/images/app-progress-analytics.png", "caption": "Progress Analytics" },
-    { "image": "/images/app-recipe-guide.png", "caption": "Custom Recipe Guide" }
+    {
+      "image": "/images/app-workout-tracking.png",
+      "caption": "Workout Tracking"
+    },
+    {
+      "image": "/images/app-progress-analytics.png",
+      "caption": "Progress Analytics"
+    },
+    {
+      "image": "/images/app-recipe-guide.png",
+      "caption": "Custom Recipe Guide"
+    }
   ],
   "trainers": [
     {
@@ -96,7 +134,11 @@
       "badge": "",
       "featured": false,
       "description": "One-on-one training session with Head Trainer/Coach, Izzy Jacobus. Includes nutrition and health coaching + Full App access.",
-      "features": ["Advanced strength & kickboxing", "Nutrition & health coaching", "Full Workout Plant App access"]
+      "features": [
+        "Advanced strength & kickboxing",
+        "Nutrition & health coaching",
+        "Full Workout Plant App access"
+      ]
     },
     {
       "id": "analine",
@@ -106,7 +148,11 @@
       "badge": "",
       "featured": false,
       "description": "One-on-one strength & mobility training session. Includes nutrition and health coaching with Coach Izzy + Full App access.",
-      "features": ["1:1 strength & mobility", "Nutrition coaching with Coach Izzy", "Full Workout Plant App access"]
+      "features": [
+        "1:1 strength & mobility",
+        "Nutrition coaching with Coach Izzy",
+        "Full Workout Plant App access"
+      ]
     },
     {
       "id": "dev",
@@ -116,7 +162,11 @@
       "badge": "",
       "featured": false,
       "description": "One-on-one strength & conditioning session. Includes nutrition and health coaching + Full App access.",
-      "features": ["1:1 strength & conditioning", "Nutrition & health coaching", "Full Workout Plant App access"]
+      "features": [
+        "1:1 strength & conditioning",
+        "Nutrition & health coaching",
+        "Full Workout Plant App access"
+      ]
     },
     {
       "id": "virtual",
@@ -126,7 +176,11 @@
       "badge": "",
       "featured": false,
       "description": "Live 1-on-1 remote personal training and nutrition coaching from anywhere.",
-      "features": ["Live remote 1-on-1 training", "Nutrition coaching", "Train from anywhere"]
+      "features": [
+        "Live remote 1-on-1 training",
+        "Nutrition coaching",
+        "Train from anywhere"
+      ]
     }
   ],
   "reviews": [
@@ -136,7 +190,8 @@
       "rating": 5,
       "date": "Recent",
       "tag": "Verified Client • Local Guide",
-      "text": "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best."
+      "text": "Training at The Workout Plant is the highlight of my week! I've never felt more confident, strong and stabilized. Izzy and Analine's knowledge, encouragement and commitment to health has been hugely influential in my daily life. They have created a very positive space in a great environment to feel my best.",
+      "avatarUrl": ""
     },
     {
       "name": "Verified Google Reviewer",
@@ -144,7 +199,8 @@
       "rating": 5,
       "date": "1 month ago",
       "tag": "Verified Client",
-      "text": "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg."
+      "text": "Izzy and Analine are extremely knowledgeable and genuinely care about people. Hands down the best 1-on-1 private training experience in Williamsburg.",
+      "avatarUrl": ""
     },
     {
       "name": "Verified Google Reviewer",
@@ -152,7 +208,8 @@
       "rating": 5,
       "date": "2 months ago",
       "tag": "Verified Client",
-      "text": "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency."
+      "text": "I've also really enjoyed the kickboxing portion of my workouts! Combining 1-on-1 strength training with pad work and nutrition guidance in the app has completely transformed my consistency.",
+      "avatarUrl": ""
     },
     {
       "name": "Verified Google Reviewer",
@@ -160,7 +217,8 @@
       "rating": 5,
       "date": "3 months ago",
       "tag": "Verified Client • Local Guide",
-      "text": "The private studio on Frost St is spotless and never crowded. One hour, two to three times a week, and I'm stronger than I've ever been. The app accountability between sessions makes all the difference."
+      "text": "The private studio on Frost St is spotless and never crowded. One hour, two to three times a week, and I'm stronger than I've ever been. The app accountability between sessions makes all the difference.",
+      "avatarUrl": ""
     },
     {
       "name": "Verified Google Reviewer",
@@ -168,7 +226,8 @@
       "rating": 5,
       "date": "4 months ago",
       "tag": "Verified Client",
-      "text": "As someone new to strength training, I was nervous about starting. The coaches met me exactly where I was and built a plan around my goals. Down 18 pounds and finally consistent."
+      "text": "As someone new to strength training, I was nervous about starting. The coaches met me exactly where I was and built a plan around my goals. Down 18 pounds and finally consistent.",
+      "avatarUrl": ""
     },
     {
       "name": "Verified Google Reviewer",
@@ -176,7 +235,8 @@
       "rating": 5,
       "date": "6 months ago",
       "tag": "Verified Client",
-      "text": "Worth every dollar. Evidence-based programming, real nutrition coaching, and trainers who actually track your progress week to week. Best gym decision I've made in Brooklyn."
+      "text": "Worth every dollar. Evidence-based programming, real nutrition coaching, and trainers who actually track your progress week to week. Best gym decision I've made in Brooklyn.",
+      "avatarUrl": ""
     }
   ],
   "faqs": [
