@@ -6,7 +6,7 @@
   },
   "trainingVideoUrl": "",
   "facilityImage": "",
-  "reviewsWidgetScript": "",
+  "reviewsWidgetScript": "<script src=\"https://elfsightcdn.com/platform.js\" async></script>\n<div class=\"elfsight-app-ff061720-2ead-471c-87c6-48fa40ed2897\" data-elfsight-app-lazy></div>",
   "hero": {
     "badgeText": "70+ Verified Google Reviews • Personal Trainer in New York",
     "headlineStart": "Cut the Bullsh*t.",
