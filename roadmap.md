@@ -1,6 +1,7 @@
 # Admin authentication replacement
 - [x] Inspect current authentication and publishing; existing Cloud auth is healthy and profiles/user_roles tables exist.
-- [ ] Replace login and add password recovery with no public registration; awaiting profile-data decision and client admin account details.
+- [x] Confirm no additional profile data and authorized admin email gypsytalha@gmail.com; no matching auth account currently exists.
+- [ ] Replace login and add password recovery with no public registration; requires invited admin account, verified hosted signup/redirect settings and independent publishing configuration before replacing current access.
 - [ ] Preserve publishing behind server-side admin checks; requires a client-owned server publishing connection and verified Netlify configuration.
 - [ ] Verify authorized login, rejection of unauthorized users, recovery, image upload and real live publishing before removing old access options.
 
