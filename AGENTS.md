@@ -12,10 +12,10 @@
 - Keep brand colors in OKLCH semantic tokens in src/styles.css; the project uses Tailwind v4, so legacy CSS/config filenames are not applicable.
 - Share Acuity scheduler and policy UI between the booking dialog and TanStack booking route to keep the two booking experiences consistent; load its embed script once in the root document.
 - Centralize editable site content in src/data/siteContent.json and articles in src/data/articles.json; public consumers retain build-time reads while /admin edits isolated drafts and commits JSON plus pending images atomically through Git data APIs, avoiding partial deploys.
-- Standalone Studio publishing uses Netlify Identity JWTs and same-origin Git Gateway, with optional repository-scoped personal tokens kept only in React memory; Netlify/GitHub enforce permissions, never PINs or client email/role checks.
+- Studio login and publishing go through netlify/functions/admin-publish.ts: it checks admin credentials from server env, issues short-lived HMAC session tokens, and commits content with a server-held GitHub token; core logic lives alias-free in src/lib/admin-publish-core.ts so Netlify can bundle it.
 - Keep repository operations in src/lib/netlify-publish.ts; non-forced main-branch writes detect concurrent changes, and a deployed studio-version.json release marker—not a commit—establishes live status.
-- Use StudioSession once around the editor to manage Netlify widget events and ephemeral token access; Cloud clients and auth-attacher remain generated but unreferenced by the application.
-- Keep the custom Studio Manager in src/components/admin behind the /admin TanStack route, without public navbar/footer; its PIN is only a privacy screen for public-content drafts, never authorization for live writes.
+- Use StudioSession once around the editor to hold the signed session token in memory only; Cloud clients and auth-attacher remain generated but unreferenced by the application.
+- Keep the custom Studio Manager in src/components/admin behind the /admin TanStack route, without public navbar/footer; the email/password screen is the only gate.
 - Do not recreate public/admin static files or a competing App.tsx/pages router; /admin belongs exclusively to TanStack Start so static hosting cannot shadow the dashboard.
 - Store the editable shared logo path in studioInfo.logoImage so exported logo changes reach both navbar and footer after deployment.
 - Use leaf TanStack route heads for canonical URLs and page metadata, with shared SEO helpers; root and index.html must not duplicate page-specific metadata.
