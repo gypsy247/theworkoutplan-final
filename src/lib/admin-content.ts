@@ -24,7 +24,7 @@ export function addContentItem(draft: EditorDraft, collection: DynamicCollection
     copy.site.pricingTiers.push({ id, name: "New 1:1 session", price: 0, duration: "1 hour", badge: "", featured: false, description: "", features: [] });
   } else if (collection === "trainers") copy.site.trainers.push({ name: "New trainer", role: "1:1 Personal Trainer", bio: "", quote: "", image: "/images/logo-white.png" });
   else if (collection === "faqs") copy.site.faqs.push({ question: "", answer: "" });
-  else if (collection === "reviews") copy.site.reviews.push({ name: "", initials: "", rating: 5, date: "Recent", tag: "Verified Client", text: "" });
+  else if (collection === "reviews") copy.site.reviews.push({ name: "", initials: "", rating: 5, date: "Recent", tag: "Verified Client", text: "", avatarUrl: "" });
   else if (collection === "studioPhotos") copy.site.studioPhotos.push({ image: "", caption: "", category: "clients" });
   else copy.site.appScreenshots.push({ image: "", caption: "" });
   return copy;
@@ -80,6 +80,7 @@ export function validateDraft(draft: EditorDraft): string | null {
     if (slugs.has(article.slug)) return "Each article must have a unique URL slug.";
     slugs.add(article.slug);
   }
+  if (draft.site.reviews.some((review) => review.avatarUrl && !/^\/images\/[\w./-]+$/.test(review.avatarUrl) && !/^https:\/\/[^\s]+$/.test(review.avatarUrl))) return "Use an /images/ path or an HTTPS address for each reviewer photo.";
   const images = [draft.site.studioInfo.logoImage, ...draft.site.trainers.map((trainer) => trainer.image), ...draft.site.studioPhotos.map((photo) => photo.image), ...draft.site.appScreenshots.map((photo) => photo.image)];
   if (images.some((image) => !/^\/images\/[\w./-]+$/.test(image) && !/^https:\/\/[^\s]+$/.test(image))) return "Use an /images/ path or an HTTPS address for each image.";
   return null;
