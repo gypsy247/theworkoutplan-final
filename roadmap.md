@@ -1,3 +1,9 @@
+# Admin authentication replacement
+- [x] Inspect current authentication and publishing; existing Cloud auth is healthy and profiles/user_roles tables exist.
+- [ ] Replace login and add password recovery with no public registration; awaiting profile-data decision and client admin account details.
+- [ ] Preserve publishing behind server-side admin checks; requires a client-owned server publishing connection and verified Netlify configuration.
+- [ ] Verify authorized login, rejection of unauthorized users, recovery, image upload and real live publishing before removing old access options.
+
 # Client revisions (Nov 2026)
 - [x] Add dedicated routes /the-plan, /trainers, /pricing, /gallery, /reviews, /faq and point nav/footer at them.
 - [x] Make /membership a private noindex PT Distinction funnel page, unlinked from nav and footer.
