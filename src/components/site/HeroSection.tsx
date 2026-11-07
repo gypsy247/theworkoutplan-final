@@ -1,6 +1,6 @@
 import { MapPin, Navigation, Star } from "lucide-react";
 import { GoogleG, MAPS_URL, Stars } from "./brand";
-import { HERO, SITE } from "./data";
+import { HERO, HERO_CTA_URL, SITE } from "./data";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
@@ -22,9 +22,15 @@ export function HeroSection() {
           {HERO.subheadline}
         </p>
         <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-          <Button onClick={() => open()} className="h-auto rounded-xl px-8 py-4 font-bold">
-            {HERO.primaryCta}
-          </Button>
+          {HERO_CTA_URL ? (
+            <Button asChild className="h-auto rounded-xl px-8 py-4 font-bold">
+              <a href={HERO_CTA_URL} {...(HERO_CTA_URL.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{HERO.primaryCta}</a>
+            </Button>
+          ) : (
+            <Button onClick={() => open()} className="h-auto rounded-xl px-8 py-4 font-bold">
+              {HERO.primaryCta}
+            </Button>
+          )}
           <a href="#reviews" className="rounded-xl border border-border bg-card px-8 py-4 font-bold transition hover:border-primary/50">
             {HERO.secondaryCta}
           </a>
