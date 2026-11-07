@@ -1,8 +1,8 @@
 {
   "promoBanner": {
     "enabled": false,
-    "text": "NEW CLIENT SPECIAL: Buy One Get One Free on Intro Sessions! Use Code: BOGO at Booking →",
-    "code": "BOGO"
+    "text": "NEW CLIENT SPECIAL: Book Your Intro Session →",
+    "code": ""
   },
   "trainingVideoUrl": "",
   "facilityImage": "",
@@ -14,7 +14,19 @@
     "headlineEnd": "Private Training That Actually Works.",
     "subheadline": "The Workout Plant is Williamsburg's private 1-on-1 personal training & nutrition coaching studio @ 139 Frost St. Improve strength, body composition, and overall fitness with our proven program.",
     "primaryCta": "Book Your Intro Session",
+    "primaryCtaUrl": "",
     "secondaryCta": "See Our 70+ Google Reviews"
+  },
+  "thePlan": {
+    "badge": "The Plan",
+    "headline": "Simple, Evidence-Based Systems That Actually Work",
+    "intro": "Led by Head Coach Izzy Jacobus, whether you train with Izzy or one of our trainers, you follow the same structured, evolving program.",
+    "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
+  },
+  "galleryCategories": {
+    "clients": "Clients Training",
+    "space": "The 139 Frost St Space",
+    "app": "The Workout Plant App"
   },
   "studioInfo": {
     "name": "The Workout Plant",
@@ -25,6 +37,7 @@
     "address": "139 Frost St, Brooklyn, NY 11211",
     "phone": "(917) 992-2395",
     "email": "izzy@theworkoutplant.com",
+    "bookingUrl": "",
     "acuityDirectUrl": "https://TheWorkoutPlant.as.me/",
     "acuityEmbedUrl": "https://app.acuityscheduling.com/schedule.php?owner=33537878&ref=embedded_csp",
     "instagramUrl": "https://www.instagram.com/theworkoutplant/",
@@ -138,7 +151,8 @@
         "Advanced strength & kickboxing",
         "Nutrition & health coaching",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "analine",
@@ -152,7 +166,8 @@
         "1:1 strength & mobility",
         "Nutrition coaching with Coach Izzy",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "dev",
@@ -166,7 +181,8 @@
         "1:1 strength & conditioning",
         "Nutrition coaching with Coach Izzy",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "virtual",
@@ -180,7 +196,8 @@
         "Live remote 1-on-1 training",
         "Nutrition coaching",
         "Train from anywhere"
-      ]
+      ],
+      "bookingUrl": ""
     }
   ],
   "reviews": [

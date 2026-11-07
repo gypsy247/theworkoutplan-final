@@ -21,7 +21,7 @@ export function addContentItem(draft: EditorDraft, collection: DynamicCollection
     let id = "new-tier";
     let index = 2;
     while (copy.site.pricingTiers.some((tier) => tier.id === id)) id = `new-tier-${index++}`;
-    copy.site.pricingTiers.push({ id, name: "New 1:1 session", price: 0, duration: "1 hour", badge: "", featured: false, description: "", features: [] });
+    copy.site.pricingTiers.push({ id, name: "New 1:1 session", price: 0, duration: "1 hour", badge: "", featured: false, description: "", features: [], bookingUrl: "" });
   } else if (collection === "trainers") copy.site.trainers.push({ name: "New trainer", role: "1:1 Personal Trainer", bio: "", quote: "", image: "/images/logo-white.png" });
   else if (collection === "faqs") copy.site.faqs.push({ question: "", answer: "" });
   else if (collection === "reviews") copy.site.reviews.push({ name: "", initials: "", rating: 5, date: "Recent", tag: "Verified Client", text: "", avatarUrl: "" });

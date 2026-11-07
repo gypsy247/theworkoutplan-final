@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { PHONE, PHONE_HREF } from "./brand";
-import { PROMO, SITE } from "./data";
+import { NAVBAR_BOOKING_URL, PROMO, SITE } from "./data";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
@@ -46,9 +46,15 @@ export function Navbar() {
             <a href={PHONE_HREF} className="hidden items-center gap-2 text-sm font-semibold xl:flex">
               <Phone className="h-4 w-4 text-primary" /> {PHONE}
             </a>
-            <Button onClick={() => open()} className="rounded-lg px-4 py-2 text-sm font-bold">
-              Book A Session
-            </Button>
+            {NAVBAR_BOOKING_URL ? (
+              <Button asChild className="rounded-lg px-4 py-2 text-sm font-bold">
+                <a href={NAVBAR_BOOKING_URL} {...(NAVBAR_BOOKING_URL.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>Book A Session</a>
+              </Button>
+            ) : (
+              <Button onClick={() => open()} className="rounded-lg px-4 py-2 text-sm font-bold">
+                Book A Session
+              </Button>
+            )}
             <Button aria-label="Menu" variant="outline" size="icon" onClick={() => setMobile((m) => !m)} className="rounded-lg lg:hidden">
               {mobile ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>

@@ -142,7 +142,7 @@ function ArticleDetail() {
             to="/book-a-session"
             className="mt-5 inline-block rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground hover:opacity-90"
           >
-            Claim Your BOGO 1:1 Intro Session
+            Book Your Intro Session
           </Link>
         </div>
       </div>

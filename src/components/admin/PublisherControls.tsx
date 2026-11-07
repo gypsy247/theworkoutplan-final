@@ -18,8 +18,9 @@ export function PublisherControls({ draft, images, onPublished, onBusy }: { draf
       const response = await fetch(ADMIN_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.token}` }, body: JSON.stringify({ action: 'publish', files, images, releaseId: crypto.randomUUID() }) });
       if (response.status === 401) { session.logout(); throw new Error(await readError(response, 'Please sign in again.')); }
       if (!response.ok) throw new Error(await readError(response, 'Publishing failed.'));
+      try { localStorage.setItem('twp-last-published', JSON.stringify({ at: new Date().toISOString(), files: files.map(file => file.path) })); } catch { /* cache is best-effort */ }
       onPublished();
-      toast.success('Changes published! Your site will update in a minute or two.');
+      toast.success('Saved & Published! Live globally in ~45 seconds while Netlify finishes rebuilding.');
     } catch (reason) { toast.error(reason instanceof Error ? reason.message : 'Publishing failed.'); }
     finally { setBusy(false); onBusy(false); }
   };

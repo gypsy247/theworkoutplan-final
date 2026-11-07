@@ -5,9 +5,9 @@ import { AcuityScheduler } from "@/components/site/AcuityScheduler";
 export const Route = createFileRoute("/book-a-session")({
   head: () => ({ meta: [
     { title: "Book a 1:1 Session | The Workout Plant" },
-    { name: "description", content: "Book private personal training or virtual coaching with The Workout Plant. Live Acuity scheduling, studio policies and new client BOGO offer." },
+    { name: "description", content: "Book private personal training or virtual coaching with The Workout Plant. Live Acuity scheduling and studio policies." },
     { property: "og:title", content: "Book a 1:1 Session | The Workout Plant" },
-    { property: "og:description", content: "Choose a private training appointment with Izzy, Analine or Dev, or book virtual coaching. New clients use BOGO at checkout." },
+    { property: "og:description", content: "Choose a private training appointment with Izzy, Analine or Dev, or book virtual coaching." },
     { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_ORIGIN}/book-a-session` },
     { name: "twitter:card", content: "summary_large_image" },

@@ -32,9 +32,15 @@ export function PricingSection() {
                   <li key={f} className="flex gap-2"><Check className="h-4 w-4 shrink-0 text-primary" /> {f}</li>
                 ))}
               </ul>
-              <Button onClick={() => open(t.id)} variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
-                Book This Session
-              </Button>
+              {t.bookingUrl ? (
+                <Button asChild variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
+                  <a href={t.bookingUrl} {...(t.bookingUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>Book This Session</a>
+                </Button>
+              ) : (
+                <Button onClick={() => open(t.id)} variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
+                  Book This Session
+                </Button>
+              )}
             </article>
           ))}
         </div>

@@ -25,7 +25,7 @@ export function AcuityScheduler({ tierId }: { tierId?: string | undefined }) {
           <h3 className="font-bold text-foreground">Cancellation & Late Policy</h3>
           <p className="mt-2 leading-relaxed text-muted-foreground">{POLICIES.cancellation} {POLICIES.late}</p>
         </div>
-        <p className="self-center font-bold text-primary">New Client Special: Use code <strong>BOGO</strong> at checkout!</p>
+        <p className="self-center font-bold text-primary">New client? Book your intro session to get started.</p>
       </div>
       <a href={ACUITY_FALLBACK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:underline">
         <span>Having trouble viewing the calendar? Open Scheduler in a New Tab ↗</span><ExternalLink className="h-4 w-4 shrink-0" />

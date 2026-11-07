@@ -17,7 +17,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
         <DialogContent className="max-h-[90vh] overflow-y-auto border-border bg-card sm:max-w-5xl">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl font-extrabold">Book A Session</DialogTitle>
-            <DialogDescription>Use code BOGO: buy one intro session, get the second free.</DialogDescription>
+            <DialogDescription>Choose a session and pick a time that works for you.</DialogDescription>
           </DialogHeader>
           <Link to="/book-a-session" onClick={() => setOpen(false)} className="text-sm font-semibold text-primary hover:underline">Open the full booking page →</Link>
           <AcuityScheduler key={tier ?? "none"} tierId={tier} />
