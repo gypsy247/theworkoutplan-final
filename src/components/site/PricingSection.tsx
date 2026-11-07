@@ -14,7 +14,7 @@ export function PricingSection() {
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">Transparent Pricing. Zero Contracts.</h2>
           <p className="mt-4 text-lg text-muted-foreground">Every session is private, one-on-one, and one full hour.</p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
           {TIERS.map((t) => (
             <article key={t.id} className={`card-surface relative flex flex-col p-6 ${t.featured ? "border-primary ring-1 ring-primary/50" : ""}`}>
               {t.badge && (
@@ -34,11 +34,11 @@ export function PricingSection() {
                 ))}
               </ul>
               {t.bookingUrl ? (
-                <Button asChild variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
+                <Button asChild variant={t.featured ? "default" : "outline"} className="mt-8 h-auto min-h-[52px] w-full whitespace-normal px-4 py-3 text-sm font-bold">
                   <a href={t.bookingUrl} {...(t.bookingUrl.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>Book This Session</a>
                 </Button>
               ) : (
-                <Button onClick={() => open(t.id)} variant={t.featured ? "default" : "outline"} className="mt-8 h-auto w-full px-4 py-3 text-sm font-bold">
+                <Button onClick={() => open(t.id)} variant={t.featured ? "default" : "outline"} className="mt-8 h-auto min-h-[52px] w-full whitespace-normal px-4 py-3 text-sm font-bold">
                   Book This Session
                 </Button>
               )}

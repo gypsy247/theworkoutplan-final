@@ -40,7 +40,7 @@ export function StudioGallery() {
       {shots.length === 0 ? (
         <p className="mt-10 rounded-2xl border border-dashed border-border p-10 text-center text-sm text-muted-foreground">Photos for this space are coming soon.</p>
       ) : (
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {shots.map((shot) => (
             <figure key={`${shot.image}-${shot.caption}`}>
               <button type="button" onClick={() => setLightbox(shot)} className="block w-full cursor-zoom-in" aria-label={`Enlarge photo: ${shot.caption}`}>

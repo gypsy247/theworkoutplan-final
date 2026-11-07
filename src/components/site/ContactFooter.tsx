@@ -21,7 +21,7 @@ export function ContactDetails() {
       {rows.map(({ Icon, text, href, strong }) => (
         <li key={text} className="flex items-center gap-3">
           <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-primary/15 text-primary"><Icon className="h-5 w-5" /></span>
-          {href ? <a href={href} className="hover:text-primary">{text}</a> : <span className={strong ? "font-bold" : ""}>{text}</span>}
+          {href ? <a href={href} className="min-w-0 break-words hover:text-primary">{text}</a> : <span className={`min-w-0 break-words ${strong ? "font-bold" : ""}`}>{text}</span>}
         </li>
       ))}
     </ul>
@@ -31,14 +31,14 @@ export function ContactDetails() {
 export function ContactSection() {
   return (
     <section id="contact" className="border-t border-border px-6 py-24">
-      <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2">
-        <div className="card-surface p-8">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 md:gap-6 lg:grid-cols-2">
+        <div className="card-surface min-w-0 p-6 md:p-8">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Contact</p>
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight">Ready to Start? Let's Talk.</h2>
           <p className="mt-4 text-muted-foreground">Request a free consultation and book your intro session.</p>
           <div className="mt-8"><ContactDetails /></div>
         </div>
-        <div className="card-surface p-8">
+        <div className="card-surface min-w-0 p-6 md:p-8">
           <h3 className="mb-6 text-2xl font-extrabold tracking-tight">Request a Consultation</h3>
           <ConsultationForm />
         </div>
@@ -65,7 +65,7 @@ export function Footer() {
   const head = "mb-4 font-display text-sm font-extrabold uppercase tracking-widest";
   const link = "text-muted-foreground transition hover:text-primary";
   return (
-    <footer className="border-t border-border bg-card px-6 pt-16">
+    <footer className="site-footer border-t border-border bg-card px-6 pt-16">
       <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">

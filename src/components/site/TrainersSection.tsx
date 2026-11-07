@@ -12,9 +12,9 @@ export function TrainersSection() {
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">Real experience. Evidence-based coaching. Zero ego.</p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
           {trainers.map((t) => (
-            <article key={t.name} className="card-surface p-8">
+            <article key={t.name} className="card-surface min-w-0 p-6 md:p-8">
               <img
                 src={t.image}
                 alt={`${t.name}, ${t.role}`}

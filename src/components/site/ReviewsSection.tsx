@@ -27,10 +27,10 @@ export function ReviewsSection() {
         </div>
 
         <div id="map" className="mt-12 mb-8 grid grid-cols-1 gap-6 lg:grid-cols-12">
-          <div className="card-surface p-8 lg:col-span-5">
+          <div className="card-surface min-w-0 p-6 md:p-8 lg:col-span-5">
             <div className="flex items-start gap-3">
               <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary"><GoogleG className="h-6 w-6" /></span>
-              <div>
+              <div className="min-w-0">
                 <h3 className="font-extrabold">The Workout Plant</h3>
                 <p className="flex items-center gap-1 text-sm text-muted-foreground"><MapPin className="h-3 w-3" /> 139 Frost St, Brooklyn, NY 11211</p>
                 <a href="tel:+19179922395" className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><Phone className="h-3 w-3" /> +1 917-992-2395</a>
@@ -75,9 +75,9 @@ export function ReviewsSection() {
         {widgetScript ? (
           <div className="mt-8" dangerouslySetInnerHTML={{ __html: widgetScript }} />
         ) : (
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
             {reviews.map((r) => (
-              <article key={`${r.name}-${r.date}`} className="card-surface flex flex-col p-8">
+              <article key={`${r.name}-${r.date}`} className="card-surface flex min-w-0 flex-col p-6 md:p-8">
                 <div className="flex items-center gap-3">
                   {r.avatarUrl ? <img src={r.avatarUrl} alt={r.name} loading="lazy" referrerPolicy="no-referrer" className="h-11 w-11 shrink-0 rounded-full object-cover" /> : <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>}
                   <div className="min-w-0">

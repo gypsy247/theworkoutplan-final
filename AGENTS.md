@@ -23,3 +23,5 @@
 - Preserve retired indexed URLs with HTTP 301 TanStack redirects, not SPA host fallbacks, because this site serves server-rendered pages on Lovable hosting.
 - Share the real studio and app gallery between the homepage and photos page to keep images and captions consistent.
 - Keep article content in src/data/articles.json (via src/data/articles.ts) and redirect known old slugs to the canonical article URL to avoid duplicate indexing.
+- Render draft previews in same-origin iframes using a parent/source-checked postMessage handshake; preview frames skip remote content hydration so unsaved edits cannot be overwritten.
+- Share public typography and mobile layout rules through the public-site wrapper and use fixed breakpoint font sizes, keeping text readable without viewport-scaled type.
