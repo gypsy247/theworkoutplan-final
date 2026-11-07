@@ -20,7 +20,7 @@ export function PublisherControls({ draft, images, onPublished, onBusy }: { draf
       if (!response.ok) throw new Error(await readError(response, 'Publishing failed.'));
       try { localStorage.setItem('twp-last-published', JSON.stringify({ at: new Date().toISOString(), files: files.map(file => file.path) })); } catch { /* cache is best-effort */ }
       onPublished();
-      toast.success('Saved & Published! Live globally in ~45 seconds while Netlify finishes rebuilding.');
+      toast.success('Saved & Published! Live globally in ~1 second — no rebuild needed.');
     } catch (reason) { toast.error(reason instanceof Error ? reason.message : 'Publishing failed.'); }
     finally { setBusy(false); onBusy(false); }
   };

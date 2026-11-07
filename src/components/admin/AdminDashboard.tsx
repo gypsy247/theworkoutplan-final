@@ -14,7 +14,8 @@ import { addContentItem, removeContentItem, moveItem, type DynamicCollection, cr
 import { PublisherControls } from "./PublisherControls";
 import { DraftPreview } from "./DraftPreview";
 import { StudioSession, useStudioSession } from "./StudioSession";
-import { prepareImage, type PendingImage } from "@/lib/netlify-publish";
+import { prepareImage, rawImageUrl, type PendingImage } from "@/lib/netlify-publish";
+import { getLiveContent, useLiveContent } from "@/lib/live-content";
 
 const sections = [
   { id: "hero", label: "Promo & Hero", icon: Megaphone, title: "Make the first impression count." },
@@ -47,11 +48,15 @@ function EditorDashboard() {
   useEffect(() => () => { previewUrls.current.forEach(url => URL.revokeObjectURL(url)); }, []);
   const [imagePreviews, setImagePreviews] = useState<Record<string, string>>({});
   async function upload(file: File, path: (string | number)[]) {
-    try { const image = await prepareImage(file); const url = URL.createObjectURL(file); previewUrls.current.push(url); setImages(current => [...current, image]); setImagePreviews(current => ({ ...current, [image.path.replace(/^public/, "")]: url })); siteEdit(path, image.path.replace(/^public/, "")); toast.success("Photo ready for the next publish."); } catch (error) { toast.error(error instanceof Error ? error.message : "Unable to prepare photo."); }
+    try { const image = await prepareImage(file); const url = URL.createObjectURL(file); const liveUrl = rawImageUrl(image.path); previewUrls.current.push(url); setImages(current => [...current, image]); setImagePreviews(current => ({ ...current, [liveUrl]: url })); siteEdit(path, liveUrl); toast.success("Photo ready for the next publish."); } catch (error) { toast.error(error instanceof Error ? error.message : "Unable to prepare photo."); }
   }
 
-  const [draft, setDraft] = useState<EditorDraft>(createEditorDraft);
+  const [draft, setDraft] = useState<EditorDraft>(() => structuredClone(getLiveContent()));
   const [dirty, setDirty] = useState(false);
+  const dirtyRef = useRef(false);
+  dirtyRef.current = dirty;
+  const live = useLiveContent();
+  useEffect(() => { if (!dirtyRef.current) setDraft(structuredClone(live)); }, [live]);
   const [tab, setTab] = useState("hero");
   const [articleIndex, setArticleIndex] = useState(0);
   const [preview, setPreview] = useState(false);
@@ -83,7 +88,7 @@ function EditorDashboard() {
 
   return <div className="studio-manager">
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md"><div className="mx-auto flex max-w-[1600px] flex-wrap items-center justify-between gap-4 px-5 py-4 md:px-8"><div className="flex min-w-0 items-center gap-3"><img src={site.studioInfo.logoImage} alt="The Workout Plant" className="h-10 w-10 shrink-0 rounded-full object-cover" /><div><h1 className="text-sm font-bold sm:text-base">The Workout Plant <span className="text-muted-foreground">— Studio Manager</span></h1><div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground"><span className="h-1.5 w-1.5 rounded-full bg-primary" />{session.email}<span className="hidden sm:inline">· {dirty ? "Unsaved draft" : "Ready"}</span></div></div></div><div className="flex items-center gap-2"><Button variant="ghost" size="icon" aria-label="View live site" title="View live site" asChild><a href="/" target="_blank" rel="noreferrer"><ArrowUpRight /></a></Button><Button variant="outline" onClick={() => setShowLivePreview(true)}><Eye />Live Preview</Button><Button variant="ghost" onClick={session.logout}><LogOut />Sign Out</Button><PublisherControls draft={draft} images={images.filter(image => JSON.stringify(draft.site).includes(image.path.replace(/^public/, "")))} onBusy={setPublishing} onPublished={() => { setDirty(false); setImages([]); setPublishedBanner(true); }} /></div></div></header>
-    {publishedBanner && <div role="status" className="border-b border-primary/40 bg-primary/10 px-5 py-3 text-center text-sm font-semibold text-primary">Saved &amp; Published! Live globally in ~45 seconds while Netlify finishes rebuilding.<button type="button" aria-label="Dismiss publish confirmation" className="ml-3 underline underline-offset-2" onClick={() => setPublishedBanner(false)}>Dismiss</button></div>}
+    {publishedBanner && <div role="status" className="border-b border-primary/40 bg-primary/10 px-5 py-3 text-center text-sm font-semibold text-primary">Saved &amp; Published! Live globally in ~1 second — no rebuild needed.<button type="button" aria-label="Dismiss publish confirmation" className="ml-3 underline underline-offset-2" onClick={() => setPublishedBanner(false)}>Dismiss</button></div>}
     <fieldset disabled={publishing} className="min-w-0"><Tabs value={tab} onValueChange={setTab} className="mx-auto max-w-[1600px] lg:grid lg:grid-cols-[255px_minmax(0,1fr)]">
       <aside className="border-b border-border p-4 lg:min-h-[calc(100vh-78px)] lg:border-b-0 lg:border-r lg:p-6"><p className="mb-5 hidden text-[11px] font-bold uppercase tracking-widest text-muted-foreground lg:block">Your studio</p><TabsList className="flex h-auto w-full justify-start gap-1 overflow-x-auto rounded-none bg-transparent p-0 lg:flex-col lg:items-stretch">{sections.map(({ id, label, icon: Icon }) => <TabsTrigger key={id} value={id} className="justify-start gap-3 rounded-md px-3 py-3 text-xs data-[state=active]:bg-primary/10 data-[state=active]:text-primary data-[state=active]:shadow-none lg:whitespace-normal lg:text-left"><Icon className="h-4 w-4 shrink-0" />{label}</TabsTrigger>)}</TabsList><div className="mt-16 hidden border-t border-border pt-5 lg:block"><p className="text-sm font-bold">The Workout Plant</p><p className="mt-1 text-xs text-muted-foreground">Williamsburg, Brooklyn</p><div className="mt-5 flex items-center gap-2 text-xs text-muted-foreground"><LockKeyhole className="h-3 w-3" />Signed in · Owner-only publish</div></div></aside>
       <div className="min-w-0 px-5 py-8 md:px-10 md:py-10"><div className="mb-8 flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-widest text-primary">Studio content / {active?.label}</p><h2 className="mt-3 text-2xl font-extrabold md:text-3xl">{active?.title}</h2></div><span className="flex items-center gap-2 text-xs text-muted-foreground">{dirty ? <><span className="h-1.5 w-1.5 rounded-full bg-primary" />Unsaved changes</> : <><Check className="h-4 w-4" />No unsaved changes</>}</span></div>
