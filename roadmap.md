@@ -1,7 +1,7 @@
 # Mobile layout and draft preview
-- [ ] Replace draft summary with the real site in isolated 375px/1280px viewports, syncing unsaved edits.
-- [ ] Improve public mobile typography, single-column layouts, feature tags and hero actions; add sticky call/text and booking bar.
-- [ ] Verify draft sync, booking and public layouts on mobile and desktop.
+- [x] Replace draft summary with the real site in isolated 375px/1280px viewports, syncing unsaved edits and pending photos.
+- [x] Improve public mobile typography, single-column layouts, feature tags and hero actions; add sticky call/text and booking bar.
+- [x] Verify draft sync using simulated admin login, booking dialog and public layouts at 375px, 640px, 767px and 1280px; 37 focused tests pass.
 
 # Admin authentication replacement
 - [x] Inspect current authentication and publishing; existing Cloud auth is healthy and profiles/user_roles tables exist.
