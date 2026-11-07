@@ -1,7 +1,7 @@
 import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { LegalPage } from "@/components/site/LegalPage";
-import { POLICIES } from "@/components/site/data";
+import { useLiveContent } from "@/lib/live-content";
 
 export const Route = createFileRoute("/terms-of-service")({
   head: () => ({
@@ -16,7 +16,12 @@ export const Route = createFileRoute("/terms-of-service")({
     ],
     links: [{ rel: "canonical", href: `${SITE_ORIGIN}/terms-of-service` }],
   }),
-  component: () => (
+  component: TermsPage,
+});
+
+function TermsPage() {
+  const POLICIES = useLiveContent().site.policies;
+  return (
     <LegalPage
       title="Terms & Conditions"
       intro="These Terms govern your use of The Workout Plant website and your participation in our private 1-on-1 personal training and nutrition coaching services at 139 Frost St, Brooklyn, NY 11211. By booking a session, you agree to these Terms."
@@ -32,5 +37,5 @@ export const Route = createFileRoute("/terms-of-service")({
         { h: "Governing Law", body: <p>These Terms are governed by the laws of the State of New York.</p> },
       ]}
     />
-  ),
-});
+  );
+}

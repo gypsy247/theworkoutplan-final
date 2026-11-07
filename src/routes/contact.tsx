@@ -2,9 +2,9 @@ import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Navigation, Phone } from "lucide-react";
 import { ConsultationForm } from "@/components/site/ConsultationForm";
-import { EMAIL } from "@/components/site/data";
+import { useLiveContent } from "@/lib/live-content";
 import { MAP_EMBED, MAPS_URL } from "@/components/site/brand";
-import { SOCIAL_LIST } from "@/components/site/social";
+import { getSocialList } from "@/components/site/social";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -23,6 +23,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const { site } = useLiveContent();
+  const EMAIL = site.studioInfo.email;
+  const SOCIAL_LIST = getSocialList(site);
   const cards = [
     { Icon: Phone, label: "Call / Text", value: "917-992-2395", href: "tel:+19179922395", cta: "Call Now" },
     { Icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}`, cta: "Send Email" },
