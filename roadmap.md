@@ -1,5 +1,5 @@
 # Mobile layout and draft preview
-- [ ] Recheck all five grids in the iframe and add explicit mobile single-column safeguards and 20px card padding.
+- [x] Recheck all five manual-content grids in the iframe and add explicit mobile single-column safeguards and 20px card padding; each measures 335px wide inside the 375px frame, with desktop columns preserved.
 - [ ] Replace unnamed review attribution only when real client identities are supplied; blocked on verified names/photos.
 - [x] Replace draft summary with the real site in isolated 375px/1280px viewports, syncing unsaved edits and pending photos.
 - [x] Improve public mobile typography, single-column layouts, feature tags and hero actions; add sticky call/text and booking bar.
