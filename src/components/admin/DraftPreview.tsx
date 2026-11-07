@@ -5,7 +5,7 @@ import type { EditorDraft } from "@/lib/admin-content";
 import { DRAFT_MESSAGE, PREVIEW_READY, previewViewports } from "@/lib/draft-preview";
 
 export function DraftPreview({ draft, imagePreviews = {}, onClose }: { draft: EditorDraft; imagePreviews?: Record<string, string>; onClose: () => void }) {
-  const [viewport, setViewport] = useState(previewViewports[0]);
+  const [viewport, setViewport] = useState<(typeof previewViewports)[number]>(previewViewports[0]);
   const frame = useRef<HTMLIFrameElement>(null);
   const latest = useRef(draft);
   latest.current = draft;
@@ -40,7 +40,7 @@ export function DraftPreview({ draft, imagePreviews = {}, onClose }: { draft: Ed
         </div>
       </div>
       <div className="min-h-0 flex-1 overflow-x-auto bg-secondary p-2 sm:p-4">
-        <iframe ref={frame} title="Studio draft website" src="/?preview=draft" onLoad={sendDraft} className="mx-auto block h-full max-w-none border border-border bg-background" style={{ width: viewport.width }} />
+        <iframe ref={frame} title="Studio draft website" src="/?preview=draft" onLoad={sendDraft} className="mx-auto block h-full max-w-none border-0 bg-background ring-1 ring-border" style={{ width: viewport.width }} />
       </div>
     </div>
   );

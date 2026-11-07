@@ -33,7 +33,6 @@ function ContactPage() {
   ];
   return (
     <section className="relative overflow-hidden px-6 py-24">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[400px] w-[640px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Contact Us</p>
@@ -41,24 +40,24 @@ function ContactPage() {
           <p className="mt-4 text-lg text-muted-foreground">Request a free consultation and book your intro session.</p>
         </div>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {cards.map(({ Icon, label, value, href, cta, external }) => (
-            <div key={label} className="card-surface flex flex-col p-8">
+            <div key={label} className="card-surface flex min-w-0 flex-col p-6 md:p-8">
               <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary/15 text-primary"><Icon className="h-6 w-6" /></span>
               <p className="mt-6 text-sm text-muted-foreground">{label}</p>
               <p className="mt-1 break-words text-lg font-bold">{value}</p>
-              <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold transition hover:border-primary/50">
+              <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-semibold transition hover:border-primary/50">
                 {external && <Navigation className="h-4 w-4" />} {cta}
               </a>
             </div>
           ))}
         </div>
 
-        <div className="mt-6 grid gap-6 sm:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
           {SOCIAL_LIST.map(({ label, handle, href, Icon }) => (
             <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="card-surface flex items-center gap-4 p-6">
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-secondary text-primary"><Icon className="h-6 w-6" /></span>
-              <div>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-secondary text-primary"><Icon className="h-6 w-6" /></span>
+              <div className="min-w-0">
                 <p className="font-bold">{label}</p>
                 <p className="text-sm text-muted-foreground">{handle}</p>
               </div>
@@ -67,7 +66,7 @@ function ContactPage() {
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="card-surface p-8">
+          <div className="card-surface min-w-0 p-6 md:p-8">
             <h2 className="mb-6 text-2xl font-extrabold tracking-tight">Request a Free Consultation</h2>
             <ConsultationForm />
           </div>

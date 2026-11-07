@@ -40,9 +40,9 @@ export function Navbar() {
         </Button>
       )}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
-          <Link to="/" className="flex items-center gap-2 font-display text-lg font-extrabold tracking-tight">
-            <img src={SITE.logoImage} alt="The Workout Plant logo" className="h-9 w-9 rounded-full object-cover" />
+        <div className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-5 py-3 md:px-6 md:py-4 lg:flex lg:justify-between lg:gap-6">
+          <Link to="/" className="flex min-w-0 items-center gap-2 font-display text-lg font-extrabold tracking-tight">
+            <img src={SITE.logoImage} alt="The Workout Plant logo" className="h-9 w-9 shrink-0 rounded-full object-cover" />
             <span className="hidden sm:inline">THE WORKOUT PLANT</span>
           </Link>
           <nav className="hidden items-center gap-6 text-sm text-muted-foreground lg:flex">{items}</nav>
