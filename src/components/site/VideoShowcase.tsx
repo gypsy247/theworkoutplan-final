@@ -1,14 +1,13 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
-import siteContent from "@/data/siteContent.json";
-
-const videoUrl = siteContent.trainingVideoUrl;
+import { useLiveContent } from "@/lib/live-content";
 
 function isEmbed(url: string) {
   return /youtube|youtu\.be|vimeo/.test(url);
 }
 
 export function VideoShowcase() {
+  const videoUrl = useLiveContent().site.trainingVideoUrl;
   const [playing, setPlaying] = useState(false);
   return (
     <section id="watch" className="border-t border-border px-6 py-24">

@@ -1,9 +1,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import siteContent from "@/data/siteContent.json";
-
-const faqs = siteContent.faqs;
+import { useLiveContent } from "@/lib/live-content";
 
 export function FaqSection() {
+  const faqs = useLiveContent().site.faqs;
   return (
     <section id="faq" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-3xl">
