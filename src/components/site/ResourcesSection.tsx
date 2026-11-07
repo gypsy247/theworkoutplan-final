@@ -1,8 +1,9 @@
 import { Link } from "@tanstack/react-router";
 import { RECIPE_CATEGORIES } from "./content";
-import { ARTICLES } from "@/data/articles";
+import { useLiveContent } from "@/lib/live-content";
 
 export function ResourcesSection() {
+  const ARTICLES = useLiveContent().blog.articles;
   return (
     <section id="resources" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">

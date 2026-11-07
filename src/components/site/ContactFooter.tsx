@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone, Sprout, User } from "lucide-react";
 import { ConsultationForm } from "./ConsultationForm";
-import { EMAIL, SITE } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 import { PHONE, PHONE_HREF, Stars } from "./brand";
-import { SOCIAL_LIST } from "./social";
+import { getSocialList } from "./social";
 
 export function ContactDetails() {
+  const { site } = useLiveContent();
+  const SITE = site.studioInfo;
+  const EMAIL = SITE.email;
   const rows = [
     { Icon: Sprout, text: SITE.name, strong: true },
     { Icon: User, text: `${SITE.headCoach} — Head Coach` },
@@ -55,6 +58,10 @@ const quick = [
 const programs = ["1:1 w/ Head Coach Izzy", "1:1 w/ Trainer Analine", "1:1 w/ Jr. Trainer Dev", "1:1 Virtual Session w/ Coach Izzy", "Plant-Based & Custom Nutrition", "The Workout Plant App"];
 
 export function Footer() {
+  const { site } = useLiveContent();
+  const SITE = site.studioInfo;
+  const EMAIL = SITE.email;
+  const SOCIAL_LIST = getSocialList(site);
   const head = "mb-4 font-display text-sm font-extrabold uppercase tracking-widest";
   const link = "text-muted-foreground transition hover:text-primary";
   return (
