@@ -10,9 +10,9 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact The Workout Plant | Williamsburg Personal Training" },
-      { name: "description", content: "Call, text or email The Workout Plant at 139 Frost St, Brooklyn. Request a consultation and claim your BOGO intro session." },
+      { name: "description", content: "Call, text or email The Workout Plant at 139 Frost St, Brooklyn. Request a free consultation and book your intro session." },
       { property: "og:title", content: "Contact The Workout Plant" },
-      { property: "og:description", content: "Request a consultation and claim your BOGO intro session in Williamsburg, Brooklyn." },
+      { property: "og:description", content: "Request a free consultation and book your intro session in Williamsburg, Brooklyn." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: `${SITE_ORIGIN}/contact` },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,7 +35,7 @@ function ContactPage() {
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Contact Us</p>
           <h1 className="mt-2 text-5xl font-extrabold tracking-tight md:text-6xl">Let's Build Your Plan.</h1>
-          <p className="mt-4 text-lg text-muted-foreground">Request a free consultation and claim your New Client BOGO intro session.</p>
+          <p className="mt-4 text-lg text-muted-foreground">Request a free consultation and book your intro session.</p>
         </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -65,7 +65,7 @@ function ContactPage() {
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <div className="card-surface p-8">
-            <h2 className="mb-6 text-2xl font-extrabold tracking-tight">Consultation & BOGO Booking</h2>
+            <h2 className="mb-6 text-2xl font-extrabold tracking-tight">Request a Free Consultation</h2>
             <ConsultationForm />
           </div>
           <div className="relative min-h-[420px] overflow-hidden rounded-2xl border border-border bg-card">

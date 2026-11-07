@@ -28,7 +28,6 @@ export function ConsultationForm({ defaultTier, onDone }: { defaultTier?: string
           ))}
         </select>
       </div>
-      <input name="promo" defaultValue="BOGO" placeholder="Promo Code" className={`${field} font-bold uppercase text-primary`} />
       <textarea name="message" rows={3} placeholder="Tell us about your goals" className={field} />
       <label className="flex items-start gap-3 text-xs leading-relaxed text-muted-foreground">
         <input type="checkbox" name="sms" className="mt-0.5 h-4 w-4 shrink-0 accent-primary" />
