@@ -4,8 +4,9 @@ import { TIERS } from "@/components/site/data";
 import { membershipHead } from "@/routes/membership";
 
 describe("Client revisions", () => {
-  it("hides the BOGO promo banner by default", () => {
+  it("hides the promo banner by default and keeps it BOGO-free", () => {
     expect(siteContent.promoBanner.enabled).toBe(false);
+    expect(JSON.stringify(siteContent)).not.toMatch(/bogo|buy one get one/i);
   });
   it("uses the non-promo hero CTA", () => {
     expect(siteContent.hero.primaryCta).toBe("Book Your Intro Session");
