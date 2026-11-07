@@ -2,6 +2,11 @@ import { serializeExports, validateDraft, type EditorDraft } from './admin-conte
 
 export const REPOSITORY = 'gypsy247/theworkoutplan-final';
 export const BRANCH = 'main';
+// Uploaded photos are served straight from the repository so they go live without a rebuild.
+export const RAW_BASE = `https://raw.githubusercontent.com/${REPOSITORY}/${BRANCH}`;
+export function rawImageUrl(path: string) {
+  return `${RAW_BASE}/${path}`;
+}
 export type RepositoryAccess = { kind: 'netlify' | 'github'; token: () => Promise<string> };
 export type PendingImage = { path: string; content: string };
 export type RepositoryRequest = (path: string, method?: string, body?: object) => Promise<any>;
