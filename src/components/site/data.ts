@@ -25,6 +25,7 @@ export type Tier = {
   features: string[];
   badge?: string;
   featured?: boolean;
+  bookingUrl?: string;
 };
 
 export const TIERS: Tier[] = siteContent.pricingTiers.map((t) => ({
@@ -36,7 +37,12 @@ export const TIERS: Tier[] = siteContent.pricingTiers.map((t) => ({
   features: t.features,
   ...(t.badge ? { badge: t.badge } : {}),
   featured: t.featured,
+  ...(t.bookingUrl ? { bookingUrl: t.bookingUrl } : {}),
 }));
+
+// Editable booking destinations: empty means "open the built-in scheduler".
+export const NAVBAR_BOOKING_URL = SITE.bookingUrl;
+export const HERO_CTA_URL = siteContent.hero.primaryCtaUrl;
 
 export const BOOKING_RULES = { sessionMinutes: 60, rescheduleHours: 48, noShowMinutes: 15, shortenedSessionMinutes: 10, refundsAllowed: false };
 
