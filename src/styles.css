@@ -107,6 +107,8 @@
 .public-site h3 { font-size: 1.4rem; line-height: 1.25; }
 .mobile-conversion-bar { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
 @media (max-width: 767px) {
+  .public-site .mobile-stack-grid { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .public-site .mobile-stack-grid > * { grid-column: auto; width: 100%; min-width: 0; }
   .public-site h1 { font-size: 2rem; }
   .public-site h2 { font-size: 1.65rem; }
   .public-site h3 { font-size: 1.15rem; }

@@ -1,4 +1,6 @@
 # Mobile layout and draft preview
+- [ ] Recheck all five grids in the iframe and add explicit mobile single-column safeguards and 20px card padding.
+- [ ] Replace unnamed review attribution only when real client identities are supplied; blocked on verified names/photos.
 - [x] Replace draft summary with the real site in isolated 375px/1280px viewports, syncing unsaved edits and pending photos.
 - [x] Improve public mobile typography, single-column layouts, feature tags and hero actions; add sticky call/text and booking bar.
 - [x] Verify draft sync using simulated admin login, booking dialog and public layouts at 375px, 640px, 767px and 1280px; 37 focused tests pass.

@@ -75,9 +75,9 @@ export function ReviewsSection() {
         {widgetScript ? (
           <div className="mt-8" dangerouslySetInnerHTML={{ __html: widgetScript }} />
         ) : (
-          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+          <div className="mobile-stack-grid mx-auto grid max-w-5xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
             {reviews.map((r) => (
-              <article key={`${r.name}-${r.date}`} className="card-surface flex min-w-0 flex-col p-6 md:p-8">
+              <article key={`${r.name}-${r.date}`} className="card-surface flex w-full min-w-0 flex-col p-5 md:p-8">
                 <div className="flex items-center gap-3">
                   {r.avatarUrl ? <img src={r.avatarUrl} alt={r.name} loading="lazy" referrerPolicy="no-referrer" className="h-11 w-11 shrink-0 rounded-full object-cover" /> : <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary/15 font-bold text-primary">{r.initials || initials(r.name)}</span>}
                   <div className="min-w-0">
