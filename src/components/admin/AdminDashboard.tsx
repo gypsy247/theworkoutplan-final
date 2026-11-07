@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { addContentItem, removeContentItem, moveItem, type DynamicCollection, createArticle, createEditorDraft, updateDraft, type EditorDraft } from "@/lib/admin-content";
+import { addContentItem, removeContentItem, moveItem, type DynamicCollection, createArticle, updateDraft, type EditorDraft } from "@/lib/admin-content";
 
 import { PublisherControls } from "./PublisherControls";
 import { DraftPreview } from "./DraftPreview";
