@@ -1,11 +1,15 @@
 import { MapPin, Navigation, Star } from "lucide-react";
 import { GoogleG, MAPS_URL, Stars } from "./brand";
-import { HERO, HERO_CTA_URL, SITE } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
 export function HeroSection() {
   const { open } = useBooking();
+  const { site } = useLiveContent();
+  const HERO = site.hero;
+  const SITE = site.studioInfo;
+  const HERO_CTA_URL = site.hero.primaryCtaUrl;
   return (
     <section className="relative overflow-hidden px-6 py-24 text-center">
       <div className="pointer-events-none absolute left-1/2 top-0 h-[480px] w-[720px] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />

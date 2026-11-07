@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { PHONE, PHONE_HREF } from "./brand";
-import { NAVBAR_BOOKING_URL, PROMO, SITE } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
 
@@ -17,6 +17,10 @@ const navLinks = [
 
 export function Navbar() {
   const { open } = useBooking();
+  const { site } = useLiveContent();
+  const PROMO = site.promoBanner;
+  const SITE = site.studioInfo;
+  const NAVBAR_BOOKING_URL = SITE.bookingUrl;
   const [mobile, setMobile] = useState(false);
   const linkCls = "transition hover:text-foreground";
   const items = (

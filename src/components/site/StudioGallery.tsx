@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import siteContent from "@/data/siteContent.json";
+import { useLiveContent } from "@/lib/live-content";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Shot = { image: string; caption: string; category: string };
 
-const studioShots: Shot[] = siteContent.studioPhotos;
-const appShots: Shot[] = siteContent.appScreenshots.map((s) => ({ ...s, category: "app" }));
-const allShots: Shot[] = [...studioShots, ...appShots];
-
-const categories = siteContent.galleryCategories;
-const filters = [
-  { id: "all", label: "All" },
-  { id: "clients", label: categories.clients },
-  { id: "space", label: categories.space },
-  { id: "app", label: categories.app },
-] as const;
-
 export function StudioGallery() {
+  const { site } = useLiveContent();
+  const categories = site.galleryCategories;
+  const filters = [
+    { id: "all", label: "All" },
+    { id: "clients", label: categories.clients },
+    { id: "space", label: categories.space },
+    { id: "app", label: categories.app },
+  ] as const;
+  const allShots: Shot[] = [...site.studioPhotos, ...site.appScreenshots.map((s) => ({ ...s, category: "app" }))];
   const [filter, setFilter] = useState<(typeof filters)[number]["id"]>("all");
   const [lightbox, setLightbox] = useState<Shot | null>(null);
   const shots = filter === "all" ? allShots : allShots.filter((s) => s.category === filter);
