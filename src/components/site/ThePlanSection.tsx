@@ -28,9 +28,9 @@ export function ThePlanSection() {
           </p>
           <p className="mt-4 text-sm font-semibold text-foreground">{THE_PLAN.philosophy}</p>
         </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+        <div className="mobile-stack-grid mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
           {pillars.map((p, i) => (
-            <article key={p.n} className={`card-surface min-w-0 p-6 md:p-8 ${i === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
+            <article key={p.n} className={`card-surface w-full min-w-0 p-5 md:p-8 ${i === 2 ? "md:col-span-2 lg:col-span-1" : ""}`}>
               <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary/15 text-primary">
                   <p.icon className="h-6 w-6" />

@@ -14,9 +14,9 @@ export function PricingSection() {
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">Transparent Pricing. Zero Contracts.</h2>
           <p className="mt-4 text-lg text-muted-foreground">Every session is private, one-on-one, and one full hour.</p>
         </div>
-        <div className="mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
+        <div className="mobile-stack-grid mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-4">
           {TIERS.map((t) => (
-            <article key={t.id} className={`card-surface relative flex flex-col p-6 ${t.featured ? "border-primary ring-1 ring-primary/50" : ""}`}>
+            <article key={t.id} className={`card-surface relative flex w-full min-w-0 flex-col p-5 md:p-6 ${t.featured ? "border-primary ring-1 ring-primary/50" : ""}`}>
               {t.badge && (
                 <span className={`absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-bold ${t.featured ? "bg-primary text-primary-foreground" : "border border-primary/40 bg-secondary text-primary"}`}>
                   {t.badge}
