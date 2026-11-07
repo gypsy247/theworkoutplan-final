@@ -151,7 +151,8 @@
         "Advanced strength & kickboxing",
         "Nutrition & health coaching",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "analine",
@@ -165,7 +166,8 @@
         "1:1 strength & mobility",
         "Nutrition coaching with Coach Izzy",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "dev",
@@ -179,7 +181,8 @@
         "1:1 strength & conditioning",
         "Nutrition coaching with Coach Izzy",
         "Full Workout Plant App access"
-      ]
+      ],
+      "bookingUrl": ""
     },
     {
       "id": "virtual",
@@ -193,7 +196,8 @@
         "Live remote 1-on-1 training",
         "Nutrition coaching",
         "Train from anywhere"
-      ]
+      ],
+      "bookingUrl": ""
     }
   ],
   "reviews": [
