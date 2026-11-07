@@ -1,13 +1,14 @@
 import { ExternalLink, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { POLICIES, SITE, TIERS } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 import { PHONE_HREF } from "./brand";
 
-export const ACUITY_URL = SITE.acuityEmbedUrl;
-export const ACUITY_FALLBACK = SITE.acuityDirectUrl;
-
 export function AcuityScheduler({ tierId }: { tierId?: string | undefined }) {
-  const tier = TIERS.find((item) => item.id === tierId);
+  const { site } = useLiveContent();
+  const POLICIES = site.policies;
+  const ACUITY_URL = site.studioInfo.acuityEmbedUrl;
+  const ACUITY_FALLBACK = site.studioInfo.acuityDirectUrl;
+  const tier = site.pricingTiers.find((item) => item.id === tierId);
   return (
     <div className="min-w-0 space-y-6">
       {tier && <p className="border-l-2 border-primary pl-3 text-sm font-semibold">{tier.name} · 1 Hour · ${tier.price}</p>}

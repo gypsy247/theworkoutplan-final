@@ -1,8 +1,7 @@
-import siteContent from "@/data/siteContent.json";
-
-const trainers = siteContent.trainers;
+import { useLiveContent } from "@/lib/live-content";
 
 export function TrainersSection() {
+  const trainers = useLiveContent().site.trainers;
   return (
     <section id="trainers" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">

@@ -1,4 +1,4 @@
-import { SOCIALS } from "./data";
+import type { LiveContent } from "@/lib/live-content";
 
 export function InstagramIcon({ className = "h-5 w-5" }: { className?: string }) {
   return (
@@ -24,8 +24,10 @@ export function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
   );
 }
 
-export const SOCIAL_LIST = [
-  { label: "Instagram", handle: "@theworkoutplant", href: SOCIALS.instagram, Icon: InstagramIcon },
-  { label: "Facebook", handle: "TheWorkoutPlant", href: SOCIALS.facebook, Icon: FacebookIcon },
-  { label: "TikTok", handle: "@theworkoutplant", href: SOCIALS.tiktok, Icon: TikTokIcon },
-];
+export function getSocialList(site: LiveContent["site"]) {
+  return [
+    { label: "Instagram", handle: "@theworkoutplant", href: site.studioInfo.instagramUrl, Icon: InstagramIcon },
+    { label: "Facebook", handle: "TheWorkoutPlant", href: site.studioInfo.facebookUrl, Icon: FacebookIcon },
+    { label: "TikTok", handle: "@theworkoutplant", href: site.studioInfo.tiktokUrl, Icon: TikTokIcon },
+  ];
+}

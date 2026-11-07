@@ -1,5 +1,5 @@
 import { BadgeCheck, ExternalLink, MapPin, Phone } from "lucide-react";
-import siteContent from "@/data/siteContent.json";
+import { useLiveContent } from "@/lib/live-content";
 import { GoogleG, MAP_EMBED, MAPS_URL, Stars } from "./brand";
 
 const dist = [
@@ -10,12 +10,12 @@ const dist = [
   { s: 1, p: 0 },
 ];
 
-const reviews = siteContent.reviews;
-const widgetScript = siteContent.reviewsWidgetScript;
-
 const initials = (n: string) => n.split(" ").map((w) => w[0]).slice(0, 2).join("");
 
 export function ReviewsSection() {
+  const { site } = useLiveContent();
+  const reviews = site.reviews;
+  const widgetScript = site.reviewsWidgetScript;
   return (
     <section id="reviews" className="px-6 py-24">
       <div className="mx-auto max-w-7xl">

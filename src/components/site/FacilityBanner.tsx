@@ -1,10 +1,9 @@
 import { MapPin } from "lucide-react";
-import siteContent from "@/data/siteContent.json";
+import { useLiveContent } from "@/lib/live-content";
 import { MAPS_URL } from "./brand";
 
-const facilityImage = siteContent.facilityImage;
-
 export function FacilityBanner() {
+  const facilityImage = useLiveContent().site.facilityImage;
   return (
     <section id="facility" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">

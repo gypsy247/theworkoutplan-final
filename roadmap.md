@@ -49,3 +49,11 @@
 # GitHub repository
 - [x] Recreate the owner repository as gypsy247/theworkoutplant (previous repo was deleted) and push all latest project files; publish flow constant updated.
 - [ ] Re-link the Netlify site to the new repository (old repo deletion broke the deploy connection) — needs the owner in Netlify.
+
+# Studio Manager live publishing (Nov 2026)
+- [x] Remove all BOGO/Buy One Get One/promo-code copy from articles, consultation form, contact, booking, terms and privacy pages.
+- [x] Add editable "The Plan" tab (badge, headline, intro, philosophy, 3 pillars) rendering on homepage and /the-plan.
+- [x] Add editable gallery category names syncing to homepage and /gallery filter tabs.
+- [x] Add "Add New Trainer", per-item remove, booking link URL fields (navbar, hero, per pricing tier) and a Desktop/Mobile live preview drawer in /admin.
+- [x] Publish with [skip ci] commits plus public/site-content.json, a public ?action=content endpoint, runtime hydration on every page, repo-owner fallback and clear GITHUB_TOKEN/GITHUB_REPO errors; uploaded photos referenced via raw.githubusercontent.com URLs.
+- [ ] Verify real zero-build publishing end-to-end on the owner's Netlify site (requires ADMIN_PASSWORD, GITHUB_TOKEN and GITHUB_REPO env vars set in Netlify).

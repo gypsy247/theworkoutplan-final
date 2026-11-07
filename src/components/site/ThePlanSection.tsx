@@ -1,21 +1,20 @@
 import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
-import siteContent from "@/data/siteContent.json";
+import { useLiveContent } from "@/lib/live-content";
 import { StudioGallery } from "./StudioGallery";
-
-const THE_PLAN = siteContent.thePlan;
 
 const pillarIcons = [Dumbbell, Salad, MessageCircle];
 const tagIcons = [LineChart, UtensilsCrossed, Plane, BookOpen];
 
-const pillars = siteContent.pillars.map((p, i) => ({
-  n: p.number,
-  icon: pillarIcons[i] ?? Dumbbell,
-  title: p.title,
-  text: p.description,
-  badges: p.tags.map((label, j) => ({ icon: tagIcons[j] ?? LineChart, label })),
-}));
-
 export function ThePlanSection() {
+  const { site } = useLiveContent();
+  const THE_PLAN = site.thePlan;
+  const pillars = site.pillars.map((p, i) => ({
+    n: p.number,
+    icon: pillarIcons[i] ?? Dumbbell,
+    title: p.title,
+    text: p.description,
+    badges: p.tags.map((label, j) => ({ icon: tagIcons[j] ?? LineChart, label })),
+  }));
   return (
     <section id="the-plan" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">

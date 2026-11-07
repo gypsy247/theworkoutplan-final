@@ -17,6 +17,7 @@ import { Footer } from "../components/site/ContactFooter";
 import { Toaster } from "../components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { startLiveContentFetch } from "../lib/live-content";
 
 function NotFoundComponent() {
   return (
@@ -119,6 +120,9 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const isAdmin = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") === "/admin" });
+  useEffect(() => {
+    startLiveContentFetch();
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

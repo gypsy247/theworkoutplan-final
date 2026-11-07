@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
-import { TIERS } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 
 const field = "w-full rounded-lg border border-border bg-background px-4 py-3 text-sm outline-hidden transition focus:border-primary";
 
 export function ConsultationForm({ defaultTier, onDone }: { defaultTier?: string | undefined; onDone?: () => void }) {
+  const TIERS = useLiveContent().site.pricingTiers;
   const [sent, setSent] = useState(false);
 
   function submit(e: FormEvent<HTMLFormElement>) {

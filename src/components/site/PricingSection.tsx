@@ -1,10 +1,11 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TIERS } from "./data";
+import { useLiveContent } from "@/lib/live-content";
 import { useBooking } from "./BookingModal";
 
 export function PricingSection() {
   const { open } = useBooking();
+  const TIERS = useLiveContent().site.pricingTiers;
   return (
     <section id="pricing" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">

@@ -1,6 +1,6 @@
 import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ARTICLES } from "@/data/articles";
+import { useLiveContent } from "@/lib/live-content";
 
 export const Route = createFileRoute("/fitness-articles")({
   head: () => ({
@@ -23,6 +23,7 @@ export const Route = createFileRoute("/fitness-articles")({
 });
 
 function ArticlesHub() {
+  const ARTICLES = useLiveContent().blog.articles;
   return (
     <section className="px-6 py-24">
       <div className="mx-auto max-w-6xl">

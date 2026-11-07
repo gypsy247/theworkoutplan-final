@@ -93,7 +93,16 @@ export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): Git
   };
 }
 
-// One tree + commit + non-forced ref update keeps JSON and photos in a single deploy.
+// Builds the runtime JSON the live site fetches on every page load.
+export function buildRuntimeContent(files: PublishFile[]): string {
+  const site = files.find((file) => file.path === 'src/data/siteContent.json');
+  const blog = files.find((file) => file.path === 'src/data/articles.json');
+  if (!site || !blog) throw new Error('Both content files are required to publish.');
+  return JSON.stringify({ site: JSON.parse(site.content), blog: JSON.parse(blog.content) });
+}
+
+// One tree + commit + non-forced ref update keeps JSON and photos in a single commit.
+// [skip ci] tells Netlify not to build: the live site reads public/site-content.json at runtime.
 export async function commitContent(request: GitRequest, files: PublishFile[], images: PublishImage[], releaseId: string, branch = 'main') {
   const ref = await request(`/git/ref/heads/${branch}`);
   const head = ref.object.sha as string;
@@ -106,9 +115,10 @@ export async function commitContent(request: GitRequest, files: PublishFile[], i
   const tree = await request('/git/trees', 'POST', { base_tree: parent.tree.sha, tree: [
     ...files.map(file => ({ path: file.path, mode: '100644', type: 'blob', content: file.content })),
     ...imageEntries,
+    { path: 'public/site-content.json', mode: '100644', type: 'blob', content: buildRuntimeContent(files) },
     { path: 'public/studio-version.json', mode: '100644', type: 'blob', content: JSON.stringify({ releaseId }) + '\n' },
   ] });
-  const commit = await request('/git/commits', 'POST', { message: 'Update site content via Studio Manager', tree: tree.sha, parents: [head] });
+  const commit = await request('/git/commits', 'POST', { message: 'Update site content via Studio Manager [skip ci]', tree: tree.sha, parents: [head] });
   await request(`/git/refs/heads/${branch}`, 'PATCH', { sha: commit.sha, force: false });
   return String(commit.sha);
 }

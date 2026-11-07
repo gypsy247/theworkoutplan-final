@@ -1,7 +1,8 @@
 import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import ReactMarkdown from "react-markdown";
-import { ARTICLES, getArticle } from "@/data/articles";
+import { getArticle } from "@/data/articles";
+import { useLiveContent } from "@/lib/live-content";
 import izzy from "@/assets/trainer-izzy-boxing.jpg.asset.json";
 
 export const Route = createFileRoute("/post/$slug")({
@@ -92,8 +93,10 @@ const mdComponents = {
 };
 
 function ArticleDetail() {
-  const { article } = Route.useLoaderData();
-  const more = ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3);
+  const { article: bundled } = Route.useLoaderData();
+  const live = useLiveContent().blog.articles;
+  const article = live.find((a) => a.slug === bundled.slug) ?? bundled;
+  const more = live.filter((a) => a.slug !== article.slug).slice(0, 3);
 
   return (
     <article className="px-6 py-24">

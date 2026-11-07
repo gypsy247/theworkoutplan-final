@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SITE } from "@/components/site/data";
+import { useLiveContent } from "@/lib/live-content";
 import { pageHead } from "@/lib/site-seo";
 
 export function membershipHead() {
@@ -13,6 +13,7 @@ export const Route = createFileRoute("/membership")({
 });
 
 function MembershipPage() {
+  const SITE = useLiveContent().site.studioInfo;
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-3xl text-center">
