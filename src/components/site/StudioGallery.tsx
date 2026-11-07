@@ -9,11 +9,12 @@ const studioShots: Shot[] = siteContent.studioPhotos;
 const appShots: Shot[] = siteContent.appScreenshots.map((s) => ({ ...s, category: "app" }));
 const allShots: Shot[] = [...studioShots, ...appShots];
 
+const categories = siteContent.galleryCategories;
 const filters = [
   { id: "all", label: "All" },
-  { id: "clients", label: "Clients Training" },
-  { id: "space", label: "The 139 Frost St Space" },
-  { id: "app", label: "The Workout Plant App" },
+  { id: "clients", label: categories.clients },
+  { id: "space", label: categories.space },
+  { id: "app", label: categories.app },
 ] as const;
 
 export function StudioGallery() {

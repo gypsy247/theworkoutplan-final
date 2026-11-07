@@ -1,7 +1,8 @@
 import { BookOpen, Dumbbell, LineChart, MessageCircle, Plane, Salad, UtensilsCrossed } from "lucide-react";
 import siteContent from "@/data/siteContent.json";
-import { POLICIES } from "./data";
 import { StudioGallery } from "./StudioGallery";
+
+const THE_PLAN = siteContent.thePlan;
 
 const pillarIcons = [Dumbbell, Salad, MessageCircle];
 const tagIcons = [LineChart, UtensilsCrossed, Plane, BookOpen];
@@ -19,15 +20,14 @@ export function ThePlanSection() {
     <section id="the-plan" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">The Plan</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">{THE_PLAN.badge}</p>
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">
-            Simple, Evidence-Based Systems That Actually Work
+            {THE_PLAN.headline}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Led by Head Coach Izzy Jacobus, whether you train with Izzy or one of our trainers, you follow the same
-            structured, evolving program.
+            {THE_PLAN.intro}
           </p>
-          <p className="mt-4 text-sm font-semibold text-foreground">{POLICIES.philosophy}</p>
+          <p className="mt-4 text-sm font-semibold text-foreground">{THE_PLAN.philosophy}</p>
         </div>
         <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
           {pillars.map((p, i) => (
