@@ -18,6 +18,7 @@ import { Toaster } from "../components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startLiveContentFetch } from "../lib/live-content";
+import { MobileConversionBar } from "../components/site/MobileConversionBar";
 
 function NotFoundComponent() {
   return (
@@ -129,10 +130,11 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <BookingProvider>
         {!isAdmin && <Navbar />}
-        <main>
+        <main className={isAdmin ? "" : "public-site"}>
           <Outlet />
         </main>
         {!isAdmin && <Footer />}
+        {!isAdmin && <MobileConversionBar />}
         <Toaster position="top-center" />
       </BookingProvider>
     </QueryClientProvider>

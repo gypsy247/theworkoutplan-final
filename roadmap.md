@@ -1,3 +1,8 @@
+# Mobile layout and draft preview
+- [x] Replace draft summary with the real site in isolated 375px/1280px viewports, syncing unsaved edits and pending photos.
+- [x] Improve public mobile typography, single-column layouts, feature tags and hero actions; add sticky call/text and booking bar.
+- [x] Verify draft sync using simulated admin login, booking dialog and public layouts at 375px, 640px, 767px and 1280px; 37 focused tests pass.
+
 # Admin authentication replacement
 - [x] Inspect current authentication and publishing; existing Cloud auth is healthy and profiles/user_roles tables exist.
 - [x] Confirm no additional profile data and authorized admin email gypsytalha@gmail.com; no matching auth account currently exists.

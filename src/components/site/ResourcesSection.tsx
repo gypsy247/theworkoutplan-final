@@ -12,16 +12,16 @@ export function ResourcesSection() {
           <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">Recipes & Evidence-Based Articles</h2>
         </div>
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="card-surface p-8">
+          <div className="card-surface min-w-0 p-6 md:p-8">
             <h3 className="text-2xl font-extrabold tracking-tight">THE PLANTS: High-Protein Vegan Recipes</h3>
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="mt-4 grid grid-cols-1 gap-2 md:grid-cols-2">
               {RECIPE_CATEGORIES.map((c) => (
                 <span key={c.name} className="rounded-lg border border-border bg-secondary px-3 py-2 text-sm font-semibold">{c.name} · {c.items.length}</span>
               ))}
             </div>
             <Link to="/high-protein-vegan-recipes" className="mt-6 inline-block font-bold text-primary hover:underline">View the recipe guide →</Link>
           </div>
-          <div className="card-surface p-8">
+          <div className="card-surface min-w-0 p-6 md:p-8">
             <h3 className="text-2xl font-extrabold tracking-tight">Articles by Izzy Jacobus</h3>
             <ul className="mt-4 space-y-2 text-sm">
               {ARTICLES.map((a) => (

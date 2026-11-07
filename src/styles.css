@@ -96,3 +96,22 @@
 .studio-manager:not([role="dialog"]) { min-height: 100vh; }
 .studio-manager input, .studio-manager textarea { background: var(--background); }
 .studio-manager input:focus-visible, .studio-manager textarea:focus-visible { border-color: var(--primary); }
+
+/* Public pages and isolated draft frames share the same responsive rules. */
+.public-site { overflow-x: clip; }
+.public-site :where(h1, h2, h3, h4, p, li, a, span) { overflow-wrap: break-word; }
+.public-site :where(h1, h2, h3) { text-wrap: balance; }
+.public-site :where(p, li) { text-wrap: pretty; line-height: 1.6; }
+.public-site h1 { font-size: 4.25rem; line-height: 1.08; }
+.public-site h2 { font-size: 3rem; line-height: 1.12; }
+.public-site h3 { font-size: 1.4rem; line-height: 1.25; }
+.mobile-conversion-bar { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+@media (max-width: 767px) {
+  .public-site h1 { font-size: 2rem; }
+  .public-site h2 { font-size: 1.65rem; }
+  .public-site h3 { font-size: 1.15rem; }
+  .public-site p:not(.text-xs):not(.text-sm) { font-size: 1rem; }
+  .public-site section:not(.site-hero) { padding: 3rem 1.25rem; }
+  .public-site .card-surface { min-width: 0; }
+  .site-footer { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+}

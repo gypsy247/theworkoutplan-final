@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import siteContent from "@/data/siteContent.json";
 import articlesContent from "@/data/articles.json";
+import { DRAFT_MESSAGE, PREVIEW_READY, isDraftPreview } from "@/lib/draft-preview";
 
 export type LiveContent = { site: typeof siteContent; blog: typeof articlesContent };
 
@@ -41,6 +42,17 @@ async function fetchLive(url: string) {
 export function startLiveContentFetch() {
   if (started || typeof window === "undefined") return;
   started = true;
+  if (isDraftPreview(window.location.search) && window.parent !== window) {
+    window.addEventListener("message", (event: MessageEvent) => {
+      if (event.origin !== window.location.origin || event.source !== window.parent || event.data?.type !== DRAFT_MESSAGE) return;
+      const content: LiveContent | undefined = event.data.content;
+      if (!content?.site?.hero || !Array.isArray(content.site.pillars) || !Array.isArray(content.blog?.articles)) return;
+      current = content;
+      listeners.forEach(callback => callback());
+    });
+    window.parent.postMessage({ type: PREVIEW_READY }, window.location.origin);
+    return;
+  }
   void fetchLive(`/.netlify/functions/admin-publish?action=content&t=${Date.now()}`)
     .catch(() => fetchLive(`https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/site-content.json?t=${Date.now()}`))
     .catch(() => {
