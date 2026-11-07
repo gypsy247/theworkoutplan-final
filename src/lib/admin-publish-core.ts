@@ -70,16 +70,26 @@ export function validatePublishInput(files: unknown, images: unknown): { files: 
 
 type GitRequest = (path: string, method?: string, body?: object) => Promise<any>;
 export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): GitRequest {
-  if (!env.GITHUB_TOKEN) throw new Error('Publishing is not configured on the server.');
-  const repo = env.GITHUB_REPO || DEFAULT_REPO;
+  if (!env.GITHUB_TOKEN) throw new Error('Publishing is not configured on the server. Set GITHUB_TOKEN (and GITHUB_REPO) in the Netlify environment variables.');
+  const configured = (env.GITHUB_REPO || DEFAULT_REPO).trim();
+  // If the configured repo was transferred or renamed, fall back to the default so commits keep working.
+  const candidates = configured === DEFAULT_REPO ? [configured] : [configured, DEFAULT_REPO];
   return async (path, method = 'GET', body) => {
-    const response = await fetcher(`https://api.github.com/repos/${repo}${path}`, {
-      method,
-      headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'workout-plant-studio-manager' },
-      ...(body ? { body: JSON.stringify(body) } : {}),
-    });
-    if (!response.ok) throw new Error(`GitHub request failed [${response.status}]: ${await response.text()}`);
-    return response.json();
+    let lastError = '';
+    for (const repo of candidates) {
+      const response = await fetcher(`https://api.github.com/repos/${repo}${path}`, {
+        method,
+        headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'workout-plant-studio-manager' },
+        ...(body ? { body: JSON.stringify(body) } : {}),
+      });
+      if (response.ok) return response.json();
+      lastError = await response.text();
+      if (response.status === 404 && repo !== candidates[candidates.length - 1]) continue;
+      if (response.status === 404) throw new Error(`Repository not found [404]: check GITHUB_REPO (tried ${candidates.join(' and ')}). ${lastError}`);
+      if (response.status === 401 || response.status === 403) throw new Error(`GitHub rejected the token [${response.status}]: update GITHUB_TOKEN with write access to ${repo}. ${lastError}`);
+      throw new Error(`GitHub request failed [${response.status}]: ${lastError}`);
+    }
+    throw new Error(`GitHub request failed: ${lastError}`);
   };
 }
 
