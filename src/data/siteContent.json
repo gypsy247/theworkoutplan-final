@@ -86,8 +86,8 @@
       "category": "clients"
     },
     {
-      "image": "https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/img-3215-3042a96a-73f8-4218-9d43-f365e072edcd.jpg",
-      "caption": "Barbell Training",
+      "image": "https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/img-3215-cb7389f1-2a5a-4e58-a281-5d5717b25f40.jpg",
+      "caption": "Kickboxing",
       "category": "clients"
     },
     {
@@ -99,6 +99,11 @@
       "image": "https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/img-3216-7b7add37-eaeb-4c62-b5b3-a245de6ec5f3.jpg",
       "caption": "Pilates",
       "category": "clients"
+    },
+    {
+      "image": "https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/tempimage6voa5l-fb6ac1ea-f138-42ff-82f5-39187fe76d59.jpg",
+      "caption": "The Plant",
+      "category": "space"
     }
   ],
   "appScreenshots": [
@@ -111,7 +116,7 @@
       "caption": "Progress Analytics"
     },
     {
-      "image": "/images/app-recipe-guide.png",
+      "image": "https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/untitled-design-141-358b6bec-b44c-4bb5-926e-9df55d32a4e5.png",
       "caption": "Coaching Guides"
     }
   ],
