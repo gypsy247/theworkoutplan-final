@@ -259,11 +259,11 @@
   "faqs": [
     {
       "question": "How often do I need to train to see results?",
-      "answer": "We recommend most cleints train two to three times per week, depending on their goals."
+      "answer": "We recommend most clients train two to three times per week, depending on their goals."
     },
     {
       "question": "What should I wear and bring?",
-      "answer": "Wear something comfortable and bring a water bottle. No shoes in the studio! We provide towels."
+      "answer": "Wear something comfortable and bring a water bottle. We have a water fountain and see bottled water and other drinks.\n\nNo shoes in the studio! We provide towels."
     },
     {
       "question": "What is your cancellation and rescheduling policy?",
@@ -271,7 +271,7 @@
     },
     {
       "question": "What happens if I arrive late?",
-      "answer": "Arrivals 15+ minutes late are charged in full and is considered a missed session. Arrivals 10+ minutes late may result in a shortened session."
+      "answer": "Arrivals 15+ minutes late are charged in full and the session is cancelled.\n\nArrivals 10+ minutes late may result in a shortened session."
     },
     {
       "question": "Where is the studio located?",
@@ -283,7 +283,11 @@
     },
     {
       "question": "Will there be an initial consultation with my trainer?",
-      "answer": "Yes. Once you book your first session, your trainer which reach out to you to onboard you and discuss your needs and goals."
+      "answer": "Yes. Once you book your first session, your trainer which reach out to you with an  onboarding questionnaire and to discuss your needs and goals."
+    },
+    {
+      "question": "Is there a locker room or shower?",
+      "answer": "We have a private bathroom for changing and cubbies for storing items but we do not have a full shower."
     }
   ],
   "policies": {
