@@ -27,9 +27,9 @@ type Site = typeof siteContent;
 export function sanitizeSite<T extends Site>(site: T): T {
   const s = structuredClone(site);
   if (!Array.isArray(s.studioPhotos) || s.studioPhotos.length === 0) s.studioPhotos = structuredClone(siteContent.studioPhotos);
-  s.studioPhotos.forEach((p, i) => { if (isBrokenImage(p.image)) p.image = siteContent.studioPhotos[i % siteContent.studioPhotos.length].image; });
+  s.studioPhotos.forEach((p, i) => { if (isBrokenImage(p.image)) p.image = siteContent.studioPhotos[i % siteContent.studioPhotos.length]!.image; });
   if (!Array.isArray(s.appScreenshots) || s.appScreenshots.length === 0) s.appScreenshots = structuredClone(siteContent.appScreenshots);
-  s.appScreenshots.forEach((p, i) => { if (isBrokenImage(p.image)) p.image = siteContent.appScreenshots[i % siteContent.appScreenshots.length].image; });
+  s.appScreenshots.forEach((p, i) => { if (isBrokenImage(p.image)) p.image = siteContent.appScreenshots[i % siteContent.appScreenshots.length]!.image; });
   (s.trainers ?? []).forEach((t) => { if (isBrokenImage(t.image)) t.image = siteContent.trainers.find(d => d.name === t.name)?.image ?? FALLBACK_IMAGE; });
   if (isBrokenImage(s.studioInfo?.logoImage)) s.studioInfo.logoImage = siteContent.studioInfo.logoImage;
   if (typeof s.facilityImage === "string" && s.facilityImage.startsWith("blob:")) s.facilityImage = "";
@@ -41,8 +41,8 @@ export function installImageFallback() {
   if (typeof window === "undefined") return;
   window.addEventListener("error", (event) => {
     const img = event.target;
-    if (!(img instanceof HTMLImageElement) || img.dataset.fallbackApplied) return;
-    img.dataset.fallbackApplied = "1";
-    img.src = img.dataset.fallback || FALLBACK_IMAGE;
+    if (!(img instanceof HTMLImageElement) || img.dataset["fallbackApplied"]) return;
+    img.dataset["fallbackApplied"] = "1";
+    img.src = img.dataset["fallback"] || FALLBACK_IMAGE;
   }, true);
 }
