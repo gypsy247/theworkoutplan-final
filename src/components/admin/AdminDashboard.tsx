@@ -37,7 +37,7 @@ function SectionTitle({ children, count }: { children: ReactNode; count?: number
   return <div className="mb-5 flex items-center justify-between gap-3"><h3 className="font-display text-lg font-bold">{children}</h3>{count !== undefined && <span className="text-xs text-muted-foreground">{count} entries</span>}</div>;
 }
 function PhotoEditor({ image, label, onImage, onCaption, onRemove, onUpload, previewImage, controls }: { image: string; label: string; onImage: (value: string) => void; onCaption?: (value: string) => void; onRemove?: () => void; onUpload?: (file: File) => void; previewImage?: string | undefined; controls?: ReactNode }) {
-  return <figure className="overflow-hidden rounded-lg border border-border bg-card"><div className="flex aspect-[4/3] items-center justify-center bg-secondary"><img src={previewImage || image} alt={label} className="h-full w-full object-contain" onError={(event) => { event.currentTarget.alt = "Image unavailable — check the image address"; }} /></div><figcaption className="space-y-4 p-4"><div className="flex items-center justify-between gap-2"><p className="truncate text-sm font-semibold" title={label}>{label || "New photo"}</p>{onRemove && <Button variant="ghost" size="icon" title="Remove photo" aria-label={`Remove photo ${label || "new"}`} onClick={onRemove}><Trash2 /></Button>}</div>{controls}{onUpload && <label className="grid gap-2 text-xs text-muted-foreground">Upload photo<Input aria-label={`Upload ${label || "new photo"}`} type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={event => { const file = event.target.files?.[0]; if (file) onUpload(file); event.target.value = ""; }} /></label>}<Field label={`${label} image URL`} value={image} onChange={onImage} />{onCaption && <Field label={`${label} caption`} value={label} onChange={onCaption} />}</figcaption></figure>;
+  return <figure className="overflow-hidden rounded-lg border border-border bg-card"><div className="flex aspect-[4/3] items-center justify-center bg-secondary"><img src={previewImage || image} alt={label} className="h-full w-full object-contain" onError={(event) => { if (!event.currentTarget.dataset.fb) { event.currentTarget.dataset.fb = "1"; event.currentTarget.src = "/images/trainer-izzy-boxing.jpg"; } }} /></div><figcaption className="space-y-4 p-4"><div className="flex items-center justify-between gap-2"><p className="truncate text-sm font-semibold" title={label}>{label || "New photo"}</p>{onRemove && <Button variant="ghost" size="icon" title="Remove photo" aria-label={`Remove photo ${label || "new"}`} onClick={onRemove}><Trash2 /></Button>}</div>{controls}{onUpload && <label className="grid gap-2 text-xs text-muted-foreground">Upload photo<Input aria-label={`Upload ${label || "new photo"}`} type="file" accept="image/jpeg,image/png,image/webp,image/gif" onChange={event => { const file = event.target.files?.[0]; if (file) onUpload(file); event.target.value = ""; }} /></label>}<Field label={`${label} image URL`} value={image} onChange={onImage} />{onCaption && <Field label={`${label} caption`} value={label} onChange={onCaption} />}</figcaption></figure>;
 }
 
 export function AdminDashboard() { return <StudioSession><EditorDashboard /></StudioSession>; }
@@ -53,12 +53,12 @@ function EditorDashboard() {
     try { const dataUrl = await compressImage(file); siteEdit(path, dataUrl); toast.success(`Photo compressed (${Math.round(dataUrl.length * 0.75 / 1024)} KB) and ready to publish.`); } catch (error) { toast.error(error instanceof Error ? error.message : "Unable to prepare photo."); }
   }
 
-  const [draft, setDraft] = useState<EditorDraft>(() => structuredClone(getLiveContent()));
+  const [draft, setDraft] = useState<EditorDraft>(() => { const c = getLiveContent(); return { ...structuredClone(c), site: sanitizeSite(c.site) }; });
   const [dirty, setDirty] = useState(false);
   const dirtyRef = useRef(false);
   dirtyRef.current = dirty;
   const live = useLiveContent();
-  useEffect(() => { if (!dirtyRef.current) setDraft(structuredClone(live)); }, [live]);
+  useEffect(() => { if (!dirtyRef.current) setDraft({ ...structuredClone(live), site: sanitizeSite(live.site) }); }, [live]);
   const [tab, setTab] = useState("hero");
   const [articleIndex, setArticleIndex] = useState(0);
   const [preview, setPreview] = useState(false);

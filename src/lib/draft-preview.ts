@@ -7,5 +7,5 @@ export const previewViewports = [
 
 export function isDraftPreview(search: string): boolean {
   const params = new URLSearchParams(search);
-  return ["draft", "1"].includes(params.get("preview") ?? "") || params.get("adminPreview") === "true";
+  return ["draft", "1"].includes(params.get("preview") ?? "") || ["true", "1"].includes(params.get("adminPreview") ?? "");
 }
