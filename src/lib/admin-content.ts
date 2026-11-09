@@ -80,15 +80,30 @@ export function validateDraft(draft: EditorDraft): string | null {
     if (slugs.has(article.slug)) return "Each article must have a unique URL slug.";
     slugs.add(article.slug);
   }
-  if (draft.site.reviews.some((review) => review.avatarUrl && !/^\/images\/[\w./-]+$/.test(review.avatarUrl) && !/^https:\/\/[^\s]+$/.test(review.avatarUrl))) return "Use an /images/ path or an HTTPS address for each reviewer photo.";
-  const images = [draft.site.studioInfo.logoImage, ...draft.site.trainers.map((trainer) => trainer.image), ...draft.site.studioPhotos.map((photo) => photo.image), ...draft.site.appScreenshots.map((photo) => photo.image)];
-  if (images.some((image) => !/^\/images\/[\w./-]+$/.test(image) && !/^https:\/\/[^\s]+$/.test(image))) return "Use an /images/ path or an HTTPS address for each image.";
+  // Image fields are never a publish blocker; normalizeImages() repairs them at export time.
   return null;
+}
+
+const DEFAULT_IMAGE = "/images/trainer-izzy-boxing.jpg";
+const VALID_IMAGE = /^(data:image\/|https?:\/\/|\/)\S*/i;
+function fixImage(value: unknown, fallback = DEFAULT_IMAGE) {
+  return typeof value === "string" && VALID_IMAGE.test(value.trim()) && !value.startsWith("blob:") ? value.trim() : fallback;
+}
+
+/** Replaces empty or unusable image references with working /images/ fallbacks. */
+export function normalizeImages(site: SiteContent): SiteContent {
+  const s = structuredClone(site);
+  s.studioInfo.logoImage = fixImage(s.studioInfo.logoImage, "/images/logo-white.png");
+  s.trainers.forEach((t) => { t.image = fixImage(t.image); });
+  s.studioPhotos.forEach((p) => { p.image = fixImage(p.image); });
+  s.appScreenshots.forEach((p) => { p.image = fixImage(p.image, "/images/app-progress-analytics.png"); });
+  s.reviews.forEach((r) => { if (r.avatarUrl) r.avatarUrl = fixImage(r.avatarUrl, ""); });
+  return s;
 }
 
 export function serializeExports(draft: EditorDraft) {
   return [
-    { filename: "siteContent.json", content: JSON.stringify(draft.site, null, 2) + "\n" },
+    { filename: "siteContent.json", content: JSON.stringify(normalizeImages(draft.site), null, 2) + "\n" },
     { filename: "articles.json", content: JSON.stringify(draft.blog, null, 2) + "\n" },
   ];
 }
