@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest';
 import { fetchImage } from '@/lib/admin-publish-core';
 import { resolveImageUrl, sanitizeSite } from '@/lib/image-tools';
+import siteContent from '@/data/siteContent.json';
 
 describe('resolveImageUrl', () => {
   it('rewrites raw.githubusercontent.com photo URLs to the same-origin image proxy', () => {
@@ -15,11 +16,9 @@ describe('resolveImageUrl', () => {
   it('sanitizeSite rewrites gallery photos that point at raw.githubusercontent.com', () => {
     const raw = 'https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/bands-def456.jpg';
     const site = sanitizeSite({
+      ...structuredClone(siteContent),
       studioPhotos: [{ image: raw, caption: 'Bands', category: 'space' }],
-      appScreenshots: [],
-      trainers: [],
-      studioInfo: { logoImage: '/images/logo-white.png' },
-    } as never);
+    });
     expect(site.studioPhotos[0]!.image).toBe('/.netlify/functions/admin-publish?action=image&path=' + encodeURIComponent('public/images/bands-def456.jpg'));
   });
 });
