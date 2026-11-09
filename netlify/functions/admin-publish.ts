@@ -1,4 +1,4 @@
-import { checkCredentials, commitContent, createSession, githubRequest, validatePublishInput, verifySession, type AdminEnv } from '../../src/lib/admin-publish-core';
+import { checkCredentials, commitContent, createSession, fetchImage, githubRequest, validatePublishInput, verifySession, type AdminEnv } from '../../src/lib/admin-publish-core';
 
 const json = (status: number, body: object) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
 
@@ -6,7 +6,16 @@ export default async (request: Request) => {
   const env = process.env as AdminEnv;
   if (request.method === 'GET') {
     const url = new URL(request.url);
-    if (url.searchParams.get('action') !== 'content') return json(400, { error: 'Unknown action.' });
+    const action = url.searchParams.get('action');
+    if (action === 'image') {
+      try {
+        const { bytes, contentType } = await fetchImage(githubRequest(env), url.searchParams.get('path'));
+        return new Response(bytes, { status: 200, headers: { 'content-type': contentType, 'cache-control': 'public, max-age=31536000, immutable' } });
+      } catch (error) {
+        return json(404, { error: error instanceof Error ? error.message : 'Photo is unavailable.' });
+      }
+    }
+    if (action !== 'content') return json(400, { error: 'Unknown action.' });
     try {
       const file = await githubRequest(env)('/contents/public/site-content.json?ref=main');
       if (typeof file?.content !== 'string') throw new Error('Live content is unavailable.');

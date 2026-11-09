@@ -101,6 +101,9 @@
 .public-site { overflow-x: clip; }
 .public-site :where(h1, h2, h3, h4, p, li, a, span) { overflow-wrap: break-word; }
 .public-site :where(h1, h2, h3) { text-wrap: balance; }
+/* Article card titles never split a word across lines. */
+.public-site .article-card-title { overflow-wrap: normal; word-break: normal; hyphens: none; font-size: 1.25rem; line-height: 1.3; }
+@media (min-width: 768px) { .public-site .article-card-title { font-size: 1.5rem; } }
 .public-site :where(p, li) { text-wrap: pretty; line-height: 1.6; }
 .public-site h1 { font-size: 4.25rem; line-height: 1.08; }
 .public-site h2 { font-size: 3rem; line-height: 1.12; }

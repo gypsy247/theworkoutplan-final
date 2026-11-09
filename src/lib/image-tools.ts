@@ -2,8 +2,20 @@ import siteContent from "@/data/siteContent.json";
 
 export const FALLBACK_IMAGE = "/images/trainer-izzy-boxing.jpg";
 
-/** Resize to max 1200px and compress (WebP, JPEG fallback, 0.78) into a self-contained data URL. */
-export async function compressImage(file: File, max = 1200, quality = 0.78): Promise<string> {
+const RAW_GITHUB_IMAGE = /^https:\/\/raw\.githubusercontent\.com\/[^/]+\/[^/]+\/[^/]+\/(.+)$/;
+
+/**
+ * Rewrites raw.githubusercontent.com photo URLs to the same-origin image proxy so photos
+ * load even while the GitHub repository is private (raw URLs 404 in the browser).
+ */
+export function resolveImageUrl(url: string): string {
+  const match = RAW_GITHUB_IMAGE.exec(url);
+  if (!match) return url;
+  return `/.netlify/functions/admin-publish?action=image&path=${encodeURIComponent(match[1]!)}`;
+}
+
+/** Resize to max 1000px and compress to a self-contained JPEG data URL (quality 0.75). */
+export async function compressImage(file: File, max = 1000, quality = 0.75): Promise<string> {
   if (!file.type.startsWith("image/")) throw new Error("Please choose an image file.");
   const bitmap = await createImageBitmap(file);
   const scale = Math.min(1, max / Math.max(bitmap.width, bitmap.height));
@@ -12,9 +24,7 @@ export async function compressImage(file: File, max = 1200, quality = 0.78): Pro
   canvas.height = Math.round(bitmap.height * scale);
   canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
   bitmap.close?.();
-  let url = canvas.toDataURL("image/webp", quality);
-  if (!url.startsWith("data:image/webp")) url = canvas.toDataURL("image/jpeg", quality);
-  return url;
+  return canvas.toDataURL("image/jpeg", quality);
 }
 
 export function isBrokenImage(src: unknown): boolean {
@@ -33,6 +43,11 @@ export function sanitizeSite<T extends Site>(site: T): T {
   (s.trainers ?? []).forEach((t) => { if (isBrokenImage(t.image)) t.image = siteContent.trainers.find(d => d.name === t.name)?.image ?? FALLBACK_IMAGE; });
   if (isBrokenImage(s.studioInfo?.logoImage)) s.studioInfo.logoImage = siteContent.studioInfo.logoImage;
   if (typeof s.facilityImage === "string" && s.facilityImage.startsWith("blob:")) s.facilityImage = "";
+  s.studioPhotos.forEach((p) => { p.image = resolveImageUrl(p.image); });
+  s.appScreenshots.forEach((p) => { p.image = resolveImageUrl(p.image); });
+  (s.trainers ?? []).forEach((t) => { t.image = resolveImageUrl(t.image); });
+  if (typeof s.studioInfo?.logoImage === "string") s.studioInfo.logoImage = resolveImageUrl(s.studioInfo.logoImage);
+  if (typeof s.facilityImage === "string" && s.facilityImage) s.facilityImage = resolveImageUrl(s.facilityImage);
   return s;
 }
 

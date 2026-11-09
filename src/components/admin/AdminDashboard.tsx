@@ -14,7 +14,7 @@ import { addContentItem, removeContentItem, moveItem, type DynamicCollection, cr
 import { PublisherControls } from "./PublisherControls";
 import { DraftPreview } from "./DraftPreview";
 import { StudioSession, useStudioSession } from "./StudioSession";
-import { prepareImage, rawImageUrl, type PendingImage } from "@/lib/netlify-publish";
+import type { PendingImage } from "@/lib/netlify-publish";
 import { getLiveContent, useLiveContent } from "@/lib/live-content";
 import { compressImage, sanitizeSite } from "@/lib/image-tools";
 import defaultSite from "@/data/siteContent.json";
