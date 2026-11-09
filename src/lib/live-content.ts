@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from "react";
 import siteContent from "@/data/siteContent.json";
 import articlesContent from "@/data/articles.json";
+import { installImageFallback, sanitizeSite } from "@/lib/image-tools";
 import { DRAFT_MESSAGE, PREVIEW_READY, isDraftPreview } from "@/lib/draft-preview";
 
 export type LiveContent = { site: typeof siteContent; blog: typeof articlesContent };
@@ -33,7 +34,7 @@ async function fetchLive(url: string) {
   if (!response.ok) throw new Error(`Live content request failed [${response.status}]`);
   const data: unknown = await response.json();
   if (!data || typeof data !== "object" || !("site" in data) || !("blog" in data)) throw new Error("Live content had an unexpected shape.");
-  current = { site: (data as LiveContent).site, blog: (data as LiveContent).blog };
+  current = { site: sanitizeSite((data as LiveContent).site), blog: (data as LiveContent).blog };
   listeners.forEach((callback) => callback());
 }
 
@@ -42,12 +43,13 @@ async function fetchLive(url: string) {
 export function startLiveContentFetch() {
   if (started || typeof window === "undefined") return;
   started = true;
+  installImageFallback();
   if (isDraftPreview(window.location.search) && window.parent !== window) {
     window.addEventListener("message", (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.source !== window.parent || event.data?.type !== DRAFT_MESSAGE) return;
       const content: LiveContent | undefined = event.data.content;
       if (!content?.site?.hero || !Array.isArray(content.site.pillars) || !Array.isArray(content.blog?.articles)) return;
-      current = content;
+      current = { ...content, site: sanitizeSite(content.site) };
       listeners.forEach(callback => callback());
     });
     window.parent.postMessage({ type: PREVIEW_READY }, window.location.origin);

@@ -40,7 +40,7 @@ export function DraftPreview({ draft, imagePreviews = {}, onClose }: { draft: Ed
         </div>
       </div>
       <div className="min-h-0 flex-1 overflow-x-auto bg-secondary p-2 sm:p-4">
-        <iframe ref={frame} title="Studio draft website" src="/?preview=1" width={viewport.width} onLoad={sendDraft} className="mx-auto block h-full max-w-none shrink-0 border-0 bg-background ring-1 ring-border" style={{ width: viewport.width, minWidth: viewport.width }} />
+        <iframe ref={frame} title="Studio draft website" src="/?adminPreview=1" width={viewport.width} onLoad={sendDraft} className="mx-auto block h-full max-w-none shrink-0 border-0 bg-background ring-1 ring-border" style={{ width: viewport.width, minWidth: viewport.width }} />
       </div>
     </div>
   );
