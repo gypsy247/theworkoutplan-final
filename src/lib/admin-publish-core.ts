@@ -93,6 +93,17 @@ export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): Git
   };
 }
 
+const IMAGE_TYPES: Record<string, string> = { jpg: 'image/jpeg', png: 'image/png', webp: 'image/webp', gif: 'image/gif' };
+
+// Serves an uploaded photo from the (possibly private) repository so raw.githubusercontent.com 404s never reach the browser.
+export async function fetchImage(request: GitRequest, path: unknown, branch = 'main'): Promise<{ bytes: Uint8Array; contentType: string }> {
+  if (typeof path !== 'string' || !IMAGE_PATH.test(path)) throw new Error('Unknown photo.');
+  const file = await request(`/contents/${path}?ref=${branch}`);
+  if (typeof file?.content !== 'string') throw new Error('Photo is unavailable.');
+  const contentType = IMAGE_TYPES[path.split('.').pop()!.toLowerCase()] ?? 'image/jpeg';
+  return { bytes: Uint8Array.from(atob(file.content.replace(/\s/g, '')), (character) => character.charCodeAt(0)), contentType };
+}
+
 // Builds the runtime JSON the live site fetches on every page load.
 export function buildRuntimeContent(files: PublishFile[]): string {
   const site = files.find((file) => file.path === 'src/data/siteContent.json');

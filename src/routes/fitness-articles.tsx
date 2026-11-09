@@ -43,7 +43,7 @@ function ArticlesHub() {
                   {a.date} · {a.readTime}
                 </span>
               </div>
-              <h2 className="mt-4 text-xl font-extrabold tracking-tight">{a.title}</h2>
+              <h2 className="article-card-title mt-4 text-xl font-extrabold tracking-tight md:text-2xl">{a.title}</h2>
               <p className="mt-3 flex-1 text-sm text-muted-foreground">{a.excerpt}</p>
               <Link
                 to="/post/$slug"
