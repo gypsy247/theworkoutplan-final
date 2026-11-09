@@ -13,11 +13,14 @@ describe('resolveImageUrl', () => {
     expect(resolveImageUrl('https://cdn.example.com/photo.jpg')).toBe('https://cdn.example.com/photo.jpg');
   });
   it('sanitizeSite rewrites gallery photos that point at raw.githubusercontent.com', () => {
+    const raw = 'https://raw.githubusercontent.com/gypsy247/theworkoutplan-final/main/public/images/bands-def456.jpg';
     const site = sanitizeSite({
-      ...structuredClone(JSON.parse(JSON.stringify({ ...{} }))),
-      ...JSON.parse(JSON.stringify((globalThis as any).__site ?? {})),
+      studioPhotos: [{ image: raw, caption: 'Bands', category: 'space' }],
+      appScreenshots: [],
+      trainers: [],
+      studioInfo: { logoImage: '/images/logo-white.png' },
     } as never);
-    expect(site).toBeTruthy();
+    expect(site.studioPhotos[0]!.image).toBe('/.netlify/functions/admin-publish?action=image&path=' + encodeURIComponent('public/images/bands-def456.jpg'));
   });
 });
 
