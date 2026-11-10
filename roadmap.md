@@ -1,3 +1,7 @@
+# Photo persistence
+- [ ] Prevent stale refreshes with timestamped published backups; read GitHub API without CDN caching, retry branch conflicts and surface upstream errors.
+- [ ] Test upload → publish → refresh in editor and homepage; real Netlify publishing requires owner configuration.
+
 # Homepage media controls
 - [x] Connect facility compression (1600px, 0.80), preview and clear controls; preserve legacy facility keys.
 - [x] Support training video watch/embed/file URLs and persistent small-clip uploads with previews (3 MB cap; longer clips use hosted links).

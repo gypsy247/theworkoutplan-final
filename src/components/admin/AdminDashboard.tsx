@@ -19,6 +19,7 @@ import { getLiveContent, useLiveContent } from "@/lib/live-content";
 import { compressImage, resolveImageUrl, sanitizeSite } from "@/lib/image-tools";
 import { FACILITY_KEYS, FACILITY_IMAGE_MAX, FACILITY_IMAGE_QUALITY, readVideoUpload, trainingVideoSource } from "@/lib/homepage-media";
 import defaultSite from "@/data/siteContent.json";
+import { stampContent } from '@/lib/published-content';
 
 const sections = [
   { id: "hero", label: "Promo & Hero", icon: Megaphone, title: "Make the first impression count." },
@@ -77,16 +78,18 @@ function EditorDashboard() {
   }, [dirty]);
 
   function edit(path: (string | number)[], value: unknown) {
-    setDraft((current) => updateDraft(current, path, value));
+    dirtyRef.current = true;
+    setDraft((current) => stampContent(updateDraft(current, path, value)));
     setDirty(true);
   }
   const siteEdit = (path: (string | number)[], value: unknown) => {
     if (path.length === 1 && path[0] === "facilityImage") {
+      dirtyRef.current = true;
       setDraft(current => {
         const next = updateDraft(current, ["site", "facilityImage"], value);
         const fields = next.site as unknown as Record<string, unknown>;
         FACILITY_KEYS.filter(key => key !== "facilityImage").forEach(key => { delete fields[key]; });
-        return next;
+        return stampContent(next);
       });
       setDirty(true);
       return;
@@ -99,7 +102,7 @@ function EditorDashboard() {
   }
   const videoSource = trainingVideoSource(site.trainingVideoUrl);
   const [removal, setRemoval] = useState<{ collection: DynamicCollection; index: number } | null>(null);
-  const addItem = (collection: DynamicCollection) => { setDraft(current => addContentItem(current, collection)); setDirty(true); };
+  const addItem = (collection: DynamicCollection) => { dirtyRef.current = true; setDraft(current => stampContent(addContentItem(current, collection))); setDirty(true); };
   const orderButtons = (collection: DynamicCollection, index: number, label: string) => <div className="flex gap-1">{([-1, 1] as const).map(direction => <Button key={direction} variant="ghost" size="icon" aria-label={`Move ${label} ${direction === -1 ? "up" : "down"}`} title={`Move ${direction === -1 ? "up" : "down"}`} disabled={index + direction < 0 || index + direction >= site[collection].length} onClick={() => siteEdit([collection], moveItem<unknown>(site[collection], index, direction))}>{direction === -1 ? <ArrowUp /> : <ArrowDown />}</Button>)}</div>;
   const deleteButton = (collection: DynamicCollection, index: number, label: string) => <Button variant="ghost" size="icon" title={`Remove ${label}`} aria-label={`Remove ${label}`} onClick={() => setRemoval({ collection, index })}><Trash2 /></Button>;
   const textField = (label: string, value: string | number, path: (string | number)[], multiline = false, numeric = false) => <Field key={label} label={label} value={value} onChange={(value) => siteEdit(path, numeric ? (value === "" ? NaN : Number(value)) : value)} multiline={multiline} numeric={numeric} />;
