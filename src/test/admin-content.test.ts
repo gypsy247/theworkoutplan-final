@@ -8,7 +8,9 @@ describe("Studio content editor", () => {
     expect(added.site[collection]).toHaveLength(initial + 1);
     const exported = JSON.parse(serializeExports(added)[0]?.content ?? '{}');
     expect(exported[collection]).toHaveLength(initial + 1);
-    expect(exported[collection][initial]).toEqual(added.site[collection][initial]);
+    const item = added.site[collection][initial];
+    const expected = collection === 'studioPhotos' ? { ...item, image: '/images/trainer-izzy-boxing.jpg' } : collection === 'appScreenshots' ? { ...item, image: '/images/app-progress-analytics.png' } : item;
+    expect(exported[collection][initial]).toEqual(expected);
     expect(removeContentItem(added, collection, initial)).toEqual(original);
   });
   it.each(['pricingTiers', 'trainers', 'faqs', 'reviews', 'studioPhotos', 'appScreenshots'] as const)('reorders %s without losing an item', collection => {
@@ -47,12 +49,14 @@ describe("Studio content editor", () => {
     expect(first.slug).toBe("new-article");
     expect(second.slug).toBe("new-article-2");
   });
-  it("rejects invalid prices, duplicate slugs and unsafe image URLs", () => {
+  it("rejects invalid prices and duplicate slugs but repairs unsafe images on export", () => {
     const original = createEditorDraft();
     expect(validateDraft(original)).toBeNull();
     expect(validateDraft(updateDraft(original, ["site", "pricingTiers", 0, "price"], -1))).not.toBeNull();
     expect(validateDraft(updateDraft(original, ["blog", "articles", 1, "slug"], original.blog.articles[0]?.slug))).not.toBeNull();
-    expect(validateDraft(updateDraft(original, ["site", "studioInfo", "logoImage"], "javascript:alert(1)"))).not.toBeNull();
+    const invalidImage = updateDraft(original, ["site", "studioInfo", "logoImage"], "javascript:alert(1)");
+    expect(validateDraft(invalidImage)).toBeNull();
+    expect(JSON.parse(serializeExports(invalidImage)[0]?.content ?? '{}').studioInfo.logoImage).toBe('/images/logo-white.png');
   });
   it("exports thirteen existing shared photo references", () => {
     const site = createEditorDraft().site;

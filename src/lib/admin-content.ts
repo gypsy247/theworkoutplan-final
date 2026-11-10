@@ -1,5 +1,6 @@
 import siteContent from "@/data/siteContent.json";
 import articlesContent from "@/data/articles.json";
+import { facilityImageUrl } from "./homepage-media";
 
 export type SiteContent = typeof siteContent;
 export type ArticlesContent = typeof articlesContent;
@@ -98,6 +99,8 @@ export function normalizeImages(site: SiteContent): SiteContent {
   s.studioPhotos.forEach((p) => { p.image = fixImage(p.image); });
   s.appScreenshots.forEach((p) => { p.image = fixImage(p.image, "/images/app-progress-analytics.png"); });
   s.reviews.forEach((r) => { if (r.avatarUrl) r.avatarUrl = fixImage(r.avatarUrl, ""); });
+  const facility = facilityImageUrl(s);
+  s.facilityImage = facility ? fixImage(facility) : "";
   return s;
 }
 

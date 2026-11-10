@@ -1,3 +1,8 @@
+# Homepage media controls
+- [x] Connect facility compression (1600px, 0.80), preview and clear controls; preserve legacy facility keys.
+- [x] Support training video watch/embed/file URLs and persistent small-clip uploads with previews (3 MB cap; longer clips use hosted links).
+- [x] Verify exact uploaded photo in the draft homepage, clear controls, provider conversion and MP4 playback using simulated login/publish; 42 focused tests pass. Real Netlify publishing remains unverified and depends on owner configuration.
+
 # Mobile layout and draft preview
 - [x] Recheck all five manual-content grids in the iframe and add explicit mobile single-column safeguards and 20px card padding; each measures 335px wide inside the 375px frame, with desktop columns preserved.
 - [ ] Replace unnamed review attribution only when real client identities are supplied; blocked on verified names/photos.

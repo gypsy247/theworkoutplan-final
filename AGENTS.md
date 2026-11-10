@@ -25,3 +25,4 @@
 - Keep article content in src/data/articles.json (via src/data/articles.ts) and redirect known old slugs to the canonical article URL to avoid duplicate indexing.
 - Render draft previews in same-origin iframes using a parent/source-checked postMessage handshake; preview frames skip remote content hydration so unsaved edits cannot be overwritten.
 - Share public typography and mobile layout rules through the public-site wrapper and use fixed breakpoint font sizes, keeping text readable without viewport-scaled type.
+- Normalize legacy facility photo keys through homepage-media into facilityImage; share provider-video URL conversion between editor and homepage so saved media renders consistently. Small video uploads use self-contained data URLs with a 3 MB cap to fit the existing JSON publish request; longer videos use hosted links.
