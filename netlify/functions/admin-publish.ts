@@ -13,7 +13,7 @@ export default async (request: Request) => {
         const { bytes, contentType } = await fetchImage(githubRequest(env), url.searchParams.get('path'));
         return new Response(bytes, { status: 200, headers: { 'content-type': contentType, 'cache-control': 'public, max-age=31536000, immutable' } });
       } catch (error) {
-        return json(404, { error: error instanceof Error ? error.message : 'Photo is unavailable.' });
+        return json(404, { error: publishErrorMessage(error instanceof Error ? error.message : null, error instanceof GitHubError ? error.status : undefined, 'Photo is unavailable.') });
       }
     }
     if (action !== 'content') return json(400, { error: 'Unknown action.' });
