@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Play } from "lucide-react";
 import { useLiveContent } from "@/lib/live-content";
-
-function isEmbed(url: string) {
-  return /youtube|youtu\.be|vimeo/.test(url);
-}
+import { trainingVideoSource } from "@/lib/homepage-media";
+import { Button } from "@/components/ui/button";
 
 export function VideoShowcase() {
   const videoUrl = useLiveContent().site.trainingVideoUrl;
   const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const source = trainingVideoSource(videoUrl);
+  useEffect(() => { setPlaying(false); setFailed(false); }, [videoUrl]);
   return (
     <section id="watch" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-5xl">
@@ -20,17 +21,19 @@ export function VideoShowcase() {
         <div className="relative mt-12 overflow-hidden rounded-3xl border border-primary/30 shadow-[0_0_80px_-20px_hsl(var(--primary)/0.45)]">
           <div className="relative aspect-video w-full bg-secondary">
             {videoUrl && playing ? (
-              isEmbed(videoUrl) ? (
-                <iframe src={videoUrl} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              source.kind === "embed" ? (
+                <iframe src={source.src} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
               ) : (
-                <video src={videoUrl} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full" controls autoPlay />
+                <><video src={source.src} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full" controls autoPlay playsInline onError={() => setFailed(true)} />{failed && <p role="alert" className="absolute inset-x-4 top-4 bg-background p-3 text-sm">This video could not play. <a className="text-primary underline" href={source.src} target="_blank" rel="noreferrer">Open video</a></p>}</>
               )
             ) : (
-              <button
+              <Button
+                variant="ghost"
                 type="button"
                 onClick={() => videoUrl && setPlaying(true)}
                 aria-label="Play training video"
-                className="group absolute inset-0 grid place-items-center bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.12),transparent_65%)]"
+                disabled={!videoUrl}
+                className="group absolute inset-0 grid h-full w-full place-items-center bg-secondary"
               >
                 <span className="flex flex-col items-center gap-4">
                   <span className="grid h-20 w-20 place-items-center rounded-full border border-primary/50 bg-background/80 text-primary shadow-[0_0_40px_-8px_hsl(var(--primary)/0.7)] transition group-hover:scale-105">
@@ -40,7 +43,7 @@ export function VideoShowcase() {
                     {videoUrl ? "Play video" : "Training video coming soon"}
                   </span>
                 </span>
-              </button>
+              </Button>
             )}
           </div>
         </div>

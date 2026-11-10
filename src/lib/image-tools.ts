@@ -1,4 +1,5 @@
 import siteContent from "@/data/siteContent.json";
+import { facilityImageUrl } from "./homepage-media";
 
 export const FALLBACK_IMAGE = "/images/trainer-izzy-boxing.jpg";
 
@@ -10,8 +11,9 @@ const RAW_GITHUB_IMAGE = /^https:\/\/raw\.githubusercontent\.com\/[^/]+\/[^/]+\/
  */
 export function resolveImageUrl(url: string): string {
   const match = RAW_GITHUB_IMAGE.exec(url);
-  if (!match) return url;
-  return `/.netlify/functions/admin-publish?action=image&path=${encodeURIComponent(match[1]!)}`;
+  const path = match?.[1];
+  if (!path) return url;
+  return `/.netlify/functions/admin-publish?action=image&path=${encodeURIComponent(path)}`;
 }
 
 /** Resize to max 1000px and compress to a self-contained JPEG data URL (quality 0.75). */
@@ -22,7 +24,9 @@ export async function compressImage(file: File, max = 1000, quality = 0.75): Pro
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);
-  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
+  const context = canvas.getContext("2d");
+  if (!context) { bitmap.close(); throw new Error("Unable to prepare photo."); }
+  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
   bitmap.close?.();
   return canvas.toDataURL("image/jpeg", quality);
 }
@@ -42,7 +46,7 @@ export function sanitizeSite<T extends Site>(site: T): T {
   s.appScreenshots.forEach((p, i) => { if (isBrokenImage(p.image)) p.image = siteContent.appScreenshots[i % siteContent.appScreenshots.length]!.image; });
   (s.trainers ?? []).forEach((t) => { if (isBrokenImage(t.image)) t.image = siteContent.trainers.find(d => d.name === t.name)?.image ?? FALLBACK_IMAGE; });
   if (isBrokenImage(s.studioInfo?.logoImage)) s.studioInfo.logoImage = siteContent.studioInfo.logoImage;
-  if (typeof s.facilityImage === "string" && s.facilityImage.startsWith("blob:")) s.facilityImage = "";
+  s.facilityImage = facilityImageUrl(s);
   s.studioPhotos.forEach((p) => { p.image = resolveImageUrl(p.image); });
   s.appScreenshots.forEach((p) => { p.image = resolveImageUrl(p.image); });
   (s.trainers ?? []).forEach((t) => { t.image = resolveImageUrl(t.image); });

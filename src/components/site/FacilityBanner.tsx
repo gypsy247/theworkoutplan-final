@@ -1,9 +1,11 @@
 import { MapPin } from "lucide-react";
 import { useLiveContent } from "@/lib/live-content";
 import { MAPS_URL } from "./brand";
+import { resolveImageUrl } from "@/lib/image-tools";
+import { facilityImageUrl } from "@/lib/homepage-media";
 
 export function FacilityBanner() {
-  const facilityImage = useLiveContent().site.facilityImage;
+  const facilityImage = facilityImageUrl(useLiveContent().site);
   return (
     <section id="facility" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -14,7 +16,7 @@ export function FacilityBanner() {
         </div>
         <div className="relative mt-12 overflow-hidden rounded-3xl border border-border">
           {facilityImage ? (
-            <img src={facilityImage} alt="The Workout Plant private training facility at 139 Frost St, Williamsburg" loading="lazy" className="aspect-[21/9] w-full object-cover" />
+            <img src={resolveImageUrl(facilityImage)} alt="139 Frost St Private Training Studio" loading="lazy" className="max-h-[520px] w-full rounded-lg object-cover" />
           ) : (
             <div className="grid aspect-[21/9] w-full place-items-center bg-[radial-gradient(ellipse_at_center,hsl(var(--primary)/0.1),transparent_70%)] bg-secondary">
               <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Panoramic studio photo coming soon</p>
