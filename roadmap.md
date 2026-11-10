@@ -1,3 +1,9 @@
+# Publishing repository recovery
+- [x] Keep file selection local and verify facility, gallery and trainer JPEG drafts without upload requests.
+- [x] Normalize repository settings, recover missing owners through accessible repository discovery, and replace raw errors with clear messages.
+- [x] Run publishing regressions (106 tests) and browser checks with simulated login/publish; all three JPEGs stay local and publish in content JSON, with readable 404 errors.
+- [ ] Verify real Netlify publishing; blocked on the owner's deployed server credentials.
+
 # Photo persistence
 - [x] Prevent stale refreshes with timestamped published backups; read GitHub API without CDN caching, retry branch conflicts and surface upstream errors; preserve atomic commits rather than separate file PUTs.
 - [x] Test upload → publish → refresh in editor and homepage with simulated endpoints; exact uploaded JPEG retained despite stale server JSON, 49 focused tests pass.

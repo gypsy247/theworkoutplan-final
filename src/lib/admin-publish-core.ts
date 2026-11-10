@@ -1,4 +1,5 @@
 // Server-only logic for netlify/functions/admin-publish.ts. No path aliases so Netlify's bundler resolves it.
+import { publishErrorMessage } from './publish-errors';
 export type PublishFile = { path: string; content: string };
 export type PublishImage = { path: string; content: string };
 export type AdminEnv = { ADMIN_EMAIL?: string; ADMIN_PASSWORD?: string; ADMIN_SESSION_SECRET?: string; GITHUB_TOKEN?: string; GITHUB_REPO?: string };
@@ -68,42 +69,67 @@ export function validatePublishInput(files: unknown, images: unknown): { files: 
   return { files: cleanFiles, images: cleanImages };
 }
 
-type GitRequest = (path: string, method?: string, body?: object) => Promise<any>;
+type GitRequest = (path: string, method?: string, body?: object, raw?: boolean) => Promise<any>;
 export class GitHubError extends Error {
   constructor(public status: number, message: string) { super(message); this.name = 'GitHubError'; }
 }
 export async function fetchRuntimeContent(env: AdminEnv, fetcher: typeof fetch = fetch): Promise<string> {
   if (!env.GITHUB_TOKEN) throw new GitHubError(503, 'Publishing is not configured: set GITHUB_TOKEN on Netlify.');
-  const repo = (env.GITHUB_REPO || DEFAULT_REPO).trim();
-  const response = await fetcher(`https://api.github.com/repos/${repo}/contents/public/site-content.json?ref=main&t=${Date.now()}`, {
-    cache: 'no-store',
-    headers: { Accept: 'application/vnd.github.raw', Authorization: `Bearer ${env.GITHUB_TOKEN}`, 'Cache-Control': 'no-cache', 'User-Agent': 'workout-plant-studio-manager' },
-  });
-  const text = await response.text();
-  if (!response.ok) throw new GitHubError(response.status, text);
+  const text = await githubRequest(env, fetcher)(`/contents/public/site-content.json?ref=main&t=${Date.now()}`, 'GET', undefined, true);
   JSON.parse(text);
   return text;
 }
+
+export function normalizeRepository(value: string | undefined): string {
+  const repo = (value || DEFAULT_REPO).trim().replace(/^https?:\/\/github\.com\//i, '').replace(/\/+$/, '').replace(/\.git$/i, '');
+  if (!/^[\w.-]+\/[\w.-]+$/.test(repo)) throw new Error('GITHUB_REPO must be an owner/repository name or a GitHub repository URL.');
+  return repo;
+}
+
 export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): GitRequest {
   if (!env.GITHUB_TOKEN) throw new Error('Publishing is not configured on the server. Set GITHUB_TOKEN (and GITHUB_REPO) in the Netlify environment variables.');
-  const configured = (env.GITHUB_REPO || DEFAULT_REPO).trim();
-  // Never silently save to another repository when the configured destination fails.
-  const candidates = [configured];
-  return async (path, method = 'GET', body) => {
-    let lastError = '';
-    for (const repo of candidates) {
-      const response = await fetcher(`https://api.github.com/repos/${repo}${path}`, {
-        method,
-        cache: 'no-store',
-        headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'workout-plant-studio-manager' },
-        ...(body ? { body: JSON.stringify(body) } : {}),
-      });
-      if (response.ok) return response.json();
-      lastError = await response.text();
-      if (response.status === 404 && repo !== candidates[candidates.length - 1]) continue;
-      throw new GitHubError(response.status, lastError);
+  let repo = normalizeRepository(env.GITHUB_REPO);
+  let pinned = false;
+  const send = (url: string, method = 'GET', body?: object, raw = false) => fetcher(`https://api.github.com${url}`, {
+    method, cache: 'no-store',
+    headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: raw ? 'application/vnd.github.raw' : 'application/vnd.github+json', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache', 'User-Agent': 'workout-plant-studio-manager' },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+  const fail = async (response: Response): Promise<never> => { throw new GitHubError(response.status, await response.text()); };
+  const recover = async () => {
+    // Only recover a missing repository, not a missing file/branch in an accessible one.
+    const current = await send(`/repos/${repo}`);
+    if (current.ok) { pinned = true; return; }
+    if (current.status !== 404) return fail(current);
+    if (repo.toLowerCase() !== DEFAULT_REPO.toLowerCase()) {
+      const fallback = await send(`/repos/${DEFAULT_REPO}`);
+      if (fallback.ok) { repo = DEFAULT_REPO; pinned = true; return; }
+      if (fallback.status !== 404) return fail(fallback);
     }
-    throw new Error(`GitHub request failed: ${lastError}`);
+    for (let page = 1; ; page++) {
+      const response = await send(`/user/repos?per_page=100&page=${page}`);
+      if (!response.ok) return fail(response);
+      const repositories = await response.json();
+      if (!Array.isArray(repositories)) throw new Error('GitHub returned an unexpected repository list. Please try again.');
+      const matches = repositories.filter(item => typeof item?.full_name === 'string' && item.full_name.split('/')[1]?.toLowerCase() === 'theworkoutplan-final');
+      if (matches.length > 1) throw new Error('More than one accessible theworkoutplan-final repository was found. Set GITHUB_REPO to the exact owner/repository name.');
+      if (matches[0]) { repo = normalizeRepository(matches[0].full_name); pinned = true; return; }
+      if (repositories.length < 100) break;
+    }
+    throw new GitHubError(404, publishErrorMessage(null, 404));
+  };
+  return async (path, method = 'GET', body, raw = false) => {
+    // Resolve before any write, then pin all operations in the atomic commit to that owner.
+    if (!pinned && method !== 'GET') await recover();
+    let response = await send(`/repos/${repo}${path}`, method, body, raw);
+    if (response.status === 404 && !pinned) {
+      const previous = repo;
+      await recover();
+      if (repo !== previous) response = await send(`/repos/${repo}${path}`, method, body, raw);
+    }
+    if (!response.ok) return fail(response);
+    pinned = true;
+    return raw ? response.text() : response.json();
   };
 }
 

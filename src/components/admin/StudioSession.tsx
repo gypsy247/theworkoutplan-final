@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from 'react';
+import { publishErrorMessage } from '@/lib/publish-errors';
 
 export const ADMIN_ENDPOINT = '/.netlify/functions/admin-publish';
 type StudioAuth = { token: string | null; email: string | null; login: (email: string, password: string) => Promise<void>; logout: () => void };
@@ -11,7 +12,10 @@ export function useStudioSession() {
 }
 
 export async function readError(response: Response, fallback: string) {
-  try { const data = await response.json(); return data.error || fallback; } catch { return `${fallback} (${response.status})`; }
+  try {
+    const data = await response.json();
+    return publishErrorMessage(data.error ?? JSON.stringify(data), response.status === 401 ? undefined : response.status, fallback);
+  } catch { return publishErrorMessage(null, response.status === 401 ? undefined : response.status, fallback); }
 }
 
 // The session token lives only in memory; the server verifies credentials and signs it.
