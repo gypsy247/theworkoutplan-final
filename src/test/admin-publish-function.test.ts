@@ -1,8 +1,34 @@
 import { describe, it, expect, vi } from 'vitest';
-import { checkCredentials, createSession, verifySession, validatePublishInput, buildRuntimeContent, commitContent, githubRequest, DEFAULT_REPO } from '@/lib/admin-publish-core';
+import { checkCredentials, createSession, verifySession, validatePublishInput, buildRuntimeContent, commitContent, githubRequest, DEFAULT_REPO, fetchRuntimeContent, GitHubError } from '@/lib/admin-publish-core';
 
 const env = { ADMIN_PASSWORD: 'secret-pass' };
 describe('admin-publish function', () => {
+  it('reads runtime JSON from the uncached GitHub API, not the raw CDN', async () => {
+    const fetcher = vi.fn().mockResolvedValue(new Response('{"site":{"updatedAt":2000},"blog":{"articles":[]}}'));
+    expect(JSON.parse(await fetchRuntimeContent({ GITHUB_TOKEN: 'test' }, fetcher)).site.updatedAt).toBe(2000);
+    expect(fetcher.mock.calls[0]?.[0]).toContain('api.github.com/repos/gypsy247/theworkoutplan-final/contents/public/site-content.json?ref=main');
+    expect(fetcher.mock.calls[0]?.[1]).toMatchObject({ cache: 'no-store', headers: { Accept: 'application/vnd.github.raw' } });
+  });
+  it('preserves the exact GitHub failure status and message', async () => {
+    const request = githubRequest({ GITHUB_TOKEN: 'test' }, vi.fn().mockResolvedValue(new Response('Token denied', { status: 403 })));
+    await expect(request('/git/ref/heads/main')).rejects.toMatchObject({ status: 403, message: 'Token denied' });
+  });
+  it('retries a SHA conflict once using the latest branch head', async () => {
+    const request = vi.fn()
+      .mockResolvedValueOnce({ object: { sha: 'old-head' } }).mockResolvedValueOnce({ tree: { sha: 'old-tree' } })
+      .mockResolvedValueOnce({ sha: 'tree' }).mockResolvedValueOnce({ sha: 'commit' }).mockRejectedValueOnce(new GitHubError(409, 'Conflict'))
+      .mockResolvedValueOnce({ object: { sha: 'latest-head' } }).mockResolvedValueOnce({ tree: { sha: 'latest-tree' } })
+      .mockResolvedValueOnce({ sha: 'new-tree' }).mockResolvedValueOnce({ sha: 'saved' }).mockResolvedValueOnce({});
+    const files = [{ path: 'src/data/siteContent.json', content: '{"updatedAt":2000}' }, { path: 'src/data/articles.json', content: '{"articles":[]}' }];
+    expect(await commitContent(request, files, [], 'release-1')).toBe('saved');
+    expect(request.mock.calls[6]?.[0]).toBe('/git/commits/latest-head');
+    expect(request.mock.calls[8]?.[2].parents).toEqual(['latest-head']);
+  });
+  it('does not report success after the retry also fails', async () => {
+    const request = vi.fn().mockRejectedValue(new GitHubError(409, 'Still conflicting'));
+    await expect(commitContent(request, [], [], 'release-1')).rejects.toMatchObject({ status: 409 });
+    expect(request).toHaveBeenCalledTimes(2);
+  });
   it('accepts only the default admin email with the server password', () => {
     expect(checkCredentials(env, 'Izzy@TheWorkoutPlant.com', 'secret-pass')).toBe(true);
     expect(checkCredentials(env, 'izzy@theworkoutplant.com', 'wrong')).toBe(false);

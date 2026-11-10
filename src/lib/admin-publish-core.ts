@@ -69,6 +69,21 @@ export function validatePublishInput(files: unknown, images: unknown): { files: 
 }
 
 type GitRequest = (path: string, method?: string, body?: object) => Promise<any>;
+export class GitHubError extends Error {
+  constructor(public status: number, message: string) { super(message); this.name = 'GitHubError'; }
+}
+export async function fetchRuntimeContent(env: AdminEnv, fetcher: typeof fetch = fetch): Promise<string> {
+  if (!env.GITHUB_TOKEN) throw new GitHubError(503, 'Publishing is not configured: set GITHUB_TOKEN on Netlify.');
+  const repo = (env.GITHUB_REPO || DEFAULT_REPO).trim();
+  const response = await fetcher(`https://api.github.com/repos/${repo}/contents/public/site-content.json?ref=main&t=${Date.now()}`, {
+    cache: 'no-store',
+    headers: { Accept: 'application/vnd.github.raw', Authorization: `Bearer ${env.GITHUB_TOKEN}`, 'Cache-Control': 'no-cache', 'User-Agent': 'workout-plant-studio-manager' },
+  });
+  const text = await response.text();
+  if (!response.ok) throw new GitHubError(response.status, text);
+  JSON.parse(text);
+  return text;
+}
 export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): GitRequest {
   if (!env.GITHUB_TOKEN) throw new Error('Publishing is not configured on the server. Set GITHUB_TOKEN (and GITHUB_REPO) in the Netlify environment variables.');
   const configured = (env.GITHUB_REPO || DEFAULT_REPO).trim();
@@ -79,15 +94,14 @@ export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): Git
     for (const repo of candidates) {
       const response = await fetcher(`https://api.github.com/repos/${repo}${path}`, {
         method,
+        cache: 'no-store',
         headers: { Authorization: `Bearer ${env.GITHUB_TOKEN}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json', 'User-Agent': 'workout-plant-studio-manager' },
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
       if (response.ok) return response.json();
       lastError = await response.text();
       if (response.status === 404 && repo !== candidates[candidates.length - 1]) continue;
-      if (response.status === 404) throw new Error(`Repository not found [404]: check GITHUB_REPO (tried ${candidates.join(' and ')}). ${lastError}`);
-      if (response.status === 401 || response.status === 403) throw new Error(`GitHub rejected the token [${response.status}]: update GITHUB_TOKEN with write access to ${repo}. ${lastError}`);
-      throw new Error(`GitHub request failed [${response.status}]: ${lastError}`);
+      throw new GitHubError(response.status, lastError);
     }
     throw new Error(`GitHub request failed: ${lastError}`);
   };
@@ -100,7 +114,7 @@ export async function fetchImage(request: GitRequest, path: unknown, branch = 'm
   if (typeof path !== 'string' || !IMAGE_PATH.test(path)) throw new Error('Unknown photo.');
   const file = await request(`/contents/${path}?ref=${branch}`);
   if (typeof file?.content !== 'string') throw new Error('Photo is unavailable.');
-  const contentType = IMAGE_TYPES[path.split('.').pop()!.toLowerCase()] ?? 'image/jpeg';
+  const contentType = IMAGE_TYPES[path.split('.').pop()?.toLowerCase() ?? 'jpg'] ?? 'image/jpeg';
   return { bytes: Uint8Array.from(atob(file.content.replace(/\s/g, '')), (character) => character.charCodeAt(0)), contentType };
 }
 
@@ -115,6 +129,17 @@ export function buildRuntimeContent(files: PublishFile[]): string {
 // One tree + commit + non-forced ref update keeps JSON and photos in a single commit.
 // [skip ci] tells Netlify not to build: the live site reads public/site-content.json at runtime.
 export async function commitContent(request: GitRequest, files: PublishFile[], images: PublishImage[], releaseId: string, branch = 'main') {
+  // Preserve atomic source/runtime/image writes; retry with a fresh parent SHA once.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try { return await commitAttempt(request, files, images, releaseId, branch); }
+    catch (error) {
+      if (attempt === 0 && error instanceof GitHubError && (error.status === 409 || (error.status === 422 && /fast.?forward|reference update/i.test(error.message)))) continue;
+      throw error;
+    }
+  }
+  throw new Error('Publishing failed.');
+}
+async function commitAttempt(request: GitRequest, files: PublishFile[], images: PublishImage[], releaseId: string, branch: string) {
   const ref = await request(`/git/ref/heads/${branch}`);
   const head = ref.object.sha as string;
   const parent = await request(`/git/commits/${head}`);
