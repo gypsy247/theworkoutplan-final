@@ -76,14 +76,14 @@ describe('admin-publish function', () => {
     expect(request.mock.calls[3]?.[2].message).toContain('[skip ci]');
     expect(request.mock.calls[4]?.[2]).toEqual({ sha: 'new-commit', force: false });
   });
-  it('falls back to the default repository when the configured one is gone', async () => {
+  it('refuses to silently save to another repository when the configured one is gone', async () => {
     const fetcher = vi.fn()
       .mockResolvedValueOnce({ ok: false, status: 404, text: async () => 'Not Found' })
       .mockResolvedValueOnce({ ok: true, json: async () => ({ object: { sha: 'head' } }) });
     const request = githubRequest({ GITHUB_TOKEN: 'token', GITHUB_REPO: 'old-owner/moved-repo' }, fetcher as unknown as typeof fetch);
-    expect(await request('/git/ref/heads/main')).toEqual({ object: { sha: 'head' } });
+    await expect(request('/git/ref/heads/main')).rejects.toMatchObject({ status: 404 });
     expect(fetcher.mock.calls[0]?.[0]).toBe('https://api.github.com/repos/old-owner/moved-repo/git/ref/heads/main');
-    expect(fetcher.mock.calls[1]?.[0]).toBe(`https://api.github.com/repos/${DEFAULT_REPO}/git/ref/heads/main`);
+    expect(fetcher).toHaveBeenCalledTimes(1);
   });
   it('reports a clear error when the token is missing', () => {
     expect(() => githubRequest({})).toThrow('GITHUB_TOKEN');

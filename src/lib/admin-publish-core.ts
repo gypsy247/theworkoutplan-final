@@ -87,8 +87,8 @@ export async function fetchRuntimeContent(env: AdminEnv, fetcher: typeof fetch =
 export function githubRequest(env: AdminEnv, fetcher: typeof fetch = fetch): GitRequest {
   if (!env.GITHUB_TOKEN) throw new Error('Publishing is not configured on the server. Set GITHUB_TOKEN (and GITHUB_REPO) in the Netlify environment variables.');
   const configured = (env.GITHUB_REPO || DEFAULT_REPO).trim();
-  // If the configured repo was transferred or renamed, fall back to the default so commits keep working.
-  const candidates = configured === DEFAULT_REPO ? [configured] : [configured, DEFAULT_REPO];
+  // Never silently save to another repository when the configured destination fails.
+  const candidates = [configured];
   return async (path, method = 'GET', body) => {
     let lastError = '';
     for (const repo of candidates) {
