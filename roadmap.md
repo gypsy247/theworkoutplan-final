@@ -1,3 +1,8 @@
+# Photo persistence
+- [x] Prevent stale refreshes with timestamped published backups; read GitHub API without CDN caching, retry branch conflicts and surface upstream errors; preserve atomic commits rather than separate file PUTs.
+- [x] Test upload → publish → refresh in editor and homepage with simulated endpoints; exact uploaded JPEG retained despite stale server JSON, 49 focused tests pass.
+- [ ] Verify real Netlify publishing; requires owner deployment and configured server credentials. Unrelated Elfsight Google Reviews script reports its own styling error in preview.
+
 # Homepage media controls
 - [x] Connect facility compression (1600px, 0.80), preview and clear controls; preserve legacy facility keys.
 - [x] Support training video watch/embed/file URLs and persistent small-clip uploads with previews (3 MB cap; longer clips use hosted links).

@@ -2,7 +2,7 @@ import siteContent from "@/data/siteContent.json";
 import articlesContent from "@/data/articles.json";
 import { facilityImageUrl } from "./homepage-media";
 
-export type SiteContent = typeof siteContent;
+export type SiteContent = typeof siteContent & { updatedAt?: number };
 export type ArticlesContent = typeof articlesContent;
 export type EditorDraft = { site: SiteContent; blog: ArticlesContent };
 

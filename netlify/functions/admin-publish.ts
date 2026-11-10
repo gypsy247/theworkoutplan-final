@@ -1,6 +1,6 @@
-import { checkCredentials, commitContent, createSession, fetchImage, githubRequest, validatePublishInput, verifySession, type AdminEnv } from '../../src/lib/admin-publish-core';
+import { checkCredentials, commitContent, createSession, fetchImage, fetchRuntimeContent, GitHubError, githubRequest, validatePublishInput, verifySession, type AdminEnv } from '../../src/lib/admin-publish-core';
 
-const json = (status: number, body: object) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
+const json = (status: number, body: object) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store, no-cache, must-revalidate' } });
 
 export default async (request: Request) => {
   const env = process.env as AdminEnv;
@@ -17,13 +17,10 @@ export default async (request: Request) => {
     }
     if (action !== 'content') return json(400, { error: 'Unknown action.' });
     try {
-      const file = await githubRequest(env)('/contents/public/site-content.json?ref=main');
-      if (typeof file?.content !== 'string') throw new Error('Live content is unavailable.');
-      const content = Buffer.from(file.content.replace(/\s/g, ''), 'base64').toString('utf8');
-      JSON.parse(content);
-      return new Response(content, { status: 200, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
+      const content = await fetchRuntimeContent(env);
+      return new Response(content, { status: 200, headers: { 'content-type': 'application/json', 'cache-control': 'no-store, no-cache, must-revalidate' } });
     } catch (error) {
-      return json(404, { error: error instanceof Error ? error.message : 'Live content is unavailable.' });
+      return json(error instanceof GitHubError ? error.status : 500, { error: error instanceof Error ? error.message : 'Live content is unavailable.' });
     }
   }
   if (request.method !== 'POST') return json(405, { error: 'Method not allowed.' });
@@ -45,6 +42,6 @@ export default async (request: Request) => {
     return json(400, { error: 'Unknown action.' });
   } catch (error) {
     console.error('admin-publish failed', error);
-    return json(500, { error: error instanceof Error ? error.message : 'Publishing failed.' });
+    return json(error instanceof GitHubError ? error.status : 500, { error: error instanceof Error ? error.message : 'Publishing failed.' });
   }
 };
