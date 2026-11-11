@@ -1,3 +1,6 @@
+# Training video URL compatibility
+- [ ] Share URL normalization and provider/direct-file playback between the homepage and Studio Manager; test and check both views.
+
 # Publishing repository recovery
 - [x] Keep file selection local and verify facility, gallery and trainer JPEG drafts without upload requests.
 - [x] Normalize repository settings, recover missing owners through accessible repository discovery, and replace raw errors with clear messages.
