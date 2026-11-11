@@ -1,5 +1,6 @@
 # Training video URL compatibility
 - [x] Share URL normalization and provider/direct-file playback between the homepage and Studio Manager; 40 focused tests pass. Isolated editor login and draft-homepage checks confirm watch/short/Shorts/Vimeo embeds, direct-file tags, normalized input and canonical fallback links. External provider playback and real owner login remain unverified.
+- [x] Show the provider player and its thumbnail immediately — no click-to-play overlay, no floating badge over the embed, no duplicate watch link under the player; placeholder only when the URL is empty. Verified in the live homepage (real YouTube embed, zero overlay elements) and in the Studio preview player; 4 focused tests pass.
 
 # Publishing repository recovery
 - [x] Keep file selection local and verify facility, gallery and trainer JPEG drafts without upload requests.
