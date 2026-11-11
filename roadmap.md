@@ -1,5 +1,5 @@
 # Training video URL compatibility
-- [ ] Share URL normalization and provider/direct-file playback between the homepage and Studio Manager; test and check both views.
+- [x] Share URL normalization and provider/direct-file playback between the homepage and Studio Manager; 40 focused tests pass. Isolated editor login and draft-homepage checks confirm watch/short/Shorts/Vimeo embeds, direct-file tags, normalized input and canonical fallback links. External provider playback and real owner login remain unverified.
 
 # Publishing repository recovery
 - [x] Keep file selection local and verify facility, gallery and trainer JPEG drafts without upload requests.
