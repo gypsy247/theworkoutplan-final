@@ -84,3 +84,6 @@
 - [x] Add "Add New Trainer", per-item remove, booking link URL fields (navbar, hero, per pricing tier) and a Desktop/Mobile live preview drawer in /admin.
 - [x] Publish with [skip ci] commits plus public/site-content.json, a public ?action=content endpoint, runtime hydration on every page, repo-owner fallback and clear GITHUB_TOKEN/GITHUB_REPO errors; uploaded photos referenced via raw.githubusercontent.com URLs.
 - [ ] Verify real zero-build publishing end-to-end on the owner's Netlify site (requires ADMIN_PASSWORD, GITHUB_TOKEN and GITHUB_REPO env vars set in Netlify).
+# Consultation leads
+- [x] Send requests to Netlify Forms, Studio Leads & Inquiries tab and FormSubmit email; 5 focused tests pass.
+- [ ] Activate FormSubmit (one-time confirmation email to izzy@theworkoutplant.com) and confirm a real submission on the deployed Netlify site.
