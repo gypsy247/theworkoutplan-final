@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { VideoShowcase } from "@/components/site/VideoShowcase";
+import { TrainingVideoPlayer } from "@/components/site/TrainingVideoPlayer";
 import { applyLiveContent } from "@/lib/live-content";
 import siteContent from "@/data/siteContent.json";
 import articlesContent from "@/data/articles.json";
