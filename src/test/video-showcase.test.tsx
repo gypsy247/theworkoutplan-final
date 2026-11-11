@@ -31,3 +31,11 @@ describe("Watch How We Train section", () => {
     expect(screen.getByText(/coming soon/i)).toBeInTheDocument();
   });
 });
+
+describe("Video player used by the Studio preview", () => {
+  it("embeds the provider player straight away with no extra link", () => {
+    const { container } = render(<TrainingVideoPlayer url="youtube.com/watch?v=dQw4w9WgXcQ" title="Training video preview" />);
+    expect(container.querySelector("iframe")?.getAttribute("src")).toBe("https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0");
+    expect(screen.queryByText(/open video/i)).toBeNull();
+  });
+});
