@@ -11,27 +11,41 @@ export function facilityImageUrl(site: object): string {
   return "";
 }
 
-export function trainingVideoSource(value: string): { kind: "embed" | "file"; src: string } {
-  const src = value.trim();
+export function normalizeVideoUrl(raw: string): string {
+  const value = raw.trim();
+  return !value || /^(?:https?:\/\/|\/|data:video\/)/i.test(value) ? value : `https://${value}`;
+}
+
+export type VideoEmbedInfo =
+  | { kind: "embed"; provider: "youtube" | "vimeo"; src: string; openUrl: string }
+  | { kind: "file"; src: string; openUrl: string }
+  | { kind: "unsupported"; src: ""; openUrl: string }
+  | { kind: "empty"; src: ""; openUrl: "" };
+
+export function getVideoEmbedInfo(value: string): VideoEmbedInfo {
+  const src = normalizeVideoUrl(value);
+  if (!src) return { kind: "empty", src: "", openUrl: "" };
+  if (/^data:video\//i.test(src)) return { kind: "file", src, openUrl: src };
   try {
-    const url = new URL(src);
+    const url = new URL(src, "https://video-path.invalid");
+    if (!["https:", "http:"].includes(url.protocol)) return { kind: "unsupported", src: "", openUrl: "" };
     const host = url.hostname.replace(/^www\./, "");
     if (["youtube.com", "m.youtube.com", "youtube-nocookie.com", "youtu.be"].includes(host)) {
       const id = host === "youtu.be" ? url.pathname.split("/")[1] : url.searchParams.get("v") || url.pathname.match(/^\/(?:embed|shorts|live)\/([^/]+)/)?.[1];
-      if (id && /^[\w-]+$/.test(id)) return { kind: "embed", src: `https://www.youtube-nocookie.com/embed/${id}?autoplay=1` };
+      if (id && /^[\w-]{11}$/.test(id)) return { kind: "embed", provider: "youtube", src: `https://www.youtube.com/embed/${id}?rel=0`, openUrl: `https://www.youtube.com/watch?v=${id}` };
     }
     if (["vimeo.com", "player.vimeo.com"].includes(host)) {
       const id = url.pathname.match(/(?:^|\/)(\d+)(?:\/|$)/)?.[1];
       if (id) {
         const embed = new URL(`https://player.vimeo.com/video/${id}`);
-        embed.searchParams.set("autoplay", "1");
         const hash = url.searchParams.get("h") || url.pathname.match(/\/\d+\/([\w]+)$/)?.[1];
         if (hash) embed.searchParams.set("h", hash);
-        return { kind: "embed", src: embed.toString() };
+        return { kind: "embed", provider: "vimeo", src: embed.toString(), openUrl: `https://vimeo.com/${id}${hash ? `/${hash}` : ""}` };
       }
     }
-  } catch { /* Relative paths and uploaded data URLs are direct video sources. */ }
-  return { kind: "file", src };
+    if (/\.(mp4|mov|webm)$/i.test(url.pathname)) return { kind: "file", src, openUrl: src };
+    return { kind: "unsupported", src: "", openUrl: src };
+  } catch { return { kind: "unsupported", src: "", openUrl: "" }; }
 }
 
 // Keep small clips self-contained in the existing JSON publishing flow.

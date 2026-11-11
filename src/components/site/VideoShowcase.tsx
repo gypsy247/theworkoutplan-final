@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { Play } from "lucide-react";
 import { useLiveContent } from "@/lib/live-content";
-import { trainingVideoSource } from "@/lib/homepage-media";
+import { normalizeVideoUrl } from "@/lib/homepage-media";
+import { TrainingVideoPlayer } from "./TrainingVideoPlayer";
 import { Button } from "@/components/ui/button";
 
 export function VideoShowcase() {
-  const videoUrl = useLiveContent().site.trainingVideoUrl;
+  const videoUrl = normalizeVideoUrl(useLiveContent().site.trainingVideoUrl);
   const [playing, setPlaying] = useState(false);
-  const [failed, setFailed] = useState(false);
-  const source = trainingVideoSource(videoUrl);
-  useEffect(() => { setPlaying(false); setFailed(false); }, [videoUrl]);
+  useEffect(() => { setPlaying(false); }, [videoUrl]);
   return (
     <section id="watch" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-5xl">
@@ -19,13 +18,9 @@ export function VideoShowcase() {
           <p className="mt-4 text-lg text-muted-foreground">Step inside a 1-on-1 session at 139 Frost St.</p>
         </div>
         <div className="relative mt-12 overflow-hidden rounded-3xl border border-primary/30 shadow-[0_0_80px_-20px_hsl(var(--primary)/0.45)]">
-          <div className="relative aspect-video w-full bg-secondary">
+          <div className={`relative w-full bg-secondary ${playing ? "" : "aspect-video"}`}>
             {videoUrl && playing ? (
-              source.kind === "embed" ? (
-                <iframe src={source.src} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-              ) : (
-                <><video src={source.src} title="Watch How We Train — The Workout Plant" className="absolute inset-0 h-full w-full" controls autoPlay playsInline onError={() => setFailed(true)} />{failed && <p role="alert" className="absolute inset-x-4 top-4 bg-background p-3 text-sm">This video could not play. <a className="text-primary underline" href={source.src} target="_blank" rel="noreferrer">Open video</a></p>}</>
-              )
+              <TrainingVideoPlayer url={videoUrl} title="Watch How We Train — The Workout Plant" autoPlay />
             ) : (
               <Button
                 variant="ghost"
