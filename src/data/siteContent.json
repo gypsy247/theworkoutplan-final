@@ -20,7 +20,7 @@
   "thePlan": {
     "badge": "The Plan",
     "headline": "Simple, Evidence-Based Systems That Actually Work",
-    "intro": "Led by Head Coach Izzy Jacobus, whether you train with Izzy or one of our trainers, you follow the same structured, evolving program.",
+    "intro": "Led by Head Coach Izzy Jacobus, our team follows a unified training philosophy, delivering personalized, progressive programming regardless of which trainer you choose.",
     "philosophy": "Our approach is built on proven principles: progressive strength training, evidence-based nutrition, and sustainable habits. No fads. No unnecessary complexity. Just a structured, personalized system designed for lasting results."
   },
   "galleryCategories": {
@@ -302,5 +302,5 @@
     "late": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session.",
     "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
   },
-  "updatedAt": 1794429280376
+  "updatedAt": 1794451655716
 }
