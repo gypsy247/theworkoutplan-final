@@ -123,6 +123,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const isAdmin = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") === "/admin" });
   useEffect(() => {
+    removeNetlifyBadge();
     startLiveContentFetch();
   }, []);
 
