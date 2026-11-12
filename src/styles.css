@@ -120,3 +120,10 @@
   .public-site .card-surface { min-width: 0; }
   .site-footer { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
 }
+
+/* Netlify's edge injects a floating "Powered by Netlify" badge into every served page on
+   the free plan. It is not part of this site's markup, so hide it on every page — public
+   pages and the Studio manager alike. */
+#nl-badge-frame,
+#nl-hud-frame,
+iframe[title="Powered by Netlify"] { display: none !important; }

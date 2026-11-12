@@ -18,6 +18,7 @@ import { Toaster } from "../components/ui/sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startLiveContentFetch } from "../lib/live-content";
+import { removeNetlifyBadge } from "../lib/netlify-badge";
 import { MobileConversionBar } from "../components/site/MobileConversionBar";
 
 function NotFoundComponent() {
