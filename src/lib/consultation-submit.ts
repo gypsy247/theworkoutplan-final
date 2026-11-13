@@ -1,4 +1,5 @@
 // Sends one consultation request to Netlify Forms, the Studio leads inbox and an owner email at once.
+import { trackMetaEvent } from "./meta-pixel";
 export const LEAD_EMAIL = "izzy@theworkoutplant.com";
 export type LeadInput = { fullName: string; email: string; phone: string; sessionTier: string; goals: string; smsConsent: boolean; "bot-field"?: string };
 
@@ -13,5 +14,6 @@ export async function submitConsultation(lead: LeadInput, fetcher: typeof fetch 
   ]);
   const delivered = results.filter((r) => r.status === "fulfilled").length;
   if (delivered === 0) throw new Error("We couldn't send your request. Please call or text 917-992-2395.");
+  if (!lead["bot-field"]) void trackMetaEvent("Lead", { content_name: "Request a Consultation", content_category: "Personal Training Consultation" }).catch(() => {});
   return delivered;
 }
