@@ -20,6 +20,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startLiveContentFetch } from "../lib/live-content";
 import { removeNetlifyBadge } from "../lib/netlify-badge";
 import { MobileConversionBar } from "../components/site/MobileConversionBar";
+import { consentDefaults } from "../lib/consent-defaults";
+import { metaPixelBase, trackMetaPageView, watchMetaActions } from "../lib/meta-pixel";
 
 function NotFoundComponent() {
   return (
@@ -83,6 +85,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
+    scripts: [{ children: consentDefaults }, { children: metaPixelBase }],
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -121,11 +124,14 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
   const isAdmin = useRouterState({ select: (state) => state.location.pathname.replace(/\/$/, "") === "/admin" });
   useEffect(() => {
     removeNetlifyBadge();
     startLiveContentFetch();
   }, []);
+  useEffect(() => watchMetaActions(), []);
+  useEffect(() => { void trackMetaPageView(); }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

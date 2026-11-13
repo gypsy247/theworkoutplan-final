@@ -1,3 +1,10 @@
+# Meta Pixel installation
+- [x] Add consent-gated SSR bootstrap and public-page navigation/contact events without changing Studio, JSON content, forms UI or Netlify functions.
+- [x] Wire successful consultation delivery to Lead; booking clicks use BookingInterest rather than false completed Schedule conversions.
+- [x] Verify 18 focused tests and isolated browser flows: SSR head bootstrap, one PageView, successful form Lead and booking interest; Studio and Canada remain uninitialized. SDK/event calls used a test stub; actual Meta transmission and receipt remain unverified. Latest build OK.
+- [ ] Verify Meta dataset eligibility and receipt; blocked by missing Meta account connection.
+- [ ] Verify production deployment; main-branch commits/pushes are managed externally, not performed here.
+
 # Netlify badge removal
 - [x] Clear the floating "Powered by Netlify" badge from every public page and /admin: hidden through the stylesheet and dropped from the live document by a root-layout guard. Verified against the real injected badge on the deployed site (visible pill before, empty corner after); 3 focused tests pass.
 
