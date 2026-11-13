@@ -52,6 +52,7 @@ describe("Meta pixel events", () => {
     const p = await pixel(); const stop = p.watchMetaActions();
     const button = document.createElement("button"); button.textContent = "Book A Session";
     const link = document.createElement("a"); link.href = "tel:9175550000";
+    link.addEventListener("click", e => e.preventDefault());
     document.body.append(button, link); button.click(); link.click();
     await new Promise(resolve => setTimeout(resolve, 0)); stop(); button.remove(); link.remove();
     expect(p.calls.mock.calls.some(c => c[0] === "trackCustom" && c[1] === "BookingInterest")).toBe(true);
@@ -70,7 +71,7 @@ describe("Meta pixel events", () => {
     await new Promise(resolve => setTimeout(resolve, 0));
     const events = p.calls.mock.calls.filter(c => c[1] === "Lead");
     expect(events).toHaveLength(1);
-    expect(events[0][2]).toEqual({ content_name: "Request a Consultation", content_category: "Personal Training Consultation" });
+    expect(events[0]?.[2]).toEqual({ content_name: "Request a Consultation", content_category: "Personal Training Consultation" });
   });
   it("failed delivery never counts a Lead", async () => {
     const p = await pixel();
