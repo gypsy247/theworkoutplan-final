@@ -162,7 +162,7 @@
     {
       "id": "analine",
       "name": "1:1 Personal Training — Trainer Analine",
-      "price": 115,
+      "price": 130,
       "duration": "1 hour",
       "badge": "",
       "featured": false,
@@ -177,7 +177,7 @@
     {
       "id": "dev",
       "name": "1:1 Personal Training — Jr. Trainer Dev",
-      "price": 95,
+      "price": 110,
       "duration": "1 hour",
       "badge": "",
       "featured": false,
@@ -302,5 +302,5 @@
     "late": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session.",
     "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
   },
-  "updatedAt": 1794451655716
+  "updatedAt": 1794716492038
 }
