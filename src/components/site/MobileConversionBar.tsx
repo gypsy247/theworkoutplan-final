@@ -1,4 +1,6 @@
 import { MessageCircle, Phone } from "lucide-react";
+import { useEffect, useState } from "react";
+import { shouldShowMobileCta } from "@/lib/mobile-cta";
 import { Button } from "@/components/ui/button";
 import { useLiveContent } from "@/lib/live-content";
 import { useBooking } from "./BookingModal";
@@ -7,6 +9,14 @@ export function MobileConversionBar() {
   const { site } = useLiveContent();
   const { open } = useBooking();
   const bookingUrl = site.hero.primaryCtaUrl || site.studioInfo.bookingUrl;
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const update = () => setVisible(shouldShowMobileCta(window.scrollY));
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+  if (!visible) return null;
   return (
     <aside aria-label="Quick contact and booking" className="mobile-conversion-bar fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-3 pt-3 backdrop-blur-md md:hidden">
       <div className="mx-auto grid max-w-lg grid-cols-[auto_auto_minmax(0,1fr)] items-center gap-2">

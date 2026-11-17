@@ -51,11 +51,11 @@ export function Navbar() {
               <Phone className="h-4 w-4 text-primary" /> {PHONE}
             </a>
             {NAVBAR_BOOKING_URL ? (
-              <Button asChild className="rounded-lg px-4 py-2 text-sm font-bold">
+              <Button asChild className="hidden rounded-lg px-4 py-2 text-sm font-bold md:inline-flex">
                 <a href={NAVBAR_BOOKING_URL} {...(NAVBAR_BOOKING_URL.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>Book A Session</a>
               </Button>
             ) : (
-              <Button onClick={() => open()} className="rounded-lg px-4 py-2 text-sm font-bold">
+              <Button onClick={() => open()} className="hidden rounded-lg px-4 py-2 text-sm font-bold md:inline-flex">
                 Book A Session
               </Button>
             )}

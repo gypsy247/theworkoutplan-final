@@ -1,5 +1,5 @@
-import { MapPin, Navigation, Star } from "lucide-react";
-import { GoogleG, MAPS_URL, Stars } from "./brand";
+import { GoogleG, Stars } from "./brand";
+import { GoogleBusinessCard } from "./GoogleBusinessCard";
 import { useLiveContent } from "@/lib/live-content";
 import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
@@ -34,31 +34,10 @@ export function HeroSection() {
               {HERO.primaryCta}
             </Button>
           )}
-          <Button asChild variant="outline" className="h-auto min-h-[52px] w-full whitespace-normal rounded-lg px-6 py-3 font-bold md:w-auto"><a href="#reviews">{HERO.secondaryCta}</a></Button>
+          <Button asChild variant="outline" className="hidden h-auto min-h-[52px] w-full whitespace-normal rounded-lg px-6 py-3 font-bold md:inline-flex md:w-auto"><a href="#reviews">{HERO.secondaryCta}</a></Button>
         </div>
 
-        <div className="mx-auto mt-8 grid max-w-3xl gap-4 rounded-lg border border-border bg-card p-4 text-left md:mt-10 md:p-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
-          <div className="flex min-w-0 items-center gap-3">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-secondary">
-              <GoogleG className="h-7 w-7" />
-            </span>
-            <div className="min-w-0">
-              <p className="font-display font-extrabold">{SITE.name}</p>
-              <p className="text-sm"><span className="font-bold">{SITE.rating}</span> <Stars /> <span className="text-muted-foreground">({SITE.reviewCount} Google Reviews)</span></p>
-              <p className="flex items-center gap-1 text-xs text-muted-foreground">
-                <MapPin className="h-3 w-3 shrink-0" /> Personal trainer in New York • {SITE.address}
-              </p>
-            </div>
-          </div>
-          <div className="flex shrink-0 gap-2">
-            <a href={MAPS_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-lg border border-border px-4 py-2 text-sm font-semibold transition hover:border-primary/50">
-              <Navigation className="h-4 w-4" /> Directions
-            </a>
-            <a href="#reviews" className="inline-flex items-center gap-1 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
-              <Star className="h-4 w-4" /> Read Reviews
-            </a>
-          </div>
-        </div>
+        <div className="mt-10 hidden md:block"><GoogleBusinessCard /></div>
       </div>
     </section>
   );

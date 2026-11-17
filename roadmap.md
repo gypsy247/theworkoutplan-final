@@ -1,3 +1,8 @@
+# Mobile homepage cleanup
+- [x] Hide mobile navbar booking and secondary hero review action; move business summary into mobile reviews while retaining desktop placement and compact hero badge.
+- [x] Gate sticky actions on scrollY > 300 without changing action handlers.
+- [x] Verify 8 focused tests, mobile scroll at 0/300/301px, booking dialog and phone Contact dispatch; desktop navbar and hero review controls preserved. Build OK; commit without skip-ci.
+
 # Meta Pixel installation
 - [x] Add consent-gated SSR bootstrap and public-page navigation/contact events without changing Studio, JSON content, forms UI or Netlify functions.
 - [x] Wire successful consultation delivery to Lead; booking clicks use BookingInterest rather than false completed Schedule conversions.
