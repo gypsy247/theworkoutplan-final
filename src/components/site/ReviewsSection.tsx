@@ -1,7 +1,6 @@
 import { BadgeCheck, ExternalLink, MapPin, Phone } from "lucide-react";
 import { useLiveContent } from "@/lib/live-content";
 import { GoogleG, MAP_EMBED, MAPS_URL, Stars } from "./brand";
-import { GoogleBusinessCard } from "./GoogleBusinessCard";
 
 const dist = [
   { s: 5, p: 96 },
@@ -27,7 +26,6 @@ export function ReviewsSection() {
           <p className="mt-4 text-lg text-muted-foreground">Real Williamsburg clients. Real transformations. Verified on Google Business Profile.</p>
         </div>
 
-        <div className="mt-8 md:hidden"><GoogleBusinessCard /></div>
         <div id="map" className="mt-12 mb-8 grid grid-cols-1 gap-6 lg:grid-cols-12">
           <div className="card-surface min-w-0 p-6 md:p-8 lg:col-span-5">
             <div className="flex items-start gap-3">

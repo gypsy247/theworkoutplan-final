@@ -1,3 +1,6 @@
+# Homepage reviews section cleanup
+- [x] Remove the compact Google Business card (Directions / Read Reviews) from the reviews section so the heading flows straight into the 4.9 rating-breakdown card; desktop hero placement untouched. Verified by 1 focused test and mobile/desktop browser checks; commit without skip-ci.
+
 # Mobile homepage cleanup
 - [x] Hide mobile navbar booking and secondary hero review action; move business summary into mobile reviews while retaining desktop placement and compact hero badge.
 - [x] Gate sticky actions on scrollY > 300 without changing action handlers.
