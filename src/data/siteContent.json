@@ -9,7 +9,7 @@
   "reviewsWidgetScript": "<script src=\"https://elfsightcdn.com/platform.js\" async></script>\n<div class=\"elfsight-app-ff061720-2ead-471c-87c6-48fa40ed2897\" data-elfsight-app-lazy></div>",
   "hero": {
     "badgeText": "70+ Verified Google Reviews • Personal Trainer in New York",
-    "headlineStart": "Cut the Bullsh*t.",
+    "headlineStart": "",
     "headlineHighlight": "Evidence-Based",
     "headlineEnd": "Private Training That Actually Works.",
     "subheadline": "The Workout Plant is Williamsburg's private 1-on-1 personal training & nutrition coaching studio @ 139 Frost St. Improve strength, body composition, and overall fitness with our proven program.",
@@ -302,5 +302,5 @@
     "late": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session.",
     "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
   },
-  "updatedAt": 1794856024926
+  "updatedAt": 1795094808379
 }
