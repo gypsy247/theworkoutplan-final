@@ -2,7 +2,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { ConsultationForm } from "@/components/site/ConsultationForm";
 import { submitConsultation } from "@/lib/consultation-submit";
-import editorial from "@/data/editorial-content.json";
+import site from "@/data/siteContent.json";
+import { mergeEditorial } from "@/lib/editorial";
 
 vi.mock("@/lib/consultation-submit", () => ({ submitConsultation: vi.fn() }));
 
@@ -46,6 +47,12 @@ describe("Low-friction consultation rules", () => {
 
 describe("Required public rates", () => {
   it.each([["izzy", 170], ["analine", 115], ["dev", 95], ["virtual", 150]] as const)("prices %s at $%s", (id, price) => {
-    expect(editorial.rates[id]).toBe(price);
+    expect(site.pricingTiers.find((tier) => tier.id === id)?.price).toBe(price);
   });
+  it("offers no small group tier", () => expect(site.pricingTiers.some((tier) => /group/i.test(tier.name))).toBe(false));
+});
+
+describe("Editorial copy fallback", () => {
+  it("keeps bundled hero copy when published content has none", () => expect(mergeEditorial(undefined).hero.headline).toBe(site.editorial.hero.headline));
+  it("uses a published headline over the default", () => expect(mergeEditorial({ hero: { ...site.editorial.hero, headline: "New" } }).hero.headline).toBe("New"));
 });

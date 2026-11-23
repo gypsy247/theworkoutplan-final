@@ -2,18 +2,19 @@ import { Check } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { useLiveContent } from "@/lib/live-content";
-import editorial from "@/data/editorial-content.json";
+import { useEditorial } from "@/lib/editorial";
 
 export function PricingSection() {
   const tiers = useLiveContent().site.pricingTiers;
-  const TIERS = [...tiers.map((tier) => ({ ...tier, price: editorial.rates[tier.id as keyof typeof editorial.rates] ?? tier.price }))];
+  const copy = useEditorial().pricing;
+  const TIERS = tiers;
   return (
     <section id="pricing" className="border-t border-border px-6 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">Pricing</p>
-          <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">Simple, transparent pricing.</h2>
-          <p className="mt-4 text-lg text-muted-foreground">Private coaching, virtual sessions, 1:1 and virtual training. No contracts.</p>
+          <p className="text-sm font-bold uppercase tracking-widest text-primary">{copy.eyebrow}</p>
+          <h2 className="mt-2 text-4xl font-extrabold tracking-tight md:text-5xl">{copy.heading}</h2>
+          <p className="mt-4 text-lg text-muted-foreground">{copy.subheading}</p>
         </div>
         <div className="mobile-stack-grid mt-8 grid grid-cols-1 gap-4 md:mt-12 md:grid-cols-2 md:gap-6 xl:grid-cols-3">
           {TIERS.map((t) => (
@@ -21,7 +22,7 @@ export function PricingSection() {
               <h3 className="text-lg font-extrabold tracking-tight">{t.name}</h3>
               <p className="mt-4">
                 <span className="font-display text-4xl font-extrabold">${t.price}</span>
-                <span className="text-muted-foreground"> / hour</span>
+                <span className="text-muted-foreground"> / {t.duration || "hour"}</span>
               </p>
               <p className="mt-4 text-sm text-muted-foreground">{t.description}</p>
               <ul className="mt-6 flex-1 space-y-3 text-sm text-muted-foreground">

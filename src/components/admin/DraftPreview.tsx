@@ -31,7 +31,7 @@ export function DraftPreview({ draft, imagePreviews = {}, onClose }: { draft: Ed
     return () => { document.body.style.overflow = overflow; window.removeEventListener("message", ready); window.removeEventListener("keydown", escape); };
   }, [onClose]);
   return (
-    <div role="dialog" aria-modal="true" aria-label="Live Preview" className="fixed inset-0 z-[70] flex flex-col bg-background">
+    <div role="dialog" aria-modal="true" aria-label="Live Preview" className="studio-manager fixed inset-0 z-[70] flex flex-col bg-background">
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-border px-4 py-3">
         <div className="min-w-0"><p className="text-sm font-bold">Live Preview</p><p className="text-xs text-muted-foreground">Unsaved draft</p></div>
         <div className="flex shrink-0 items-center gap-1">

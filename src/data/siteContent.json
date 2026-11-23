@@ -162,7 +162,7 @@
     {
       "id": "analine",
       "name": "1:1 Personal Training — Trainer Analine",
-      "price": 130,
+      "price": 115,
       "duration": "1 hour",
       "badge": "",
       "featured": false,
@@ -177,7 +177,7 @@
     {
       "id": "dev",
       "name": "1:1 Personal Training — Jr. Trainer Dev",
-      "price": 110,
+      "price": 95,
       "duration": "1 hour",
       "badge": "",
       "featured": false,
@@ -302,5 +302,30 @@
     "late": "Arrivals 15+ minutes late are charged in full. Arrivals 10+ minutes late may result in a shortened session.",
     "philosophy": "Our evidence-based foundation: 2–4 strength sessions per week using compound movements (1–2 reps from failure), paired with ~0.7g of protein per pound of goal bodyweight."
   },
-  "updatedAt": 1795112979086
+  "updatedAt": 1795457236547,
+  "editorial": {
+    "hero": {
+      "eyebrow": "139 Frost St • Williamsburg, Brooklyn",
+      "headline": "Private 1-on-1 personal training & nutrition coaching in Williamsburg.",
+      "subheadline": "Thoughtful coaching, a private studio, and a plan that meets you where you are. Build strength and lasting habits with Coach Izzy and our team.",
+      "reviews": "4.9 ★ across 70+ verified Google Reviews"
+    },
+    "consultation": {
+      "panelTitle": "Request a free consultation",
+      "panelSubtitle": "A personal reply from Coach Izzy. No pressure.",
+      "sectionEyebrow": "A conversation, not a commitment",
+      "sectionHeading": "Let’s find the right plan for you.",
+      "sectionIntro": "Tell us a little about yourself. Coach Izzy will get in touch to answer your questions and talk through your next steps.",
+      "reassurance": [
+        "No contracts or commitment",
+        "Private 1-on-1 studio at 139 Frost St",
+        "Personal reply within a few hours"
+      ]
+    },
+    "pricing": {
+      "eyebrow": "Pricing",
+      "heading": "Simple, transparent pricing.",
+      "subheading": "Private coaching and virtual sessions. No contracts."
+    }
+  }
 }

@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { submitConsultation } from "@/lib/consultation-submit";
 import { Button } from "@/components/ui/button";
+import { useEditorial } from "@/lib/editorial";
+import { useLiveContent } from "@/lib/live-content";
 
 const field = "w-full rounded-md border border-border bg-background px-3 py-2.5 text-base outline-hidden transition focus:border-primary";
 
@@ -9,6 +11,8 @@ export function ConsultationForm({ onDone }: { onDone?: () => void } = {}) {
   const [sent, setSent] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [sending, setSending] = useState(false);
+  const copy = useEditorial().consultation;
+  const phone = useLiveContent().site.studioInfo.phone;
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -29,7 +33,7 @@ export function ConsultationForm({ onDone }: { onDone?: () => void } = {}) {
 
   if (sent) return <div role="status" aria-live="polite" className="py-8">
     <h3>Thank you, {firstName}.</h3>
-    <p className="mt-3 text-muted-foreground">Coach Izzy will reach out shortly from <a href="tel:+19179922395" className="text-primary underline">(917) 992-2395</a>. We look forward to getting to know you.</p>
+    <p className="mt-3 text-muted-foreground">Coach Izzy will reach out shortly from <a href={`tel:+1${phone.replace(/\D/g, "").slice(-10)}`} className="text-primary underline">{phone}</a>. We look forward to getting to know you.</p>
   </div>;
 
   return (
@@ -53,9 +57,7 @@ export function ConsultationForm({ onDone }: { onDone?: () => void } = {}) {
         {sending ? "Sending…" : "Have Coach Izzy Reach Out"}
       </Button>
       <div className="consultation-reassurance space-y-1 text-center text-xs text-muted-foreground">
-        <p>No contracts or commitment</p>
-        <p>Private 1-on-1 studio at 139 Frost St</p>
-        <p>Personal reply within a few hours</p>
+        {copy.reassurance.filter(Boolean).map((line) => <p key={line}>{line}</p>)}
       </div>
     </form>
   );

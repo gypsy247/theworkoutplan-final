@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import { PHONE, PHONE_HREF } from "./brand";
 import { useLiveContent } from "@/lib/live-content";
 import { Button } from "@/components/ui/button";
 
@@ -17,6 +16,8 @@ const navLinks = [
 export function Navbar() {
   const { site } = useLiveContent();
   const SITE = site.studioInfo;
+  const PHONE = SITE.phone;
+  const PHONE_HREF = `tel:+1${PHONE.replace(/\D/g, "").slice(-10)}`;
   const [mobile, setMobile] = useState(false);
   const linkCls = "transition hover:text-foreground";
   const items = (
