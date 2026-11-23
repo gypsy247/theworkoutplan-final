@@ -1,9 +1,11 @@
 # Warm editorial consultation refinement
-- [ ] Apply the public-only botanical palette and grounded headings; preserve Studio and tracking.
-- [ ] Share the four-field consultation form across the homepage and existing public pages, with inline personalized confirmation.
-- [ ] Remove sticky/duplicate CTAs and rating boxes; keep five transparent pricing options linked to the form.
-- [ ] Use the supplied YouTube training clip (Br6lr4_MdGs), add the embed referrer policy, and verify playback; keep an authentic studio photo when no recognized clip is configured.
-- [ ] Commit on main without skip-ci; repository sync and deployment are platform-managed.
+- [x] Apply the public-only botanical palette and grounded headings; protected Studio and tracking files unchanged, build OK.
+- [x] Share the four-field consultation form across homepage and 17 existing public pages. Verified personalized confirmation and all three delivery requests with intercepted test responses; real owner delivery remains unverified.
+- [x] Remove sticky/duplicate CTAs and rating boxes; verify $95/$115/$170/$150 virtual/$75 small-group rates and consultation links on desktop/mobile. 58 focused regression tests pass.
+- [x] Use the supplied YouTube clip (Br6lr4_MdGs) with an explicit embed referrer policy; real thumbnail/player loads without an initial error. Authentic studio photo fallback retained for absent/unrecognized URLs.
+- [ ] Verify YouTube playback after clicking Play; automated sandbox is blocked by YouTube's sign-in/bot check.
+- [x] Save main-branch changes without skip-ci; repository sync is platform-managed.
+- [ ] Verify live Netlify deployment and real consultation delivery; requires the external deployment and owner delivery configuration.
 
 # Homepage reviews section cleanup
 - [x] Remove the compact Google Business card (Directions / Read Reviews) from the reviews section so the heading flows straight into the 4.9 rating-breakdown card; desktop hero placement untouched. Verified by 1 focused test and mobile/desktop browser checks; commit without skip-ci.
