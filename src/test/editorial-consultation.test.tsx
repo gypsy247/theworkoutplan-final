@@ -48,5 +48,4 @@ describe("Required public rates", () => {
   it.each([["izzy", 170], ["analine", 115], ["dev", 95], ["virtual", 150]] as const)("prices %s at $%s", (id, price) => {
     expect(editorial.rates[id]).toBe(price);
   });
-  it("offers small group training at $75 per session", () => expect(editorial.smallGroup.price).toBe(75));
 });

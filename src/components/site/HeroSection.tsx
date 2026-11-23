@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Link } from "@tanstack/react-router";
 import editorial from "@/data/editorial-content.json";
 import { ConsultationForm } from "./ConsultationForm";
 
@@ -10,12 +10,12 @@ export function HeroSection() {
         <h1 className="mt-5 max-w-2xl">{editorial.hero.headline}</h1>
         <p className="mt-5 max-w-xl text-lg text-muted-foreground">{editorial.hero.subheadline}</p>
         <a href="#reviews" className="mt-6 inline-block text-sm text-muted-foreground">{editorial.hero.reviews}</a>
-        <Button asChild className="mt-7 min-h-[52px] w-full whitespace-normal md:hidden"><a href="#consultation">Request a Free Consultation</a></Button>
       </div>
-      <div id="hero-consultation" className="consultation-panel card-surface hidden scroll-mt-24 p-5 md:block md:p-6">
+      <div id="hero-consultation" className="consultation-panel card-surface scroll-mt-24 p-5 md:p-6">
         <h2 className="mb-2">Request a free consultation</h2>
         <p className="mb-5 text-muted-foreground">A personal reply from Coach Izzy. No pressure.</p>
         <ConsultationForm />
+        <Link to="/book-a-session" className="mt-5 inline-block text-sm font-semibold text-primary underline-offset-4 hover:underline">Or book a session directly →</Link>
       </div>
     </div>
   </section>;

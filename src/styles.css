@@ -157,3 +157,5 @@
 #nl-badge-frame,
 #nl-hud-frame,
 iframe[title="Powered by Netlify"] { display: none !important; }
+
+[class*="WidgetTitle__Container"], .es-widget-title { display: none !important; }

@@ -41,6 +41,7 @@ export function Navbar() {
             <a href={PHONE_HREF} className="hidden items-center gap-2 text-sm font-semibold xl:flex">
               <Phone className="h-4 w-4 text-primary" /> {PHONE}
             </a>
+            <Button asChild size="sm" className="rounded-lg"><Link to="/book-a-session">Book a Session</Link></Button>
             <Button aria-label="Menu" variant="outline" size="icon" onClick={() => setMobile((m) => !m)} className="rounded-lg lg:hidden">
               {mobile ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>

@@ -3,15 +3,13 @@ import { Button } from "@/components/ui/button";
 import { useLiveContent } from "@/lib/live-content";
 import { PHONE_HREF } from "./brand";
 
-export function AcuityScheduler({ tierId }: { tierId?: string | undefined }) {
+export function AcuityScheduler({ tierId, policiesBelow = false }: { tierId?: string | undefined; policiesBelow?: boolean }) {
   const { site } = useLiveContent();
   const POLICIES = site.policies;
   const ACUITY_URL = site.studioInfo.acuityEmbedUrl;
   const ACUITY_FALLBACK = site.studioInfo.acuityDirectUrl;
   const tier = site.pricingTiers.find((item) => item.id === tierId);
-  return (
-    <div className="min-w-0 space-y-6">
-      {tier && <p className="border-l-2 border-primary pl-3 text-sm font-semibold">{tier.name} · 1 Hour · ${tier.price}</p>}
+  const policies = (
       <div className="grid gap-5 border-y border-border py-6 text-sm md:grid-cols-2">
         <div>
           <h3 className="font-bold text-foreground">First-Timers</h3>
@@ -28,10 +26,16 @@ export function AcuityScheduler({ tierId }: { tierId?: string | undefined }) {
         </div>
         <p className="self-center font-bold text-primary">New client? Book your intro session to get started.</p>
       </div>
+  );
+  return (
+    <div className="min-w-0 space-y-6">
+      {tier && <p className="border-l-2 border-primary pl-3 text-sm font-semibold">{tier.name} · 1 Hour · ${tier.price}</p>}
+      {!policiesBelow && policies}
       <a href={ACUITY_FALLBACK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-sm text-primary underline-offset-4 hover:underline">
         <span>Having trouble viewing the calendar? Open Scheduler in a New Tab ↗</span><ExternalLink className="h-4 w-4 shrink-0" />
       </a>
-      <iframe src={ACUITY_URL} title="Schedule Appointment" width="100%" height="800" allow="payment" className="block min-h-[800px] w-full rounded-xl border-0 bg-scheduler" />
+      <iframe src={ACUITY_URL} title="Schedule Appointment" width="100%" height="800" allow="payment" className="block min-h-[800px] w-full max-w-full rounded-xl border-0 bg-scheduler" />
+      {policiesBelow && policies}
     </div>
   );
 }

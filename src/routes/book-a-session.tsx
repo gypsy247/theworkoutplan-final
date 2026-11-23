@@ -15,10 +15,12 @@ export const Route = createFileRoute("/book-a-session")({
   component: () => (
     <section className="px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-5xl">
-        <p className="text-sm font-bold uppercase tracking-widest text-primary">The Workout Plant</p>
-        <h1 className="mt-3 text-4xl font-extrabold md:text-5xl">Book Your 1:1 Session</h1>
-        <p className="mt-4 mb-8 text-muted-foreground">Private personal training & nutrition coaching · 139 Frost St, Brooklyn</p>
-        <AcuityScheduler />
+        <h1 className="text-4xl font-extrabold md:text-5xl">Schedule your session</h1>
+        <p className="mt-4 mb-8 max-w-2xl text-muted-foreground">First session? Send a quick message to introduce yourself, share any injuries or goals, or request a brief phone consultation first.</p>
+        <div className="card-surface min-w-0 overflow-hidden p-3 sm:p-6">
+          <AcuityScheduler policiesBelow />
+        </div>
+        <p className="mt-6 text-sm text-muted-foreground">Prefer to talk before booking? <a href="#consultation" className="font-semibold text-primary underline-offset-4 hover:underline">Request a free consultation →</a></p>
       </div>
     </section>
   ),
