@@ -1,5 +1,15 @@
 [
   {
+    "id": "91aa8d83-fd50-4fff-ad8d-17f907c4ea13",
+    "fullName": "Izzy Jacobus",
+    "email": "israeljacobus@gmail.com",
+    "phone": "9179922395",
+    "sessionTier": "",
+    "goals": "Test",
+    "smsConsent": true,
+    "createdAt": "2026-11-23T22:11:45.390Z"
+  },
+  {
     "id": "0bd4abc0-01da-4764-aa4f-b758b1f289b2",
     "fullName": "Elliott Lee",
     "email": "elliott@thornfieldgrowth.com",
