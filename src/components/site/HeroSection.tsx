@@ -1,44 +1,22 @@
-import { GoogleG, Stars } from "./brand";
-import { GoogleBusinessCard } from "./GoogleBusinessCard";
-import { useLiveContent } from "@/lib/live-content";
-import { useBooking } from "./BookingModal";
 import { Button } from "@/components/ui/button";
+import editorial from "@/data/editorial-content.json";
+import { ConsultationForm } from "./ConsultationForm";
 
 export function HeroSection() {
-  const { open } = useBooking();
-  const { site } = useLiveContent();
-  const HERO = site.hero;
-  const SITE = site.studioInfo;
-  const HERO_CTA_URL = site.hero.primaryCtaUrl;
-  return (
-    <section className="site-hero relative overflow-hidden px-5 py-8 text-center md:px-6 md:py-20">
-      <div className="relative mx-auto max-w-7xl">
-        <a href="#reviews" className="inline-flex flex-wrap items-center justify-center gap-2 rounded-full border border-border bg-card/90 px-4 py-2 text-sm transition hover:border-primary/60">
-          <GoogleG className="h-4 w-4" />
-          <span className="font-bold">{SITE.rating}</span> <Stars />
-          <span className="text-muted-foreground">{HERO.badgeText}</span>
-        </a>
-        <h1 className="mx-auto mt-5 max-w-4xl font-extrabold">
-          {HERO.headlineStart} <span className="text-primary">{HERO.headlineHighlight}</span> {HERO.headlineEnd}
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-muted-foreground md:mt-6 md:text-xl">
-          {HERO.subheadline}
-        </p>
-        <div className="mt-5 flex flex-col justify-center gap-3 md:mt-8 md:flex-row">
-          {HERO_CTA_URL ? (
-            <Button asChild className="h-auto min-h-[52px] w-full whitespace-normal rounded-lg px-6 py-3 font-bold md:w-auto">
-              <a href={HERO_CTA_URL} {...(HERO_CTA_URL.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}>{HERO.primaryCta}</a>
-            </Button>
-          ) : (
-            <Button onClick={() => open()} className="h-auto min-h-[52px] w-full whitespace-normal rounded-lg px-6 py-3 font-bold md:w-auto">
-              {HERO.primaryCta}
-            </Button>
-          )}
-          <Button asChild variant="outline" className="hidden h-auto min-h-[52px] w-full whitespace-normal rounded-lg px-6 py-3 font-bold md:inline-flex md:w-auto"><a href="#reviews">{HERO.secondaryCta}</a></Button>
-        </div>
-
-        <div className="mt-10 hidden md:block"><GoogleBusinessCard /></div>
+  return <section className="site-hero px-5 py-10 md:px-6 md:py-14">
+    <div className="mx-auto grid max-w-7xl items-center gap-8 md:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] md:gap-12">
+      <div>
+        <p className="text-sm text-primary">{editorial.hero.eyebrow}</p>
+        <h1 className="mt-5 max-w-2xl">{editorial.hero.headline}</h1>
+        <p className="mt-5 max-w-xl text-lg text-muted-foreground">{editorial.hero.subheadline}</p>
+        <a href="#reviews" className="mt-6 inline-block text-sm text-muted-foreground">{editorial.hero.reviews}</a>
+        <Button asChild className="mt-7 min-h-[52px] w-full whitespace-normal md:hidden"><a href="#consultation">Request a Free Consultation</a></Button>
       </div>
-    </section>
-  );
+      <div id="hero-consultation" className="consultation-panel card-surface hidden scroll-mt-24 p-5 md:block md:p-6">
+        <h2 className="mb-2">Request a free consultation</h2>
+        <p className="mb-5 text-muted-foreground">A personal reply from Coach Izzy. No pressure.</p>
+        <ConsultationForm />
+      </div>
+    </div>
+  </section>;
 }

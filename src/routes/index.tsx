@@ -8,7 +8,6 @@ import { TrainersSection } from "@/components/site/TrainersSection";
 import { PricingSection } from "@/components/site/PricingSection";
 import { ResourcesSection } from "@/components/site/ResourcesSection";
 import { FaqSection } from "@/components/site/FaqSection";
-import { ContactSection } from "@/components/site/ContactFooter";
 import { GYM_SCHEMA, pageHead } from "@/lib/site-seo";
 
 export const Route = createFileRoute("/")({
@@ -31,7 +30,6 @@ function Index() {
       <PricingSection />
       <ResourcesSection />
       <FaqSection />
-      <ContactSection />
     </>
   );
 }

@@ -19,7 +19,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { startLiveContentFetch } from "../lib/live-content";
 import { removeNetlifyBadge } from "../lib/netlify-badge";
-import { MobileConversionBar } from "../components/site/MobileConversionBar";
+import { ConsultationSection } from "../components/site/ConsultationSection";
 import { consentDefaults } from "../lib/consent-defaults";
 import { metaPixelBase, trackMetaPageView, watchMetaActions } from "../lib/meta-pixel";
 
@@ -97,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),
@@ -136,15 +136,17 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <div className={isAdmin ? "" : "public-theme"}>
       <BookingProvider>
         {!isAdmin && <Navbar />}
         <main className={isAdmin ? "" : "public-site"}>
           <Outlet />
+          {!isAdmin && <ConsultationSection />}
         </main>
         {!isAdmin && <Footer />}
-        {!isAdmin && <MobileConversionBar />}
         <Toaster position="top-center" />
       </BookingProvider>
+      </div>
     </QueryClientProvider>
   );
 }

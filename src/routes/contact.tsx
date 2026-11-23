@@ -1,7 +1,6 @@
 import { SITE_ORIGIN } from "@/lib/site-seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MapPin, Navigation, Phone } from "lucide-react";
-import { ConsultationForm } from "@/components/site/ConsultationForm";
 import { useLiveContent } from "@/lib/live-content";
 import { MAP_EMBED, MAPS_URL } from "@/components/site/brand";
 import { getSocialList } from "@/components/site/social";
@@ -36,7 +35,7 @@ function ContactPage() {
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-primary">Contact Us</p>
-          <h1 className="mt-2 text-5xl font-extrabold tracking-tight md:text-6xl">Let's Build Your Plan.</h1>
+          <h1 className="mt-2 text-5xl font-extrabold tracking-tight md:text-6xl">Let’s talk about your goals.</h1>
           <p className="mt-4 text-lg text-muted-foreground">Request a free consultation and book your intro session.</p>
         </div>
 
@@ -65,11 +64,7 @@ function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <div className="card-surface min-w-0 p-6 md:p-8">
-            <h2 className="mb-6 text-2xl font-extrabold tracking-tight">Request a Free Consultation</h2>
-            <ConsultationForm />
-          </div>
+        <div className="mt-6">
           <div className="relative min-h-[420px] overflow-hidden rounded-2xl border border-border bg-card">
             <iframe title="Map to The Workout Plant" src={MAP_EMBED} className="absolute inset-0 h-full w-full border-0" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>

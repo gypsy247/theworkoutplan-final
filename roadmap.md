@@ -1,3 +1,10 @@
+# Warm editorial consultation refinement
+- [ ] Apply the public-only botanical palette and grounded headings; preserve Studio and tracking.
+- [ ] Share the four-field consultation form across the homepage and existing public pages, with inline personalized confirmation.
+- [ ] Remove sticky/duplicate CTAs and rating boxes; keep five transparent pricing options linked to the form.
+- [ ] Use the supplied YouTube training clip (Br6lr4_MdGs), add the embed referrer policy, and verify playback; keep an authentic studio photo when no recognized clip is configured.
+- [ ] Commit on main without skip-ci; repository sync and deployment are platform-managed.
+
 # Homepage reviews section cleanup
 - [x] Remove the compact Google Business card (Directions / Read Reviews) from the reviews section so the heading flows straight into the 4.9 rating-breakdown card; desktop hero placement untouched. Verified by 1 focused test and mobile/desktop browser checks; commit without skip-ci.
 

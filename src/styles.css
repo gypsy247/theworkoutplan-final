@@ -98,7 +98,37 @@
 .studio-manager input:focus-visible, .studio-manager textarea:focus-visible { border-color: var(--primary); }
 
 /* Public pages and isolated draft frames share the same responsive rules. */
-.public-site { overflow-x: clip; }
+.public-theme {
+  --background: oklch(0.973297 0.006963 88.642);
+  --foreground: oklch(0.210331 0.005860 285.885);
+  --card: oklch(0.943205 0.011142 89.725);
+  --card-foreground: var(--foreground);
+  --secondary: var(--card);
+  --border: oklch(0.898450 0.015788 86.429);
+  --primary: oklch(0.322373 0.039737 166.727);
+  --primary-foreground: oklch(1 0 0);
+  --muted-foreground: oklch(0.436323 0.011227 106.856);
+  --radius-2xl: 0.5rem;
+  --shadow-phone: 0 12px 30px -18px color-mix(in oklab, var(--foreground) 20%, transparent);
+  background: var(--background);
+  color: var(--foreground);
+}
+.public-site { overflow-x: clip; font-size: 1rem; }
+.public-theme .card-surface { background-color: var(--card); border-color: var(--border); border-radius: 0.5rem; }
+.public-theme .card-surface:hover { border-color: var(--border); box-shadow: none; }
+.public-theme :is(h1,h2,h3,h4) { font-weight: 600; }
+.public-theme :where(.uppercase) { text-transform: none; }
+.public-theme :where(.rounded-xl,.rounded-2xl,.rounded-3xl) { border-radius: 0.5rem; }
+.public-theme .site-hero h1 { font-size: 2.75rem; line-height: 1.16; }
+.public-theme .consultation-panel h2 { font-size: 1.5rem; line-height: 1.3; }
+.public-theme .consultation-panel p { font-size: 0.875rem; }
+.public-theme .consultation-panel .consultation-reassurance p { font-size: 0.75rem; }
+.public-theme .consultation-form textarea { resize: vertical; }
+.public-theme .consultation-form { scroll-margin-top: 7rem; }
+.public-theme .site-footer { padding-bottom: 0; }
+@media (max-width: 767px) {
+  .public-theme .site-hero h1 { font-size: 2rem; }
+}
 .public-site :where(h1, h2, h3, h4, p, li, a, span) { overflow-wrap: break-word; }
 .public-site :where(h1, h2, h3) { text-wrap: balance; }
 /* Article card titles never split a word across lines. */
@@ -118,7 +148,7 @@
   .public-site p:not(.text-xs):not(.text-sm) { font-size: 1rem; }
   .public-site section:not(.site-hero) { padding: 3rem 1.25rem; }
   .public-site .card-surface { min-width: 0; }
-  .site-footer { padding-bottom: calc(5rem + env(safe-area-inset-bottom)); }
+  .site-footer { padding-bottom: 0; }
 }
 
 /* Netlify's edge injects a floating "Powered by Netlify" badge into every served page on

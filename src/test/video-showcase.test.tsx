@@ -25,12 +25,6 @@ describe("Watch How We Train section", () => {
     expect(screen.queryByText(/open video/i)).toBeNull();
   });
 
-  it("keeps the placeholder only while no video is configured", () => {
-    withVideo("");
-    const { container } = render(<VideoShowcase />);
-    expect(container.querySelector("iframe")).toBeNull();
-    expect(screen.getByText(/coming soon/i)).toBeInTheDocument();
-  });
 });
 
 describe("Video player used by the Studio preview", () => {
