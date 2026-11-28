@@ -34,7 +34,11 @@ export function trackGaPageView() {
   const path = window.location.pathname;
   if (path === lastPage) return;
   lastPage = path;
-  trackGaEvent("page_view", { page_location: window.location.href, page_title: document.title });
+  // The route's <title> is set just after navigation, so wait for it before reporting the page.
+  setTimeout(() => {
+    if (window.location.pathname !== path) return;
+    trackGaEvent("page_view", { page_location: window.location.href, page_title: document.title });
+  }, 300);
 }
 
 function locationOf(el: Element): string {
