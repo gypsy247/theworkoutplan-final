@@ -22,7 +22,7 @@ import { removeNetlifyBadge } from "../lib/netlify-badge";
 import { ConsultationSection } from "../components/site/ConsultationSection";
 import { consentDefaults } from "../lib/consent-defaults";
 import { metaPixelBase, trackMetaPageView, watchMetaActions } from "../lib/meta-pixel";
-import { gaBase, trackGaPageView, watchGaActions } from "../lib/google-analytics";
+import { gaBase, watchGaActions } from "../lib/google-analytics";
 
 function NotFoundComponent() {
   return (
@@ -133,7 +133,7 @@ function RootComponent() {
   }, []);
   useEffect(() => watchMetaActions(), []);
   useEffect(() => watchGaActions(), []);
-  useEffect(() => { void trackMetaPageView(); trackGaPageView(pathname); }, [pathname]);
+  useEffect(() => { void trackMetaPageView(); }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

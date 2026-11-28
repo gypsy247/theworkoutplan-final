@@ -1,11 +1,11 @@
-// Google Analytics 4 for the public site. Page views are sent by the root route on each
-// navigation (gtag's own page_view is off so SPA routes are never double counted), and
-// key actions are picked up by one delegated listener, the same way meta-pixel.ts works.
+// Google Analytics 4 for the public site. Page views, including client-side route changes, come
+// from GA4's enhanced measurement (browser history events), so this file never sends its own
+// page_view. Key actions are picked up by one delegated listener, the same way meta-pixel.ts works.
 export const GA_MEASUREMENT_ID = "G-812LKH9WN4";
 
 // Runs in <head> after consentDefaults, which already defines window.gtag and dataLayer.
 // The router re-runs head scripts on every navigation, so the flag keeps this to one load.
-export const gaBase = `(function(){if(location.pathname.replace(/\\/$/,"")==="/admin"||window.top!==window.self||window.__twpGa)return;window.__twpGa=1;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}";document.head.appendChild(s);window.gtag=window.gtag||function(){(window.dataLayer=window.dataLayer||[]).push(arguments)};gtag("js",new Date());gtag("config","${GA_MEASUREMENT_ID}",{send_page_view:false});})();`;
+export const gaBase = `(function(){if(location.pathname.replace(/\\/$/,"")==="/admin"||window.top!==window.self||window.__twpGa)return;window.__twpGa=1;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}";document.head.appendChild(s);window.gtag=window.gtag||function(){(window.dataLayer=window.dataLayer||[]).push(arguments)};gtag("js",new Date());gtag("config","${GA_MEASUREMENT_ID}");})();`;
 
 type Params = Record<string, string | number | undefined>;
 
@@ -26,34 +26,6 @@ export function trackGaEvent(name: string, params: Params = {}) {
   } catch {
     /* Tracking must never interrupt the site. */
   }
-}
-
-let lastPage = "";
-let lastTitle = "";
-
-/** `path` is the router's pathname, which changes before the address bar and the <title> do. */
-export function trackGaPageView(path: string) {
-  if (!enabled() || path === lastPage) return;
-  const firstPage = lastPage === "";
-  const previousTitle = lastTitle;
-  lastPage = path;
-  // The route's <title> lands a few hundred ms after a client-side navigation, so wait until it
-  // differs from the previous page's title (or 2 s pass) before reporting the page.
-  const started = Date.now();
-  const send = () => {
-    if (lastPage !== path) return; // Already navigated somewhere else.
-    if (!firstPage && document.title === previousTitle && Date.now() - started < 2000) {
-      setTimeout(send, 100);
-      return;
-    }
-    lastTitle = document.title;
-    trackGaEvent("page_view", {
-      page_path: path,
-      page_location: window.location.origin + path + window.location.search,
-      page_title: document.title,
-    });
-  };
-  send();
 }
 
 function locationOf(el: Element): string {
