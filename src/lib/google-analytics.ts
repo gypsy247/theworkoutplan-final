@@ -28,17 +28,27 @@ export function trackGaEvent(name: string, params: Params = {}) {
 }
 
 let lastPage = "";
+let lastTitle = "";
 
 export function trackGaPageView() {
   if (!enabled()) return;
   const path = window.location.pathname;
   if (path === lastPage) return;
+  const firstPage = lastTitle === "";
   lastPage = path;
-  // The route's <title> is set just after navigation, so wait for it before reporting the page.
-  setTimeout(() => {
+  // The route's <title> lands a few hundred ms after a client-side navigation, so wait until it
+  // differs from the previous page's title (or 2 s pass) before reporting the page.
+  const started = Date.now();
+  const send = () => {
     if (window.location.pathname !== path) return;
+    if (!firstPage && document.title === lastTitle && Date.now() - started < 2000) {
+      setTimeout(send, 100);
+      return;
+    }
+    lastTitle = document.title;
     trackGaEvent("page_view", { page_location: window.location.href, page_title: document.title });
-  }, 300);
+  };
+  send();
 }
 
 function locationOf(el: Element): string {
