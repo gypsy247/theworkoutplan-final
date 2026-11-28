@@ -4,7 +4,8 @@
 export const GA_MEASUREMENT_ID = "G-812LKH9WN4";
 
 // Runs in <head> after consentDefaults, which already defines window.gtag and dataLayer.
-export const gaBase = `(function(){if(location.pathname.replace(/\\/$/,"")==="/admin"||window.top!==window.self)return;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}";document.head.appendChild(s);window.gtag=window.gtag||function(){(window.dataLayer=window.dataLayer||[]).push(arguments)};gtag("js",new Date());gtag("config","${GA_MEASUREMENT_ID}",{send_page_view:false});})();`;
+// The router re-runs head scripts on every navigation, so the flag keeps this to one load.
+export const gaBase = `(function(){if(location.pathname.replace(/\\/$/,"")==="/admin"||window.top!==window.self||window.__twpGa)return;window.__twpGa=1;var s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}";document.head.appendChild(s);window.gtag=window.gtag||function(){(window.dataLayer=window.dataLayer||[]).push(arguments)};gtag("js",new Date());gtag("config","${GA_MEASUREMENT_ID}",{send_page_view:false});})();`;
 
 type Params = Record<string, string | number | undefined>;
 
