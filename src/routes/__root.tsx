@@ -133,7 +133,7 @@ function RootComponent() {
   }, []);
   useEffect(() => watchMetaActions(), []);
   useEffect(() => watchGaActions(), []);
-  useEffect(() => { void trackMetaPageView(); trackGaPageView(); }, [pathname]);
+  useEffect(() => { void trackMetaPageView(); trackGaPageView(pathname); }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

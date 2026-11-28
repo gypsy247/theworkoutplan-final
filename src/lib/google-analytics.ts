@@ -30,23 +30,27 @@ export function trackGaEvent(name: string, params: Params = {}) {
 let lastPage = "";
 let lastTitle = "";
 
-export function trackGaPageView() {
-  if (!enabled()) return;
-  const path = window.location.pathname;
-  if (path === lastPage) return;
-  const firstPage = lastTitle === "";
+/** `path` is the router's pathname, which changes before the address bar and the <title> do. */
+export function trackGaPageView(path: string) {
+  if (!enabled() || path === lastPage) return;
+  const firstPage = lastPage === "";
+  const previousTitle = lastTitle;
   lastPage = path;
   // The route's <title> lands a few hundred ms after a client-side navigation, so wait until it
   // differs from the previous page's title (or 2 s pass) before reporting the page.
   const started = Date.now();
   const send = () => {
-    if (window.location.pathname !== path) return;
-    if (!firstPage && document.title === lastTitle && Date.now() - started < 2000) {
+    if (lastPage !== path) return; // Already navigated somewhere else.
+    if (!firstPage && document.title === previousTitle && Date.now() - started < 2000) {
       setTimeout(send, 100);
       return;
     }
     lastTitle = document.title;
-    trackGaEvent("page_view", { page_location: window.location.href, page_title: document.title });
+    trackGaEvent("page_view", {
+      page_path: path,
+      page_location: window.location.origin + path + window.location.search,
+      page_title: document.title,
+    });
   };
   send();
 }
