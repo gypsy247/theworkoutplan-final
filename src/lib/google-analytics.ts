@@ -84,10 +84,27 @@ export function watchGaActions() {
     }, 0);
   };
 
+  // Acuity's confirmation page (Integrations > Custom Conversion Tracking) posts this message to the
+  // embedding page, so the completed booking is credited to the visitor's session on this site.
+  const message = (event: MessageEvent) => {
+    if (!/^https:\/\/([a-z0-9-]+\.)*acuityscheduling\.com$/i.test(event.origin)) return;
+    const data = event.data as { type?: unknown; appointment?: unknown; price?: unknown } | null;
+    if (!data || data.type !== "twp_booking_complete") return;
+    const price = Number(data.price);
+    trackGaEvent("booking_complete", {
+      booking_method: "acuity_embed",
+      appointment_type: typeof data.appointment === "string" && !data.appointment.startsWith("%") ? data.appointment.slice(0, 100) : undefined,
+      value: Number.isFinite(price) && price > 0 ? price : undefined,
+      currency: Number.isFinite(price) && price > 0 ? "USD" : undefined,
+    });
+  };
+
   document.addEventListener("click", click, true);
   window.addEventListener("blur", blur);
+  window.addEventListener("message", message);
   return () => {
     document.removeEventListener("click", click, true);
     window.removeEventListener("blur", blur);
+    window.removeEventListener("message", message);
   };
 }
