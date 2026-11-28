@@ -22,6 +22,7 @@ import { removeNetlifyBadge } from "../lib/netlify-badge";
 import { ConsultationSection } from "../components/site/ConsultationSection";
 import { consentDefaults } from "../lib/consent-defaults";
 import { metaPixelBase, trackMetaPageView, watchMetaActions } from "../lib/meta-pixel";
+import { gaBase, trackGaPageView, watchGaActions } from "../lib/google-analytics";
 
 function NotFoundComponent() {
   return (
@@ -85,7 +86,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
-    scripts: [{ children: consentDefaults }, { children: metaPixelBase }],
+    scripts: [{ children: consentDefaults }, { children: gaBase }, { children: metaPixelBase }],
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -131,7 +132,8 @@ function RootComponent() {
     startLiveContentFetch();
   }, []);
   useEffect(() => watchMetaActions(), []);
-  useEffect(() => { void trackMetaPageView(); }, [pathname]);
+  useEffect(() => watchGaActions(), []);
+  useEffect(() => { void trackMetaPageView(); trackGaPageView(); }, [pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>

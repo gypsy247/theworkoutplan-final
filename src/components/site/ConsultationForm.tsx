@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { submitConsultation } from "@/lib/consultation-submit";
+import { formLocation, trackGaEvent } from "@/lib/google-analytics";
 import { Button } from "@/components/ui/button";
 import { useEditorial } from "@/lib/editorial";
 import { useLiveContent } from "@/lib/live-content";
@@ -22,6 +23,7 @@ export function ConsultationForm({ onDone }: { onDone?: () => void } = {}) {
     setSending(true);
     try {
       await submitConsultation({ fullName: get("name").slice(0, 100), email: get("email").slice(0, 255), phone: get("phone").slice(0, 40), sessionTier: "", goals: get("message").slice(0, 2000), smsConsent: data.get("sms") === "on", "bot-field": get("bot-field") });
+      if (!get("bot-field")) trackGaEvent("generate_lead", { form_location: formLocation(formEl) });
       setFirstName(get("name").split(/\s+/)[0] ?? "there");
       formEl.reset();
       setSent(true);
